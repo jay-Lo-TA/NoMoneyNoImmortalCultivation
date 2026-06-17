@@ -1,0 +1,229 @@
+{
+  "main": {
+    "id": "24ac8b1ea51d101b",
+    "type": "split",
+    "children": [
+      {
+        "id": "3559ed0adbcc43b3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e806a85bae1b2db1",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0758124e984d8e82",
+    "type": "split",
+    "children": [
+      {
+        "id": "97b859092d4d66d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c993a0cb73173179",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "6473c201b1412d3d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "f578c8c0af4e1c27",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3667f2b0341cff77",
+    "type": "split",
+    "children": [
+      {
+        "id": "2c03ba86a98f493c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "db7907541eef9515",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "a370bbd52856252c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "1fd958271b64b32d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "32510e3aea9903f1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "0de48753c38ed718",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          },
+          {
+            "id": "b8f2f3a7b6b80899",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "c993a0cb73173179",
+  "lastOpenFiles": [
+    "00-质检清单.md",
+    "00-项目立项书.md",
+    "00-番剧制作总览.md",
+    "00-MOC总览.md",
+    "90-进度追踪/_fix_role_links_5.py",
+    "90-进度追踪/_fix_role_links_4.py",
+    "90-进度追踪/_fix_role_links_3.py",
+    "90-进度追踪/_fix_role_links_2.py",
+    "90-进度追踪/_fix_role_links.py",
+    "90-进度追踪/_fix_role_links.ps1",
+    "90-进度追踪/_fix_broken_chapter_links_utf8.ps1",
+    "90-进度追踪/_fix_broken_chapter_links.ps1",
+    "90-进度追踪/_find_3_remaining.py",
+    "90-进度追踪/90-TODO.md",
+    "90-进度追踪",
+    "80-参考资料/80-百度百科摘要.md",
+    "80-参考资料/80-小说原文.md",
+    "70-CG制作要素/70-角色建模清单.md",
+    "70-CG制作要素/70-特效清单.md",
+    "70-CG制作要素/70-场景建模清单.md",
+    "70-CG制作要素/70-动作捕捉需求.md",
+    "60-改编策略/60-风险与红线.md",
+    "60-改编策略/60-节奏与高潮点.md",
+    "60-改编策略/60-番剧结构设想.md",
+    "60-改编策略/60-删改增补建议.md",
+    "50-美术风格/50-视觉风格猜想.md",
+    "50-美术风格/50-色彩与情绪.md",
+    "50-美术风格/50-服装与造型.md",
+    "50-美术风格/50-关键场景设计.md",
+    "40-场景/通用/场景SC-200-01-筑基决战擂台-玄冥重水.md",
+    "40-场景/通用/场景SC-150-02-嵩阳高中练功场-辱蓝岭事件.md",
+    "40-场景/通用/场景SC-150-01-嵩阳高中练功场-高二实战交流-周澈尘对峙.md",
+    "40-场景/通用/场景SC-148-01-仙都酒店-突飞猛进.md",
+    "40-场景/通用/场景SC-141-01-仙都城筑基考场金属大门大厅+神力办公室道心幻境.md",
+    "40-场景/通用/场景SC-140-01-仙都城火车站厕所隔间-筑基考试报名.md",
+    "40-场景/通用/场景SC-139-01-嵩阳高中-高考结场景.md"
+  ]
+}
