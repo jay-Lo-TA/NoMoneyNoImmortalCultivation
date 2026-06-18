@@ -1,0 +1,21 @@
+# Claude Code 本地配置（包含权限与隐私设置）
+.claude/
+
+# Obsidian 运行时状态（每次打开会变，不入库）
+.obsidian/workspace.json
+.obsidian/cache/
+
+# 系统/编辑器临时文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Python 维护脚本生成的临时文件
+__pycache__/
+*.pyc
+
+# 备份文件（防止重复命名污染）
+*.bak
+*.backup

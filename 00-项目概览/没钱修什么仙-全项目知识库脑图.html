@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>没钱修什么仙 · 全项目知识库脑图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #d4d4d4;
+    font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+    padding: 20px 30px;
+  }
+
+  /* 头部 */
+  .header {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-bottom: 1px solid #222;
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-size: 26px;
+    color: #fff;
+    letter-spacing: 4px;
+    margin-bottom: 6px;
+  }
+  .header h1 span { color: #ff8c00; }
+  .header .subtitle {
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 2px;
+  }
+  .header .badge-group {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .header .badge {
+    display: inline-block;
+    padding: 3px 14px;
+    border: 1px solid #ff8c00;
+    color: #ff8c00;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+  }
+
+  /* 控制栏 */
+  .controls {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .controls button {
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    padding: 5px 14px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 2px;
+    transition: all .2s;
+  }
+  .controls button:hover { border-color: #ff8c00; color: #ff8c00; }
+  .controls button.on { border-color: #ff8c00; color: #ff8c00; background: rgba(255,140,0,0.08); }
+
+  /* 网格 */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 14px;
+  }
+
+  /* 分类标题 - 脑图节点风格 */
+  .node-break {
+    grid-column: 1 / -1;
+    margin: 18px 0 2px;
+    padding: 18px 0 8px;
+    border-top: 1px solid #222;
+    text-align: center;
+    position: relative;
+  }
+  .node-break::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: #ff8c00;
+  }
+  .node-break .node-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+  .node-break .node-name {
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 4px;
+    font-weight: 400;
+  }
+  .node-break .node-desc {
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+  .node-break .node-stats {
+    font-size: 10px;
+    color: #ff8c00;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* 卡片 */
+  .card {
+    background: #111;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+    position: relative;
+  }
+  .card:hover { border-color: #ff8c00; box-shadow: 0 0 14px rgba(255,140,0,0.05); }
+  .card.prime { border-left: 3px solid #ff8c00; }
+
+  .card-header {
+    padding: 12px 14px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .card-header .ep-num {
+    font-size: 11px;
+    color: #555;
+    font-weight: 300;
+    min-width: 40px;
+  }
+  .card-header .ep-title {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+    flex: 1;
+    margin: 0 8px;
+  }
+  .card-header .ep-tag {
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .tag-core { background: rgba(255,140,0,0.15); color: #ff8c00; border: 1px solid rgba(255,140,0,0.2); }
+  .tag-info { background: rgba(100,180,255,0.12); color: #64b4ff; border: 1px solid rgba(100,180,255,0.15); }
+  .tag-warn { background: rgba(255,210,50,0.15); color: #ffd232; border: 1px solid rgba(255,210,50,0.2); }
+  .tag-danger { background: rgba(255,80,80,0.12); color: #ff5050; border: 1px solid rgba(255,80,80,0.15); }
+  .tag-green { background: rgba(80,255,120,0.12); color: #50ff78; border: 1px solid rgba(80,255,120,0.15); }
+
+  .card-body {
+    padding: 0 14px 14px;
+    display: none;
+  }
+  .card.open .card-body { display: block; }
+
+  .card-body section {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #1a1a1a;
+  }
+  .card-body section:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+
+  .card-body .sec-title {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    font-weight: 300;
+  }
+  .card-body .sec-title .hl { color: #ff8c00; }
+
+  .card-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card-body ul li {
+    font-size: 11px;
+    color: #b0b0b0;
+    line-height: 1.6;
+    padding: 1px 0;
+    position: relative;
+    padding-left: 10px;
+  }
+  .card-body ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #444;
+  }
+  .card-body ul li strong { color: #e0e0e0; font-weight: 500; }
+  .card-body ul li .hl-text { color: #ff8c00; }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-top: 4px;
+  }
+  .tag-list span {
+    font-size: 9px;
+    padding: 2px 7px;
+    background: #181818;
+    color: #777;
+    border-radius: 2px;
+    border: 1px solid #222;
+  }
+  .tag-list span.main { border-color: #ff8c00; color: #ff8c00; }
+  .tag-list span.key { border-color: #64b4ff; color: #64b4ff; }
+
+  .data-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 4px 0;
+  }
+  .data-item {
+    font-size: 10px;
+    padding: 3px 8px;
+    background: #0d0d0d;
+    border: 1px solid #1a1a1a;
+    border-radius: 2px;
+    color: #999;
+  }
+  .data-item .num { color: #ff8c00; font-weight: 600; }
+
+  /* 脑图分支线连接 */
+  .branch-line {
+    grid-column: 1 / -1;
+    height: 0;
+    position: relative;
+    margin: 0;
+  }
+
+  /* 统计 */
+  .summary-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 24px 0 8px;
+    padding: 16px 0;
+    border-top: 1px solid #222;
+  }
+  .summary-item {
+    text-align: center;
+    padding: 12px;
+    background: #0e0e0e;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+  }
+  .summary-item .num { font-size: 22px; color: #ff8c00; font-weight: 700; }
+  .summary-item .label { font-size: 10px; color: #666; margin-top: 3px; letter-spacing: 1px; }
+
+  .toggle-arrow {
+    font-size: 9px;
+    color: #444;
+    transition: transform .2s;
+  }
+  .card.open .toggle-arrow { transform: rotate(90deg); }
+
+  /* 脑图连接装饰线 */
+  .connector {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 2px 0;
+    opacity: 0.3;
+  }
+  .connector .dot {
+    width: 4px; height: 4px;
+    background: #ff8c00;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 720px) {
+    body { padding: 12px; }
+    .header h1 { font-size: 20px; }
+    .grid { grid-template-columns: 1fr; }
+    .summary-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>没钱修什么仙 · <span>全项目知识库</span></h1>
+  <div class="subtitle">番剧制作 · 世界观 · 角色 · 剧情 · CG要素 · 完整脑图</div>
+  <div class="badge-group">
+    <span class="badge">P0核心设定</span>
+    <span class="badge">26集 · 15min</span>
+    <span class="badge">修真+金融</span>
+    <span class="badge">1-200章</span>
+  </div>
+</div>
+
+<div class="controls">
+  <button onclick="filterNode(0)" id="f0" class="on">🌐 全部展开</button>
+  <button onclick="filterNode('project')" id="f_project">📋 项目概览</button>
+  <button onclick="filterNode('world')" id="f_world">🌍 世界观</button>
+  <button onclick="filterNode('character')" id="f_char">👥 角色</button>
+  <button onclick="filterNode('story')" id="f_story">📖 剧情</button>
+  <button onclick="filterNode('edu')" id="f_edu">🎓 教育</button>
+  <button onclick="filterNode('power')" id="f_power">⚔️ 势力</button>
+  <button onclick="filterNode('tech')" id="f_tech">📜 功法</button>
+  <button onclick="filterNode('cg')" id="f_cg">🎬 CG制作</button>
+</div>
+
+<div class="grid" id="nodeGrid">
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 1：项目概览 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="project">
+    <span class="node-icon">📋</span>
+    <div class="node-name">项目概览</div>
+    <div class="node-desc">立项定位 · 制作规格 · 核心策略</div>
+    <div class="node-stats">P0 · 首页索引</div>
+  </div>
+
+  <div class="card prime" data-cat="project">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">项目立项书</span>
+      <span class="ep-tag tag-core">核心</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🎯 <span class="hl">一句话定位</span></div>
+        <ul>
+          <li>熊狼狗《没钱修什么仙？》改编为<strong>26集标准TV番剧</strong>，呈现「修真+现代金融」独特世界观</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">📐 <span class="hl">制作规格</span></div>
+        <ul>
+          <li>形态：标准TV半年番｜单集：<strong>15分钟</strong>｜总集数：<strong>26集</strong>｜总时长：约390分钟</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎯 <span class="hl">目标观众</span></div>
+        <div class="tag-list">
+          <span class="main">18-30岁年轻人</span>
+          <span class="key">修真玄幻爱好者</span>
+          <span>泛二次元</span>
+          <span>金融跨界</span>
+        </div>
+      </section>
+      <section>
+        <div class="sec-title">💎 <span class="hl">核心卖点</span></div>
+        <ul>
+          <li><strong>世界观</strong>：修真+现代金融体系（法力贷、天庭金融监管）——全网唯一</li>
+          <li><strong>视觉</strong>：昆墟36层+18层超级建筑+现代城市修仙</li>
+          <li><strong>冲突</strong>：修仙+贫困+债务三角，张力天然</li>
+          <li><strong>角色</strong>：张羽（极致逆袭+努力型男主）、白真真（进化型灵根女主）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">📊 <span class="hl">重要级体系</span></div>
+        <ul>
+          <li><strong>P0</strong>：主角、必出场场景、关键战斗、必建模角色 → 1-2集出初稿</li>
+          <li><strong>P1</strong>：重要配角、主要场景、关键法术</li>
+          <li><strong>P2</strong>：一般场景、过渡镜头 → 可简化/外包</li>
+          <li><strong>P3</strong>：一次性背景NPC、远景剪影</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">📖 <span class="hl">改编范围</span></div>
+        <ul>
+          <li>第1季覆盖：原作<strong>1-200章</strong>（筑基资格考试前）</li>
+          <li>全本：1-906章（远期可规划第2季）</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="project">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">MOC</span>
+      <span class="ep-title">知识库索引</span>
+      <span class="ep-tag tag-info">导航</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🗂️ <span class="hl">知识库结构</span></div>
+        <ul>
+          <li><strong>00-项目概览</strong>：立项书、MOC、制作时间线</li>
+          <li><strong>10-世界观</strong>：核心设定、昆墟地理、货币经济、修炼体系</li>
+          <li><strong>20-角色</strong>：主角、师承、反派、同学、配角图鉴</li>
+          <li><strong>30-剧情</strong>：时间线、关键冲突、人物弧光、章节摘要</li>
+          <li><strong>40-场景</strong>：各章节场景md</li>
+          <li><strong>50-美术风格</strong>：视觉风格猜想、关键场景设计</li>
+          <li><strong>60-改编策略</strong>：番剧结构、节奏高潮、删改建议</li>
+          <li><strong>70-CG制作要素</strong>：角色建模、场景建模、特效清单</li>
+          <li><strong>80-参考资料</strong>：百度百科、小说原文</li>
+          <li><strong>90-进度追踪</strong>：TODO</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🔗 <span class="hl">双向链接策略</span></div>
+        <ul>
+          <li>角色↔场景：场景md链接角色卡</li>
+          <li>章节→角色：章节摘要自动链接</li>
+          <li>章节→场景：章节摘要链接到40-场景</li>
+          <li>世界观→角色/场景：世界观笔记的反向链接</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- Connector -->
+  <div class="connector"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 2：世界观 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="world">
+    <span class="node-icon">🌍</span>
+    <div class="node-name">世界观</div>
+    <div class="node-desc">昆墟结构 · 社会生态 · 金融体系 · 修炼体系</div>
+    <div class="node-stats">核心差异化 · 修真+金融</div>
+  </div>
+
+  <div class="card prime" data-cat="world">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">昆墟结构与阶层</span>
+      <span class="ep-tag tag-core">世界观</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🏛️ <span class="hl">昆墟金字塔</span></div>
+        <ul>
+          <li>地上<strong>36层</strong>+地下<strong>18层</strong>=54层超级建筑</li>
+          <li>第一层面积≈两个中国 | 每城市由大宗门市政府管理</li>
+          <li>越上层灵气越充沛、技术越发达、物资越富足</li>
+          <li>跨层铁律：十大宗门定下，各层之间不能任意来往</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🏠 <span class="hl">嵩阳市 · 主舞台</span></div>
+        <ul>
+          <li>位于<strong>昆墟第一层</strong>，凡人/金融夹心层的主舞台</li>
+          <li>三层世界：郊区（凡人/张羽）→ 市中心（修仙者/嵩阳高中）→ 中心大厦999层（有钱人）</li>
+          <li>嵩阳TOP5死因：投资、诈骗、赌博、猝死、走火入魔</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👥 <span class="hl">三层社会结构</span></div>
+        <ul>
+          <li><strong>顶层</strong>：仙道宗门（资源垄断）</li>
+          <li><strong>中层</strong>：仙门后备（大学生）</li>
+          <li><strong>底层</strong>：凡人+金融夹心层</li>
+          <li>分层路径：考上大学→第二层 | 大学+宗门→更高层</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🏙️ <span class="hl">仙都城</span></div>
+        <ul>
+          <li>上城=空中都市+金色祥云+摩天楼</li>
+          <li>下城=常年黑夜的车站</li>
+          <li>仙云高中：迁移整条灵脉过来，顶级教育资源</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="world">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">修真金融化体系</span>
+      <span class="ep-tag tag-core">核心差异</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">💰 <span class="hl">金融工具</span></div>
+        <ul>
+          <li><strong>法力贷/修仙贷</strong>：30天免息起，深夜推送小贷广告</li>
+          <li><strong>校园黑箱贷款</strong>：免费→赠药→同学奖励层层加码</li>
+          <li><strong>灵币/琼浆币</strong>：货币体系</li>
+          <li>逾期3天即催收，催收外溢到学校老师</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">📊 <span class="hl">经济锚点</span></div>
+        <ul>
+          <li>张羽：账户50元+70万负债+母亲卖房</li>
+          <li>月收支：房租1500+水电200+贷款月供15000=月入2万覆盖</li>
+          <li>浑元丹3万/颗 | 春秋无尽禅155万</li>
+          <li>仙韵代言：张羽60万/年，白真真40万/年</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🏢 <span class="hl">十大宗门垄断</span></div>
+        <ul>
+          <li>无国家，十大宗门垄断粮食/能源/交通/教育/金融/互联网</li>
+          <li>政府军队在宗门执法队前如保安</li>
+          <li>万法宗：旗下仙韵集团开发/售卖功法+仙道教育</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="world">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">修炼体系</span>
+      <span class="ep-tag tag-info">基础</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📈 <span class="hl">境界体系</span></div>
+        <ul>
+          <li>仙道十大境界：炼气→筑基→金丹→……</li>
+          <li>前200章聚焦炼气→筑基</li>
+          <li>炼气期上限：道心10级+法力100+肉体10级</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">⚡ <span class="hl">核心属性</span></div>
+        <div class="data-row">
+          <span class="data-item">道心 <span class="num">150分</span></span>
+          <span class="data-item">法力 <span class="num">150分</span></span>
+          <span class="data-item">武功 <span class="num">100分</span></span>
+          <span class="data-item">体育 <span class="num">150分</span></span>
+          <span class="data-item">通识 <span class="num">50分</span></span>
+        </div>
+      </section>
+      <section>
+        <div class="sec-title">📜 <span class="hl">功法5等级</span></div>
+        <ul>
+          <li>基础级 → 进阶级 → 专家级 → 军用级（军政部门） → 仙门级（大宗门）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🧠 <span class="hl">灵根体系</span></div>
+        <ul>
+          <li>五大等级：人灵根/地灵根/天灵根/神灵根/仙灵根</li>
+          <li>价格锚点：气海灵根（天灵根）=6000万买/5000元时租</li>
+          <li>现代分类：学习类/战斗类/修行类等</li>
+          <li><strong>真灵根</strong>（白真真）：自己养的灵根，7大功能，可转移</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="world">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">正神 & 邪神体系</span>
+      <span class="ep-tag tag-warn">双轨</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🙏 <span class="hl">八部正神</span></div>
+        <ul>
+          <li>交通部/卫生部/巡察部/万民部等8大神职部门</li>
+          <li>神等九级：最低一等到最高九等</li>
+          <li>符箓=充值：信仰等级靠充值，符咒靠充值</li>
+          <li>典型符咒：好感符/拘役符/威压符/天眼符/红包符/防诈符</li>
+          <li>箓书最便宜近10万，神辅可免费配</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">😈 <span class="hl">邪神体系</span></div>
+        <ul>
+          <li>邪神9等级位格，福姬目前1级下位</li>
+          <li>形态多样化：玩具/文具/手套/项链等</li>
+          <li>仪式：愿望仪式/侦测仪式/屏蔽仪式/反检测仪式</li>
+          <li>福姬10仪式槽位，位格提升需吞同事或窃正神权柄</li>
+          <li>周家：将邪神镇压为"仪式电池"</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="connector"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 3：角色群像 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="character">
+    <span class="node-icon">👥</span>
+    <div class="node-name">角色群像</div>
+    <div class="node-desc">主角 · 师承 · 同学 · 反派 · 配角</div>
+    <div class="node-stats">P0×2 · P1×30+ · 动态表格</div>
+  </div>
+
+  <div class="card prime" data-cat="character">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">张羽 · 主角</span>
+      <span class="ep-tag tag-core">男主</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📋 <span class="hl">基础档案</span></div>
+        <div class="data-row">
+          <span class="data-item">境界 <span class="num">炼气期</span></span>
+          <span class="data-item">负债 <span class="num">70万</span></span>
+          <span class="data-item">羽书 <span class="num">外挂</span></span>
+        </div>
+        <ul>
+          <li>穿越即负债，账户余额50元，面试被拒</li>
+          <li>诡辩反杀邪神→羽书觉醒→逆袭之路</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">📊 <span class="hl">关键数据变化</span></div>
+        <ul>
+          <li><strong>ch1</strong>：道心1级/法力7.7/肉体0.82/负债70万</li>
+          <li><strong>ch101</strong>：道心4级28%/法力34.8/肉体3.21</li>
+          <li><strong>ch105</strong>：道心4级80%/法力43.9/肉体4.95</li>
+          <li><strong>ch192</strong>：道心7级18%/法力97.56/肉体9.89</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎭 <span class="hl">性格关键词</span></div>
+        <div class="tag-list">
+          <span class="main">诡辩反杀</span>
+          <span class="main">倔强务实</span>
+          <span class="key">体制内化</span>
+          <span class="key">穷鬼哲学</span>
+          <span>黑色幽默</span>
+          <span>信息战天才</span>
+        </div>
+      </section>
+      <section>
+        <div class="sec-title">🎬 <span class="hl">OP/ED候选金句</span></div>
+        <ul>
+          <li>"妈，对不起。但我真的想修仙啊。哪怕欠上一辈子还不上欠债，我也想修仙"（ch4）</li>
+          <li>"分高的学生，就是能侮辱分低的同学，成绩好就是一切"（ch150）</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card prime" data-cat="character">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">白真真 · 女主</span>
+      <span class="ep-tag tag-core">女主</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📋 <span class="hl">基础档案</span></div>
+        <ul>
+          <li>天剑大学（外校）| 金丹期（后期）| 真灵根持有者</li>
+          <li>冷若冰霜+嘴毒心善+战斗刚烈</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎭 <span class="hl">性格关键词</span></div>
+        <div class="tag-list">
+          <span class="main">冷若冰霜</span>
+          <span class="main">战斗刚烈</span>
+          <span class="key">嘴毒心善</span>
+          <span>节俭主义</span>
+          <span>充电修炼</span>
+        </div>
+      </section>
+      <section>
+        <div class="sec-title">⚡ <span class="hl">真灵根7大功能</span></div>
+        <ul>
+          <li>隐藏灵根+隐藏自己+武道修炼加速+实战看破绽</li>
+          <li>法力提炼加速+炼体辅助+随白真真成长+意念适应不同方向</li>
+          <li>可转移给张羽使用，形成"双向适应+叠加"机制</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎬 <span class="hl">OP/ED候选金句</span></div>
+        <ul>
+          <li>"我辈修道人，以天为被，以地为席，就应该住桥洞，钻树林，占烂尾楼！"（ch100）</li>
+          <li>"被看不起也有被看不起的好处，这样以后超越他们的时候才更出风头"（ch163）</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="character">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">核心配角群</span>
+      <span class="ep-tag tag-info">群像</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">👤 <span class="hl">师承/强者</span></div>
+        <ul>
+          <li><strong>玉星寒</strong>：金丹弟子，天武炼心诀，月薪5000的穷金丹</li>
+          <li><strong>张翩翩</strong>：白龙高三第一/嵩阳市最强高中生/张羽姐姐/神道</li>
+          <li><strong>星火真人</strong>：退休金丹，李雪莲之父</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">学校师生</span></div>
+        <ul>
+          <li><strong>周澈尘</strong>：学生会副主席/周家暗子/霜天冻气场</li>
+          <li><strong>苏海峰</strong>：年级主任/幕后势力眼线</li>
+          <li><strong>雷钧</strong>：武道老师"一拳破亿钱"</li>
+          <li><strong>王海</strong>：体育老师/炼体专家/自有原则</li>
+          <li><strong>何大有</strong>：校董之子/小天星掌</li>
+          <li><strong>蓝岭</strong>：学生会体育部长/肉体6级+/无弱点</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">仙都天骄</span></div>
+        <ul>
+          <li><strong>夜凌霄</strong>：完美血脉/绿洲集团"最完美肉体"/夜氏天骄</li>
+          <li><strong>云景</strong>：仙云高中高二首席/双眼法骸/一层最强</li>
+          <li><strong>戴行之</strong>：戴氏速度型仙人/仙都1.5层天骄</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">同学/盟友</span></div>
+        <ul>
+          <li><strong>宋海龙</strong>：白龙领军人物/2米5/冲天长发外置灵根</li>
+          <li><strong>乐沐岚</strong>：紫云678分/超级代谢手术/2500万洁癖女</li>
+          <li><strong>赵天行</strong>：张羽同学/"小丑相对论"发明者</li>
+          <li><strong>钱深</strong>："分数种姓"世界观/嵩阳金主</li>
+          <li><strong>炼天极</strong>：紫云高中/天勤之子</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="character">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">反派 & 势力首领</span>
+      <span class="ep-tag tag-danger">敌对</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">👿 <span class="hl">周家势力</span></div>
+        <ul>
+          <li><strong>周阳</strong>：周家十代最杰出/紫金功德主/下半身消失/镇压邪神为仪式电池</li>
+          <li><strong>周澈尘</strong>：学生会副主席，周家执行者</li>
+          <li><strong>周豪</strong>：72下校毕业/炼气巅峰10年+/周澈尘贴身护卫</li>
+          <li>周家靠邪神代代传承崛起，垄断嵩阳尸体生意</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🐉 <span class="hl">红塔黑龙董事</span></div>
+        <ul>
+          <li>3米高人形龙人/妖裔之父/红塔大厦333层</li>
+          <li>想收张羽为义子/借种10万一个</li>
+          <li>"不签合同的流着我的血也不是我儿子"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">😈 <span class="hl">邪神阵营</span></div>
+        <ul>
+          <li><strong>福姬</strong>：张羽的邪神/原名"福姬"/地下三层出身</li>
+          <li><strong>祸山</strong>：躺平邪神/收社会牛马信徒</li>
+          <li><strong>宋虚</strong>：卷王邪神/"信徒管理学"/300字结构化日报</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="connector"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 4：剧情线 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="story">
+    <span class="node-icon">📖</span>
+    <div class="node-name">核心剧情线</div>
+    <div class="node-desc">时间线 · 关键冲突 · 人物弧光 · 章节地图</div>
+    <div class="node-stats">1-200章 · 5幕结构</div>
+  </div>
+
+  <div class="card prime" data-cat="story">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">ACT1</span>
+      <span class="ep-title">绝望与觉醒（ch1-50）</span>
+      <span class="ep-tag tag-core">开篇</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🔥 <span class="hl">关键事件</span></div>
+        <ul>
+          <li><strong>ch1-4</strong>：穿越即负债70万，邪神契约，诡辩反杀</li>
+          <li><strong>ch5</strong>：羽书系统觉醒</li>
+          <li><strong>ch38</strong>：周天采气法10级，被动吐纳，法力年级第二</li>
+          <li><strong>ch50</strong>：法赛第四名，无极云手白色狼烟冲天</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎬 <span class="hl">名场面CG</span></div>
+        <ul>
+          <li>出租屋邪神降临（影子从布娃娃撕裂而出）</li>
+          <li>羽书UI首次弹出（全息面板+文字逐行浮现）</li>
+          <li>白色狼烟冲天（无极云手觉醒）</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="story">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">ACT2</span>
+      <span class="ep-title">逆袭与打压（ch51-100）</span>
+      <span class="ep-tag tag-warn">反转密集</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🔥 <span class="hl">关键事件</span></div>
+        <ul>
+          <li><strong>ch55</strong>：张羽第一次月考第一（653分）</li>
+          <li><strong>ch82-88</strong>：体育竞赛，玉星寒登场，嵩阳十六家</li>
+          <li><strong>ch99-100</strong>：真灵根首次转移，互换修炼</li>
+          <li><strong>ch120</strong>：仿妖筋肉代言60万/年</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎬 <span class="hl">名场面CG</span></div>
+        <ul>
+          <li>张羽肉体3.21碾压何大有3.07</li>
+          <li>白真真1500公斤杠铃轻松举过头顶</li>
+          <li>仙韵展台：张羽拉白真真拍广告"怕分低，就要上仿妖筋肉"</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="story">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">ACT3</span>
+      <span class="ep-title">筑基之路（ch101-150）</span>
+      <span class="ep-tag tag-info">爬升</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🔥 <span class="hl">关键事件</span></div>
+        <ul>
+          <li><strong>ch114</strong>：5000米决赛，张羽心脏极限突破</li>
+          <li><strong>ch118</strong>：12531公斤擎天5秒成功，逆转玉星寒</li>
+          <li><strong>ch122</strong>：张翩翩"两个月后让你一起上二层"</li>
+          <li><strong>ch124</strong>：筑基证考试时间表公布，福姬真名揭晓</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎬 <span class="hl">名场面CG</span></div>
+        <ul>
+          <li>天空柱12531公斤（骨骼开裂+七窍溢血+微笑）</li>
+          <li>张羽"你会被玩死的，阿真"情感核爆</li>
+          <li>白真真"对不起羽子……我太没用了"</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="story">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">ACT4</span>
+      <span class="ep-title">狩猎邪神与压迫（ch151-180）</span>
+      <span class="ep-tag tag-danger">暗涌</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🔥 <span class="hl">关键事件</span></div>
+        <ul>
+          <li><strong>ch178</strong>：福姬设局信息差狩猎祸山</li>
+          <li><strong>ch180</strong>：张羽伪装快递员送数学书（藏春秋无尽禅）</li>
+          <li><strong>ch181</strong>：易容术伪装宋虚，骗开祸山夹层</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎬 <span class="hl">名场面CG</span></div>
+        <ul>
+          <li>大日气海+无相云罡漆黑乌云砸房</li>
+          <li>6信徒跳窗自燃（仪式反噬视觉预演）</li>
+          <li>福姬消化祸山"今日重聚位格"</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card prime" data-cat="story">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">ACT5</span>
+      <span class="ep-title">筑基决战（ch181-200）</span>
+      <span class="ep-tag tag-core">高潮</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🔥 <span class="hl">关键事件</span></div>
+        <ul>
+          <li><strong>ch191</strong>：高中圣体10/10觉醒（炼气期修行效率×2）</li>
+          <li><strong>ch193</strong>：张羽白真真赴仙都，周家不跟</li>
+          <li><strong>ch196-199</strong>：打药大赛，张羽吃两片仿凤功能素</li>
+          <li><strong>ch200</strong>：白真真vs戴行之同归于尽（医保归零）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎬 <span class="hl">名场面CG</span></div>
+        <ul>
+          <li>夜凌霄完美血脉解封·3米5肉甲巨兽</li>
+          <li>张羽"雷神擂鼓"狂轰自己腹部辅助消化</li>
+          <li>白真真"以肩膀硬接戴行之一掌"</li>
+          <li>玄冥重水缸体定海柱登场</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="story">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">关键</span>
+      <span class="ep-title">羽书链法图系统</span>
+      <span class="ep-tag tag-core">外挂</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">羽书觉醒</span></div>
+        <ul>
+          <li>ch5首次显化，半透明全息面板</li>
+          <li>ch182升级：链法图系统激活</li>
+          <li>最多拖入10门功法，激活套装效果</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🔗 <span class="hl">套装路线</span></div>
+        <ul>
+          <li><strong>高中圣体</strong>：6/6药物负荷提升→8/8消化代谢提升→10/10修行效率×2</li>
+          <li><strong>全勤乞丐</strong>：挖掘掌+吊车爪+跑车腿+电梯纵</li>
+          <li><strong>武道圣胎</strong>：春秋无尽禅系</li>
+          <li><strong>诸龙血裔</strong>：龙象崩山掌+背龙翻岳手系</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="connector"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 5：教育体系 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="edu">
+    <span class="node-icon">🎓</span>
+    <div class="node-name">教育体系</div>
+    <div class="node-desc">高考制度 · 四大名校 · 月考竞赛 · 阶层固化</div>
+    <div class="node-stats">高考700分 · 炼气→筑基</div>
+  </div>
+
+  <div class="card prime" data-cat="edu">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">高考 & 考试制度</span>
+      <span class="ep-tag tag-core">核心制度</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📝 <span class="hl">高考700分制</span></div>
+        <div class="data-row">
+          <span class="data-item">通识 <span class="num">50</span></span>
+          <span class="data-item">道心 <span class="num">150</span></span>
+          <span class="data-item">法力 <span class="num">150</span></span>
+          <span class="data-item">武功 <span class="num">100</span></span>
+          <span class="data-item">道术 <span class="num">100</span></span>
+          <span class="data-item">体育 <span class="num">150</span></span>
+        </div>
+      </section>
+      <section>
+        <div class="sec-title">🏫 <span class="hl">四大学校生态</span></div>
+        <ul>
+          <li><strong>嵩阳高中</strong>：市重点公立，张羽/白真真所在</li>
+          <li><strong>白龙高中</strong>：三大名校之一，仿妖筋肉技术，660分专用道</li>
+          <li><strong>紫云高中</strong>：残忍高压，超级代谢手术，种姓制度（深紫/浅紫/无紫）</li>
+          <li><strong>红塔高中</strong>：妖裔体系，黑龙血脉，校董每月播种</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎯 <span class="hl">月考分班制</span></div>
+        <ul>
+          <li>高一10班按月考动态分：示范班→普通班→淘汰线</li>
+          <li>排名差→待遇差→恶性循环</li>
+          <li>示范班特权：食堂VIP通道优先用餐</li>
+          <li>公开排名：年级前十电子屏公示</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="edu">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">筑基资格考试</span>
+      <span class="ep-tag tag-core">主线</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📅 <span class="hl">时间表</span></div>
+        <ul>
+          <li><strong>6月</strong>报名 → <strong>8月</strong>第一轮综合素质 → <strong>10月</strong>第二轮特长 → <strong>次年1月</strong>终选</li>
+          <li>考场在仙都城（距嵩阳1500多公里）</li>
+          <li>昆墟1层名额：一年<strong>4个</strong>（道心/法力/体育/武功各1）</li>
+          <li>600分以上免面试进十大</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">⚔️ <span class="hl">考试内容</span></div>
+        <ul>
+          <li>第一轮：法力/暴食/武道/结果四关制</li>
+          <li>第二轮：四条赛道（道心/法力/体育/武功）</li>
+          <li>体育赛道：打药积分制+玄冥重水压力测试</li>
+          <li>武道赛道：100万医保制度</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="edu">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">校园阶级生态</span>
+      <span class="ep-tag tag-warn">现实</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📊 <span class="hl">阶级可视化</span></div>
+        <ul>
+          <li><strong>头顶分数</strong>：550以下=亚人/NPC</li>
+          <li><strong>弟位文化</strong>：学弟见学长鞠躬，学长没坐不能坐</li>
+          <li><strong>低分奴隶制</strong>：白龙高中伸手即安静</li>
+          <li><strong>三大休息区</strong>：贵宾厅/遮阳棚/草席三级分化</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💉 <span class="hl">药物与改造</span></div>
+        <ul>
+          <li>入学必做绝育手术（防早恋+保持激素）</li>
+          <li>三大技术分流：仿妖筋肉/超级代谢/黑龙血脉</li>
+          <li>三种只能选一种（公司套娃策略）</li>
+          <li>嵩阳一年都有药残死亡案例</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🏆 <span class="hl">竞赛与合同</span></div>
+        <ul>
+          <li>甲级合同：月5万+学校资源8折+宿舍单间</li>
+          <li>不签合同=沦为竞争对手→被联手绞杀</li>
+          <li>特殊培养计划300万门槛</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="connector"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 6：势力阵营 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="power">
+    <span class="node-icon">⚔️</span>
+    <div class="node-name">势力阵营</div>
+    <div class="node-desc">十大宗门 · 豪族 · 帮派 · 公司 · 正邪神</div>
+    <div class="node-stats">势力交织 · 暗流涌动</div>
+  </div>
+
+  <div class="card prime" data-cat="power">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">四大集团 & 嵩阳十六家</span>
+      <span class="ep-tag tag-core">暗流</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🏢 <span class="hl">四大集团布局</span></div>
+        <ul>
+          <li><strong>绿洲集团</strong>：体外培养技术，仿妖筋肉</li>
+          <li><strong>仙韵集团（万法宗）</strong>：功法开发+仙道教育+广告</li>
+          <li><strong>紫云药业</strong>：超级代谢手术+浑元丹+道解缓释胶囊</li>
+          <li><strong>红塔牧业</strong>：黑龙血脉+繁育基地+妖裔生态</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🏰 <span class="hl">嵩阳十六豪族</span></div>
+        <ul>
+          <li>嵩阳十六个最富最有权势的家族</li>
+          <li>相互联姻+盘踞大公司嵩阳分公司</li>
+          <li><strong>周家</strong>：邪神代传+尸体生意+公司渗透</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="power">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">帮派 & 地下世界</span>
+      <span class="ep-tag tag-danger">灰色</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">💀 <span class="hl">暗学帮</span></div>
+        <ul>
+          <li>非法补课+功法破解+盗版功法传播</li>
+          <li>背后公司=深海教育集团</li>
+          <li>企业化管理：头上数字考勤+与正神合作监控</li>
+          <li>张羽曾月入26万→被周家压制后断收入</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🏭 <span class="hl">红塔牧业</span></div>
+        <ul>
+          <li>嵩阳市最大地主，周边百公里灵脉垄断</li>
+          <li>繁育基地五区：孵化室→新生区→学习室→成品室→纪念品区</li>
+          <li>转型：定制化生育市场+血脉开发</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="power">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">巡查队 & 神道体系</span>
+      <span class="ep-tag tag-info">官方</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🌟 <span class="hl">关键人物</span></div>
+        <ul>
+          <li><strong>云霓</strong>：巡查队队长/七代巡察世家/张翩翩熟人</li>
+          <li><strong>邓丙丁</strong>：六等四方游神/筑基考试主导考官</li>
+          <li><strong>黄子丑</strong>：九等功曹小神/负责张羽白真真</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🔍 <span class="hl">关键事件</span></div>
+        <ul>
+          <li>云霓秒批张羽白真真请假去仙都</li>
+          <li>邓丙丁"人都是有价的，昆墟的规则也是有价的"</li>
+          <li>贡赋天监：正神执法最高形态</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="connector"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 7：功法/技术库 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="tech">
+    <span class="node-icon">📜</span>
+    <div class="node-name">功法 & 技术库</div>
+    <div class="node-desc">核心功法 · 炼体技术 · 三大神药 · 炼体体系</div>
+    <div class="node-stats">73+招数 · 三级技术体系</div>
+  </div>
+
+  <div class="card prime" data-cat="tech">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">张羽核心功法</span>
+      <span class="ep-tag tag-core">必做</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">⚡ <span class="hl">战斗体系</span></div>
+        <ul>
+          <li><strong>无极云手10级</strong>：白色无相云罡，牵引+借力</li>
+          <li><strong>不灭印法</strong>：反弹+吸收法力，3:10比例</li>
+          <li><strong>龙象崩山掌</strong>：20万，土木系功法</li>
+          <li><strong>春秋无尽禅</strong>：155万/八星/四十九式+长生法力</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💪 <span class="hl">炼体功法</span></div>
+        <ul>
+          <li><strong>赤髓浑元气10级</strong>：全身筋肉拉伸收缩</li>
+          <li><strong>健体三十六式10级</strong>：十大宗门专为高中创造</li>
+          <li><strong>背龙翻岳手10级</strong>：重心可视化</li>
+          <li><strong>大日气海</strong>：12万，光照被动吐纳+吸收光华</li>
+          <li><strong>10级功法融会贯通</strong>：牵引+挪移+卸力+发力+支撑+爆发</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💊 <span class="hl">三大神药</span></div>
+        <ul>
+          <li><strong>道解缓释胶囊</strong>：1500积分，镇定+阻断负面情绪，副作用=智商降低</li>
+          <li><strong>法力脉络针剂</strong>：1500积分，极大加速法力和恢复，长期致经脉癌变</li>
+          <li><strong>仿凤功能素</strong>：1500积分，纳米仿制凤凰细胞+修复损伤</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="tech">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">三大炼体技术</span>
+      <span class="ep-tag tag-info">公司技术</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🦴 <span class="hl">仿妖筋肉（仙韵/绿洲）</span></div>
+        <ul>
+          <li>改造后10个学生里7-8个不似人形</li>
+          <li>张羽代言60万/年+白真真40万/年</li>
+          <li>赵天行动心改造</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🟣 <span class="hl">超级代谢手术（紫云）</span></div>
+        <ul>
+          <li>提升代谢+耐药性，打药猛十倍</li>
+          <li>副作用=一辈子买药打药+肉体变紫</li>
+          <li>紫云种姓制度：深紫/淡紫/无紫</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🐉 <span class="hl">黑龙血脉（红塔）</span></div>
+        <ul>
+          <li>黑色龙鳞+猩红双眼+额角利爪尾巴</li>
+          <li>觉醒越多体征越多</li>
+          <li>熊文武"擎天"10800公斤</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="tech">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P1</span>
+      <span class="ep-title">白真真功法 & 真灵根</span>
+      <span class="ep-tag tag-info">女主</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">⚡ <span class="hl">核心功法</span></div>
+        <ul>
+          <li><strong>雷殛真体</strong>：12万，法力凝练雷电淬体</li>
+          <li><strong>电光步</strong>：战斗用短距高速移动</li>
+          <li><strong>惊涛九转</strong>：专家级吐纳法，法力九转后更凶猛</li>
+          <li><strong>万剑无终诀</strong>：149万/十星/无终剑意</li>
+          <li><strong>寒魄冰心诀</strong>：拼命状态下保持思维冷静</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💜 <span class="hl">真灵根推演</span></div>
+        <ul>
+          <li>10级推演后功法获得更适配的10级效果</li>
+          <li>推演方向：无一不和速度有关</li>
+          <li>可转移给张羽，形成"双向适应+叠加"</li>
+          <li>灵根逐渐缠绕电光（充电修炼）</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="connector"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+
+  <!-- ============================================================ -->
+  <!-- 脑图节点 8：CG制作要素 -->
+  <!-- ============================================================ -->
+  <div class="node-break" data-cat="cg">
+    <span class="node-icon">🎬</span>
+    <div class="node-name">CG制作要素</div>
+    <div class="node-desc">角色建模 · 场景 · 特效 · 动作捕捉 · 视觉调性</div>
+    <div class="node-stats">P0清单 · 视觉签名</div>
+  </div>
+
+  <div class="card prime" data-cat="cg">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">番剧视觉签名CG</span>
+      <span class="ep-tag tag-core">必做</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">✨ <span class="hl">P0番剧视觉签名</span></div>
+        <ul>
+          <li><strong>羽书链法图</strong>：黑色画卷+功法化作白色星辰落入夜空</li>
+          <li><strong>夜凌霄完美血脉解封</strong>：3米5肉甲巨兽+筋肉盔甲</li>
+          <li><strong>张羽"雷神擂鼓"</strong>：暴食考场躺桌上+双手轰击腹部如雷鸣</li>
+          <li><strong>天空柱12531公斤</strong>：七窍溢血+骨骼开裂+微笑</li>
+          <li><strong>白真真"以肩膀硬接"</strong>：戴行之惊愕+医保归零+同归于尽</li>
+          <li><strong>大日气海+无相云罡</strong>：漆黑乌云滚滚的视觉奇观</li>
+          <li><strong>白真真雷电觉醒</strong>：眼中电光暴涨+长发冲天+口中电光</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉调性</span></div>
+        <ul>
+          <li><strong>绝望</strong>：冷色（出租屋压迫感）→ <strong>觉醒</strong>：暖光（诡辩成功）</li>
+          <li><strong>打药</strong>：紫云紫人/红塔黑色龙鳞/白龙兽人王国</li>
+          <li><strong>筑基考场</strong>：仙都上城金色祥云+下城常年黑夜</li>
+          <li><strong>昆墟</strong>：金字塔54层+金融大厦仙山融合</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="cg">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">OP/ED候选金句</span>
+      <span class="ep-tag tag-core">品牌</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🎵 <span class="hl">OP候选</span></div>
+        <ul>
+          <li>"信息差在有时候甚至比实力差更重要"（福姬·ch178）</li>
+          <li>"光靠天赋和努力就能崛起？也就那些被公司媒体反复洗脑的凡人才会相信"（黄子丑·ch197）</li>
+          <li>"跳出三贷之外，不在五险之中，过上修为自由财富自由的日子"（福姬·ch185）</li>
+          <li>"被看不起也有被看不起的好处，这样以后超越他们的时候才更出风头"（白真真·ch163）</li>
+          <li>"人都是有价的，昆墟的规则也是有价的"（邓丙丁·ch145）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎵 <span class="hl">ED候选</span></div>
+        <ul>
+          <li>"妈，对不起。但我真的想修仙啊。哪怕欠上一辈子还不上欠债，我也想修仙"（张羽·ch4）</li>
+          <li>"我辈修道人，以天为被，以地为席，就应该住桥洞，钻树林，占烂尾楼！"（白真真·ch100）</li>
+          <li>"他会期待到时候与你的较量。那么……顶峰再见了"（夜凌霄·ch172）</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="cg">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">CG制作清单</span>
+      <span class="ep-tag tag-core">制作</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🧑 <span class="hl">P0角色建模</span></div>
+        <div class="tag-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="main">邪神布娃娃</span>
+          <span class="key">玉星寒</span>
+          <span class="key">夜凌霄</span>
+          <span class="key">张翩翩</span>
+          <span>周澈尘</span>
+          <span>宋海龙</span>
+          <span>云景</span>
+          <span>福姬</span>
+        </div>
+      </section>
+      <section>
+        <div class="sec-title">🌆 <span class="hl">P0场景建模</span></div>
+        <ul>
+          <li><strong>嵩阳高中</strong>：教室+食堂+体育场+学生会办公室</li>
+          <li><strong>张羽出租屋</strong>：压迫感+霓虹修真金融UI叠化</li>
+          <li><strong>昆墟中心大厦999层</strong>：传送阵+云中厅</li>
+          <li><strong>红塔大厦333层</strong>：海底隧道办公室+龙人</li>
+          <li><strong>筑基考试赛场</strong>：仙都城+定海柱+玄冥重水缸</li>
+          <li><strong>暗学帮园区</strong>：嵩阳北月高新技术服务业园区</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">P0特效清单</span></div>
+        <ul>
+          <li><strong>羽书UI</strong>：半透明全息面板+文字逐行浮现</li>
+          <li><strong>无极云手</strong>：7次法力震荡→白色无相云罡喷涌</li>
+          <li><strong>真灵根转移</strong>：灵根丝线从丹田蔓延+神经布满全身</li>
+          <li><strong>邪神仪式</strong>：猩红蜡烛阵+透明符号由清变黑</li>
+          <li><strong>高中圣体套装</strong>：链法图+功法化作白色星辰</li>
+          <li><strong>雷电觉醒</strong>：丝丝缕缕电光暴涨+雷光长发</li>
+          <li><strong>龙人变身</strong>：黑鳞+额角+利爪+尾巴+五彩斑斓的黑</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div class="card" data-cat="cg">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">P0</span>
+      <span class="ep-title">镜头关键设计</span>
+      <span class="ep-tag tag-info">分镜</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">🎥 <span class="hl">情绪戏镜头</span></div>
+        <ul>
+          <li>面试官俯拍→张羽仰拍（权力差）</li>
+          <li>母亲说"妈妈会帮你凑齐"→切到张羽眼眶特写→羽书UI从瞳孔炸开</li>
+          <li>张羽"你会被玩死的，阿真"→白真真低头哽咽→情感核爆</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎥 <span class="hl">战斗戏镜头</span></div>
+        <ul>
+          <li>天空柱：张羽指尖试探→全集中→黑白世界→12531公斤爆发</li>
+          <li>白真真vs戴行之：残影围杀→肩膀硬接→医保归零同框</li>
+          <li>夜凌霄解封：法力脉络针剂注入→浑身青筋游走→暴涨3米5</li>
+          <li>张羽伪装宋虚：赤髓浑元气脸型改变→蹲姿训话→致命一击</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 统计 -->
+  <!-- ============================================================ -->
+  <div class="summary-row">
+    <div class="summary-item">
+      <div class="num">200</div>
+      <div class="label">第一章~第二百章</div>
+    </div>
+    <div class="summary-item">
+      <div class="num">73+</div>
+      <div class="label">招数/功法/技术</div>
+    </div>
+    <div class="summary-item">
+      <div class="num">50+</div>
+      <div class="label">角色</div>
+    </div>
+    <div class="summary-item">
+      <div class="num">8</div>
+      <div class="label">核心模块</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 展开/折叠单张卡片
+function toggleCard(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+
+// 按分类筛选
+function filterNode(cat) {
+  const cards = document.querySelectorAll('.card');
+  const breaks = document.querySelectorAll('.node-break');
+  const connectors = document.querySelectorAll('.connector');
+  const btns = document.querySelectorAll('.controls button');
+
+  // 更新按钮状态
+  btns.forEach(b => b.classList.remove('on'));
+  const btn = document.getElementById(cat === 0 ? 'f0' : 'f_' + cat);
+  if (btn) btn.classList.add('on');
+
+  if (cat === 0) {
+    // 全部展开：所有卡片可见，所有分类标题展开
+    cards.forEach(c => c.style.display = 'block');
+    breaks.forEach(b => b.style.display = 'block');
+    connectors.forEach(c => c.style.display = 'flex');
+  } else {
+    // 按分类显示
+    cards.forEach(c => {
+      if (c.dataset.cat === cat) c.style.display = 'block';
+      else c.style.display = 'none';
+    });
+    breaks.forEach(b => {
+      if (b.dataset.cat === cat) b.style.display = 'block';
+      else b.style.display = 'none';
+    });
+    connectors.forEach(c => c.style.display = 'none');
+  }
+}
+</script>
+
+</body>
+</html>

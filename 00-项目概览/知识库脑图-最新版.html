@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《没钱修什么仙？》番剧知识库脑图 · 最新版</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  #header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    border-bottom: 1px solid #30363d;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  #header h1 {
+    font-size: 16px;
+    background: linear-gradient(135deg, #c9a227 0%, #f5d76e 50%, #c9a227 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  #header .subtitle {
+    font-size: 11px;
+    color: #8b949e;
+  }
+  .controls {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .btn {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #e6edf3;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+  .btn:hover { background: #30363d; border-color: #8b949e; }
+  #canvas-container {
+    position: fixed; top: 52px; left: 0; right: 0; bottom: 0;
+    overflow: hidden; cursor: grab;
+  }
+  #canvas-container:active { cursor: grabbing; }
+  svg#mindmap { width: 100%; height: 100%; }
+  .node-group { cursor: pointer; }
+  .node-group:hover .node-bg { filter: brightness(1.3); }
+  .node-bg { transition: all 0.2s; rx: 8; ry: 8; }
+  .node-label {
+    font-family: 'Microsoft YaHei', sans-serif;
+    fill: #ffffff;
+    dominant-baseline: central;
+    text-anchor: middle;
+    pointer-events: none;
+    font-weight: 600;
+  }
+  .node-sublabel {
+    font-family: 'Microsoft YaHei', sans-serif;
+    fill: rgba(255,255,255,0.7);
+    dominant-baseline: central;
+    text-anchor: middle;
+    pointer-events: none;
+    font-size: 10px;
+    font-weight: 400;
+  }
+  .edge {
+    fill: none;
+    stroke-width: 1.5;
+    opacity: 0.5;
+  }
+  #info-panel {
+    position: fixed; right: 16px; top: 68px;
+    width: 280px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 12px;
+    line-height: 1.7;
+    max-height: calc(100vh - 84px);
+    overflow-y: auto;
+    transition: all 0.3s;
+    z-index: 50;
+  }
+  #info-panel h3 {
+    font-size: 14px;
+    color: #f5d76e;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 6px;
+  }
+  #info-panel .info-tag {
+    display: inline-block;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    margin: 2px 2px 2px 0;
+  }
+  #info-panel .info-section { margin-top: 10px; }
+  #info-panel .info-section-title {
+    color: #8b949e;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  #info-panel p { color: #c9d1d9; margin-bottom: 6px; }
+  #info-panel ul { color: #c9d1d9; padding-left: 14px; }
+  #info-panel li { margin-bottom: 3px; }
+  #info-panel .quote {
+    border-left: 2px solid #c9a227;
+    padding-left: 8px;
+    color: #f5d76e;
+    font-style: italic;
+    margin: 4px 0;
+  }
+  #info-panel .priority-p0 { color: #ff6b6b; font-weight: 700; }
+  #info-panel .priority-p1 { color: #ffa94d; }
+  #info-panel .priority-p2 { color: #74c0fc; }
+  #info-panel .milestone-done { color: #2ea043; }
+  #info-panel .milestone-pending { color: #8b949e; }
+  #info-panel .hl-gold { color: #f5d76e; font-weight: 600; }
+  #tip {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(22, 27, 34, 0.9);
+    border: 1px solid #30363d;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 11px;
+    color: #8b949e;
+    pointer-events: none;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div>
+    <h1>⚡ 《没钱修什么仙？》番剧知识库脑图 · 最新版</h1>
+    <div class="subtitle">783个文件 · 26集×15分钟 · TV半年番 · 1-202章改编 · 修真+金融差异化视觉风格</div>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="resetView()">⌂ 复位</button>
+    <button class="btn" onclick="zoomIn()">＋ 放大</button>
+    <button class="btn" onclick="zoomOut()">－ 缩小</button>
+    <button class="btn" onclick="togglePanel()">📋 详情面板</button>
+  </div>
+</div>
+
+<div id="canvas-container">
+  <svg id="mindmap" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div id="info-panel">
+  <h3>🗺️ 知识库概览 · 最新版</h3>
+  <div class="info-section">
+    <div class="info-section-title">项目规格</div>
+    <ul>
+      <li>原作：熊狼狗《没钱修什么仙？》</li>
+      <li>改编范围：1-202章</li>
+      <li>番剧规格：<span class="priority-p0">26集 × 15分钟</span></li>
+      <li>目标受众：18-35岁年轻人</li>
+      <li>视觉调性：修真+金融（差异化）</li>
+    </ul>
+  </div>
+  <div class="info-section">
+    <div class="info-section-title">知识库规模</div>
+    <ul>
+      <li>总文件数：<span class="priority-p0">783个</span></li>
+      <li>世界观：94个</li>
+      <li>角色：79个</li>
+      <li>剧情：407个</li>
+      <li>场景：166个</li>
+      <li>项目概览：7个</li>
+      <li>改编策略/CG/美术/参考/进度：24个</li>
+    </ul>
+  </div>
+  <div class="info-section">
+    <div class="info-section-title">里程碑状态</div>
+    <ul>
+      <li class="milestone-done">✅ M1：知识库骨架搭建</li>
+      <li class="milestone-done">✅ M2：1-202章章节摘要+原文</li>
+      <li class="milestone-done">✅ M3：场景/招数/角色CG要素100%</li>
+      <li class="milestone-pending">⬜ M4：番剧分集大纲（26集映射已定）</li>
+      <li class="milestone-pending">⬜ M5：核心场景分镜+关键帧</li>
+      <li class="milestone-pending">⬜ M6：美术风格指南+角色设计图</li>
+    </ul>
+  </div>
+  <div class="info-section">
+    <div class="info-section-title">使用说明</div>
+    <p>👆 点击节点查看详情</p>
+    <p>🖱️ 拖拽画布移动视图</p>
+    <p>🔍 滚轮缩放</p>
+  </div>
+</div>
+
+<div id="tip">点击节点查看详情 · 拖拽移动 · 滚轮缩放</div>
+
+<script>
+// ============================================================
+// Mindmap Data - 8 Branches (Latest Project Data)
+// ============================================================
+const mindmapData = {
+  id: 'root',
+  label: '《没钱修什么仙？》',
+  sublabel: '番剧制作知识库 · 783个文件',
+  color: '#c9a227',
+  textColor: '#0d1117',
+  size: [180, 56],
+  info: {
+    title: '《没钱修什么仙？》番剧制作知识库 · 最新版',
+    tags: ['P0核心', '番剧制作', '26集', '783文件'],
+    sections: [
+      { title: '项目愿景', content: '将熊狼狗所著《没钱修什么仙？》1-202章改编为26集×15分钟/集的TV半年番，打造"修真+金融"差异化视觉风格。' },
+      { title: '5大视觉差异化卖点', list: [
+        '<span class="priority-p0">修真+金融</span>：法力贷APP/灵币/琼浆币',
+        '<span class="priority-p0">修真+游戏化</span>：羽书系统加点UI+链法图',
+        '<span class="priority-p0">黑色幽默</span>：绝育/变性/抵押器官',
+        '<span class="priority-p0">商业讽刺</span>：金丹弟子/仿妖筋肉/暗学帮',
+        '<span class="priority-p0">季终钩子</span>：ch50无极云手+黑影 ⭐'
+      ]},
+      { title: '核心数据', list: [
+        '总文件数：783个md文件',
+        '章节目录：202章原文+202章摘要',
+        '角色：79个（含2主+2师+2反+3同学+70配角）',
+        '招数：67+个',
+        '通用场景：126个',
+        '章节原文+摘要全部基于原文端到端重写'
+      ]}
+    ]
+  },
+  children: [
+
+    // ─────── 1. 世界观 ───────
+    {
+      id: 'world',
+      label: '🌍 世界观',
+      sublabel: '94个文件',
+      color: '#1f6f8b',
+      size: [130, 44],
+      info: {
+        title: '10-世界观 (94个文件)',
+        tags: ['核心设定', '昆墟地理', '修炼体系', '货币经济', '法术体系', '招数67+'],
+        sections: [
+          { title: '核心差异化', content: '修真文明不是古典仙侠，而是资本化的仙道：货币=灵币/琼浆币/法力贷，资源被天庭金融体系严格管控。' },
+          { title: '文件体系', list: [
+            '10-核心设定 (47KB，已重写6节重构版)',
+            '10-昆墟地理（54层超级建筑）',
+            '10-货币与经济（法力贷/灵币体系）',
+            '10-修炼体系（炼气→化神）',
+            '10-法术体系（炼气级→化神级）',
+            '招数目录 (67+个，01-40为A-E维度详细版)'
+          ]}
+        ]
+      },
+      children: [
+        {
+          id: 'setting',
+          label: '核心设定',
+          sublabel: '修真+金融',
+          color: '#1a5276',
+          size: [110, 38],
+          info: {
+            title: '核心设定 · 修真文明+现代金融',
+            tags: ['P0', '差异化', '世界观'],
+            sections: [
+              { title: '昆墟世界', content: '地上36层+地下18层=54层超级建筑。仙道+金融+城市三位一体超级都市，第一层面积约两个中国大小。' },
+              { title: '修真 vs 金融的核心矛盾', content: '资本化的仙道：货币→灵币/琼浆币/法力贷。十大宗门垄断粮食、能源、交通、教育、医疗、金融、互联网一切行业。' },
+              { title: '三层社会结构', list: [
+                '顶层：仙道宗门（资源垄断）',
+                '中层：仙门后备（大学生/修仙者）',
+                '底层：凡人+金融夹心层（张羽的起点）'
+              ]},
+              { title: '核心势力', list: [
+                '天庭（神道金融监管/财税部）',
+                '万法大学（仙门后备人才培养）',
+                '十大宗门（顶级资源垄断）',
+                '嵩阳高中→万法大学（张羽路径）'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'kunxu',
+          label: '昆墟地理',
+          sublabel: '54层超级建筑',
+          color: '#1a5276',
+          size: [110, 38],
+          info: {
+            title: '昆墟地理 · 54层超级建筑',
+            tags: ['P1', '场景', '世界观'],
+            sections: [
+              { title: '基础结构', content: '地上36层（越往上越精英）+ 地下18层（暗层/邪教/黑市），共54层。嵩阳市位于第1层。' },
+              { title: 'CG重点层', list: [
+                '第1层：张羽起始层·嵩阳市 (P0)',
+                '第6层：姬垣枢/道乾坤所在层 (P0)',
+                '顶层36：仙道宗门所在 (P0)',
+                '地下层：邪神/黑市/暗学帮 (P1)'
+              ]},
+              { title: '视觉要点', list: [
+                '楼层垂直感强，俯瞰镜头冲击力',
+                '嵩阳市999层中心大厦（传送阵直达）',
+                '高层明亮·地下阴冷·对比强烈',
+                '飞行法器+现代电梯并存'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'cultivation',
+          label: '修炼体系',
+          sublabel: '炼气→化神',
+          color: '#1a5276',
+          size: [110, 38],
+          info: {
+            title: '修炼等级体系',
+            tags: ['P1', '等级', '世界观'],
+            sections: [
+              { title: '修炼境界（1-202章）', list: [
+                '炼气（道心10级上限）→ 1-200章主舞台',
+                '筑基（道心20级）→ ch232首次突破',
+                '金丹（400年寿命）→ ch666左右',
+                '元婴（1000+年）',
+                '化神（数千年）'
+              ]},
+              { title: '张羽外挂：羽书系统', list: [
+                '运功即修成功法（核心能力）',
+                '链法图：修炼6/8/10门功法解锁圣体',
+                '道种谱：复制他人道种',
+                '高中圣体（ch191-197完成）：吃/药/卷三倍效率'
+              ]},
+              { title: 'CG重点特效', list: [
+                '<span class="priority-p0">高中圣体 P0</span>：肌肉微光+气场流动',
+                '<span class="priority-p0">羽书UI P0</span>：符咒+现代界面融合',
+                '<span class="priority-p0">10级突破 P0</span>：金光+经脉透明化',
+                '掌中昆仑 P0：巨型手印虚影引力操控'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'economy',
+          label: '货币与经济',
+          sublabel: '法力贷/灵币',
+          color: '#1a5276',
+          size: [110, 38],
+          info: {
+            title: '货币与经济体系',
+            tags: ['P0', '金融', '世界观'],
+            sections: [
+              { title: '货币类型', list: [
+                '灵币：普通修士交易（类现代纸币）',
+                '琼浆币：高端资源（APP数字化管理）',
+                '法力贷：借贷工具（利息自动结算）',
+                '功力：可借贷抵押的内功'
+              ]},
+              { title: '张羽财务弧线', list: [
+                'ch1：<span class="priority-p0">负债70万+账户50元</span>',
+                'ch100：兼职积累·1000+元',
+                'ch120：仿妖筋肉代言·60万灵币',
+                'ch135：广告拍摄·48万到账',
+                'ch200：筑基决战投入·百万级'
+              ]},
+              { title: '视觉化要点', list: [
+                '金融UI：现代APP+仙道符咒融合',
+                '债务提示：弹幕式广告（法力贷广告）',
+                '货币兑换：类似股票K线图'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'spells',
+          label: '法术体系',
+          sublabel: '炼气→化神法术',
+          color: '#1a5276',
+          size: [110, 38],
+          info: {
+            title: '法术体系',
+            tags: ['P1', '法术', '世界观'],
+            sections: [
+              { title: '法术分类', list: [
+                '攻击型：掌中昆仑/七绝/散手',
+                '防御型：法骸（高崇光300+件）',
+                '辅助型：羽书/链法图（核心外挂）',
+                '召唤型：邪神契约/请神仪式'
+              ]},
+              { title: '法术等级与CG密度', list: [
+                '炼气级：威力小，特效密度低',
+                '筑基级：中等威力，开始有法力感',
+                '金丹级：威力大，CG重点投入',
+                '元婴级：领域级，关键战斗',
+                '化神级：法则级，必做P0'
+              ]},
+              { title: '招牌法术', content: '掌中昆仑（ch572获得）：倒翻昆仑，引力操控，巨型手印虚影，压迫感极强。' }
+            ]
+          }
+        },
+        {
+          id: 'moves',
+          label: '招数大全',
+          sublabel: '67+个招数',
+          color: '#1a5276',
+          size: [110, 38],
+          info: {
+            title: '招数目录（67+个）',
+            tags: ['P0', '招数', 'CG特效'],
+            sections: [
+              { title: 'P0核心招数（1-202章）', list: [
+                '<span class="priority-p0">周天采气法</span>（ch1，被动吐纳10成）',
+                '<span class="priority-p0">健体三十六式</span>（ch1-10，1-10级递进）',
+                '<span class="priority-p0">无极云手</span>（ch50，白色云罡冲天）',
+                '<span class="priority-p0">背龙翻岳手</span>（ch84，绊谁谁倒）',
+                '<span class="priority-p0">不灭印法</span>（暗学帮，2小时10级）',
+                '<span class="priority-p0">大日气海</span>（ch125，光照被动吐纳）',
+                '<span class="priority-p0">春秋无尽禅</span>（ch170，32分15秒速成）',
+                '<span class="priority-p0">高中圣体</span>（ch191-197，10功合一）'
+              ]},
+              { title: '特效要点', content: '健体三十六式1-10级需差异化。9→10级突破金光/白色光效统一标准。招数01-40已有A-E维度详细版+原文引用。' }
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─────── 2. 角色 ───────
+    {
+      id: 'characters',
+      label: '👥 角色',
+      sublabel: '79个文件',
+      color: '#6f2fa0',
+      size: [130, 44],
+      info: {
+        title: '20-角色 (79个文件)',
+        tags: ['主角2', '师承2', '反派2', '同学3', '配角70'],
+        sections: [
+          { title: '角色体系（84角色 / 79文件）', list: [
+            '主角2人：张羽·白真真（A-G 7维度已填）',
+            '师承2人：高崇光·萧玉容（A-G已填）',
+            '反派2人：链枢神君·邪神布娃娃（A-G已填）',
+            '同学3人：道乾坤·夜星璃·素云霓（A-G已填）',
+            '配角75人：含全部1-202章出场人物'
+          ]},
+          { title: '质量控制', list: [
+            '2026-06-17 A1-A4四轮质检完成',
+            '0编造残留·0原文嵌入污染',
+            '关键事实已校正（ch070/ch086/ch195/ch202）',
+            'main_characters 列本章实际角色'
+          ]}
+        ]
+      },
+      children: [
+        {
+          id: 'zhangyu',
+          label: '张羽',
+          sublabel: '主角 | 炼气→筑基',
+          color: '#7b3fa0',
+          size: [120, 40],
+          info: {
+            title: '张羽 - 主角 (A-G已填)',
+            tags: ['P0', '主角', '炼气', 'S级模型'],
+            sections: [
+              { title: '基础档案', list: [
+                '所属：嵩阳高中→备战筑基',
+                '境界：炼气期道心7级·肉体9.91·法力97.6',
+                '首次出场：第1章',
+                '起点：负债70万+账户50+元',
+                '状态：ch202 高中圣体终成'
+              ]},
+              { title: '性格特征', list: [
+                '触底后的清醒：接受贫困现实不抱怨',
+                '诡辩天才：ch4诡辩邪神反杀',
+                '讨好型伪装+骨子里的倔强',
+                '修真金融化的清醒认知者'
+              ]},
+              { title: '关键台词', quotes: [
+                '"妈，对不起。但我真的想修仙啊。"——ch2',
+                '"分高的学生就是能侮辱分低的同学"——ch150',
+                '"懂了，绊谁谁倒是吧。"——ch84',
+                '"你说你很有钱，钱也是你力量的一部分……你试试看用钱来阻止我。"——ch80'
+              ]},
+              { title: '人物弧光1-202章', list: [
+                'ch1：绝望处境（70万负债+50元）',
+                'ch5：羽书显化（外挂解锁）',
+                'ch38：周天采气法10级（被动吐纳10成）',
+                'ch50：无极云手觉醒（白色狼烟冲天）',
+                'ch84：背龙翻岳手10级',
+                'ch120：仿妖筋肉代言60万',
+                'ch150："分高=一切"反击',
+                'ch191-197：高中圣体终成',
+                'ch200-202：筑基决战·同归于尽'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'baizhen',
+          label: '白真真',
+          sublabel: '女主 | 真灵根',
+          color: '#7b3fa0',
+          size: [120, 40],
+          info: {
+            title: '白真真 - 女主 (A-G已填)',
+            tags: ['P0', '女主', '真灵根', 'S级模型'],
+            sections: [
+              { title: '基础档案', list: [
+                '所属：嵩阳高中→白龙高中武道竞赛',
+                '境界：炼气期·真灵根进化（种子形态）',
+                '首次出场：第1章',
+                '特殊：隐藏灵根十年+跑车腿10级',
+                'ch202：筑基决战同归于尽'
+              ]},
+              { title: '性格特征', list: [
+                '冷若冰霜外表+嘴毒心善',
+                '战斗刚烈：ch200以肩膀硬接戴行之一掌',
+                '节俭风：住桥洞/钻树林/占烂尾楼',
+                '真灵根主动跑进张羽体内（ch99-100）',
+                '雷电属性觉醒（ch185，可插电充电修炼）'
+              ]},
+              { title: '关键台词', quotes: [
+                '"我辈修道人，以天为被，以地为席，就应该住桥洞，钻树林，占烂尾楼！"——ch100',
+                '"我要和羽子一起上十大！"——ch114',
+                '"在戴行之惊愕的目光之中，白真真微微撇头，竟以肩膀硬接了他这一掌。"——ch200'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'villains',
+          label: '反派角色',
+          sublabel: '链枢神君·邪神',
+          color: '#7b3fa0',
+          size: [120, 40],
+          info: {
+            title: '反派角色',
+            tags: ['P0', '反派', '化神', '契约'],
+            sections: [
+              { title: '链枢神君', list: [
+                '所属：万法大学金融系（→邪教）',
+                '境界：化神',
+                '法力贷系统真正设计者/推动者',
+                '张羽70万灵币债务的根源',
+                'A-G 7维度已填'
+              ]},
+              { title: '邪神布娃娃', list: [
+                '真身：未知高维存在',
+                '外形：30cm高破旧布娃娃（反差萌）',
+                '目标：让张羽实现1000愿望+收集古董',
+                'ch4被张羽诡辩反杀·临时让步',
+                '风格：清脆女声+犀利洞察（"耍得比我们邪神溜多了"）'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'mentors',
+          label: '师承人物',
+          sublabel: '高崇光·萧玉容',
+          color: '#7b3fa0',
+          size: [120, 40],
+          info: {
+            title: '师承人物',
+            tags: ['P0', '师承', '化神'],
+            sections: [
+              { title: '高崇光 / 青木神君', list: [
+                '所属：万法大学土木系',
+                '境界：化神',
+                '首次出场：ch349（第2季范围）',
+                '关系：张羽记名师傅',
+                'CG：化神级法骸装备300+件',
+                'A-G 7维度已填'
+              ]},
+              { title: '萧玉容 / 磁极神君', list: [
+                '所属：万法大学炼器系',
+                '境界：化神',
+                '关系：张羽炼器系师承（第2季范围）',
+                'CG：磁极气场特效',
+                'A-G 7维度已填'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'classmates',
+          label: '同学角色',
+          sublabel: '道乾坤·夜星璃·素云霓',
+          color: '#7b3fa0',
+          size: [120, 40],
+          info: {
+            title: '同学角色（3人）',
+            tags: ['P0/P1', '同学', '配角'],
+            sections: [
+              { title: '道乾坤', list: [
+                '室友/竞争对手',
+                '全校第一',
+                'A-G 7维度已填（1.7KB）'
+              ]},
+              { title: '夜星璃', list: [
+                '同学·P1重要角色',
+                'A-G 7维度已填（1.9KB）'
+              ]},
+              { title: '素云霓', list: [
+                '同学·P1重要角色',
+                'A-G 7维度已填（1.9KB）'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'supports',
+          label: '配角群像',
+          sublabel: '70个配角',
+          color: '#7b3fa0',
+          size: [120, 40],
+          info: {
+            title: '配角群像（75个角色）',
+            tags: ['P0-P3', '配角', '群像'],
+            sections: [
+              { title: 'P0关键配角', list: [
+                '玉星寒（P0·体育竞赛对手·宝石级）',
+                '宋海龙（武道竞赛·张羽队友）',
+                '乐沐岚（紫云高中·轮换训练伙伴）',
+                '张翩翩（神辅·最大靠山·ch139离开）',
+                '王海（学生会·打压张羽）',
+                '周澈尘（学长·学生会打压势力）'
+              ]},
+              { title: '配角图鉴', content: '详见 20-角色/配角图鉴.md，含人物-01至人物-82。' }
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─────── 3. 剧情 ───────
+    {
+      id: 'story',
+      label: '📖 剧情',
+      sublabel: '407个文件',
+      color: '#1a7a4a',
+      size: [130, 44],
+      info: {
+        title: '30-剧情 (407个文件)',
+        tags: ['时间线', '关键冲突', '人物弧光', '章节摘要202', '章节原文202'],
+        sections: [
+          { title: '文件体系', list: [
+            '30-时间线.md（三阶段结构）',
+            '30-关键冲突.md（四大矛盾线）',
+            '30-人物弧光.md（角色成长轨迹）',
+            '章节摘要：202章（全部基于原文端到端重写）',
+            '章节原文：202章（含归档修订副本）',
+            '质量：143详细+59中等+0低质'
+          ]},
+          { title: '质控成果（2026-06-17）', list: [
+            '<span class="milestone-done">✅ 26批端到端校对202章</span>',
+            '<span class="milestone-done">✅ A1系统清理：195文件修改</span>',
+            '<span class="milestone-done">✅ A2重写23章P0重灾摘要</span>',
+            '<span class="milestone-done">✅ A3重写179章剩余P0失实摘要</span>',
+            '<span class="milestone-done">✅ A4修复2处原文交叉污染</span>',
+            '<span class="priority-p0">0编造残留·0原文嵌入污染</span>'
+          ]}
+        ]
+      },
+      children: [
+        {
+          id: 'timeline',
+          label: '剧情时间线',
+          sublabel: '1-202章三阶段',
+          color: '#1a6e40',
+          size: [120, 38],
+          info: {
+            title: '剧情时间线 · 1-202章',
+            tags: ['P0', '时间线', '三阶段'],
+            sections: [
+              { title: '第一阶段：嵩阳高中 (ch1-14)', list: [
+                'ch1：面试（法力贷广告）+邪神契约',
+                'ch4：诡辩反杀+三愿仪式',
+                'ch5：羽书激活（外挂系统解锁）',
+                'ch13-14：法赛首战+转校'
+              ]},
+              { title: '第二阶段：白龙校际赛+暗学帮 (ch15-150)', list: [
+                'ch15：进入中心大厦/画展/星火真人',
+                'ch37-38：合同陷阱+10级周天采气',
+                'ch50：无极云手觉醒+季终钩子',
+                'ch66-82：武道竞赛夺冠',
+                'ch91-100：暗学帮+真灵根入体+桥洞宣言',
+                'ch106-120：体育竞赛四关+12531kg+代言'
+              ]},
+              { title: '第三阶段：筑基考试 (ch151-202)', list: [
+                'ch159-171：第一轮筑基三关考试',
+                'ch177-182：狩猎邪神·链法图解锁',
+                'ch183-190：白真真雷电+周家压迫',
+                'ch191-197：高中圣体终成',
+                'ch200-202：玄冥重水·同归于尽'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'conflict',
+          label: '关键冲突',
+          sublabel: '四大矛盾线',
+          color: '#1a6e40',
+          size: [120, 38],
+          info: {
+            title: '关键冲突梳理',
+            tags: ['P0', '冲突', '矛盾'],
+            sections: [
+              { title: '主冲突：修仙 vs 贫困', list: [
+                '张羽70万欠债+母卖房仍无力承担',
+                '持续被债务催收+法力贷广告如影随形',
+                'ch120代言60万→ch135仅剩48万→ch200百万级投入'
+              ]},
+              { title: '次冲突1：派系打压', list: [
+                '学生会（王海/周澈尘）不让参赛',
+                '十大宗门与公司联手耍穷鬼',
+                '"绝世天才"捧杀压低商业价值',
+                '周家（周阳）层层束缚'
+              ]},
+              { title: '次冲突2：资源争夺', list: [
+                '筑基资格证激烈竞争',
+                '仙门功法获取门槛极高',
+                '暗学帮=穷人唯一补课渠道'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'arc',
+          label: '人物弧光',
+          sublabel: '成长轨迹',
+          color: '#1a6e40',
+          size: [120, 38],
+          info: {
+            title: '人物弧光 (1-202章)',
+            tags: ['P0', '弧光', '成长'],
+            sections: [
+              { title: '张羽弧光', content: '核心：从"被侮辱的贫困少年"到"靠羽书+拼命逆袭的筑基候选人"。负债→觉醒→法赛突围→武道冠军→代言→圣体终成→筑基决战。' },
+              { title: '白真真弧光', content: '核心：从"冷若冰霜的竞争者"到"灵根共享伙伴"再到"同归于尽的战友"。隐藏灵根十年→主动入体→种子进化→雷电觉醒→肩膀硬接→医保归零。' },
+              { title: '张羽财务弧线', content: 'ch1：50元（负债70万）→ ch100：1000+元（兼职）→ ch120：60万灵币（代言）→ ch135：48万（广告）→ ch200：百万级（筑基决战投入）。始终在穷与更穷之间挣扎。' }
+            ]
+          }
+        },
+        {
+          id: 'chapters',
+          label: '章节摘要+原文',
+          sublabel: '202章×2=404文件',
+          color: '#1a6e40',
+          size: [120, 38],
+          info: {
+            title: '章节内容 (404个文件)',
+            tags: ['章节摘要', '章节原文', '202章'],
+            sections: [
+              { title: 'P0关键章节 ⭐', list: [
+                '<span class="priority-p0">ch1：面试+邪神契约（开篇）</span>',
+                '<span class="priority-p0">ch4：诡辩反杀（智力高光）</span>',
+                '<span class="priority-p0">ch5：羽书显化（外挂激活）</span>',
+                '<span class="priority-p0">ch38：周天采气法10级</span>',
+                '<span class="priority-p0">ch50：无极云手+季终钩子 ⭐</span>',
+                '<span class="priority-p0">ch84：背龙翻岳手10级</span>',
+                '<span class="priority-p0">ch88：玉星寒首登场</span>',
+                '<span class="priority-p0">ch99-100：真灵根入体+桥洞宣言</span>',
+                '<span class="priority-p0">ch118：12531公斤天空柱擎天</span>',
+                '<span class="priority-p0">ch120：仿妖筋肉代言60万</span>',
+                '<span class="priority-p0">ch150：辱蓝岭事件</span>',
+                '<span class="priority-p0">ch191-197：高中圣体终成</span>',
+                '<span class="priority-p0">ch200-202：玄冥重水·同归于尽 ⭐</span>'
+              ]}
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─────── 4. 场景 ───────
+    {
+      id: 'scenes',
+      label: '🏙️ 场景',
+      sublabel: '166个文件',
+      color: '#7a4f1a',
+      size: [130, 44],
+      info: {
+        title: '40-场景 (166个文件)',
+        tags: ['通用场景126', '单章场景', '场景去重表1407行'],
+        sections: [
+          { title: '场景体系', list: [
+            '00-场景去重表（主索引·1407行）',
+            '通用场景126个（全部带原文引用+CG关键帧）',
+            '单章目录（第001章/002章等）',
+            '归档目录（00-归档-章节场景孤儿_2026-06-16）'
+          ]},
+          { title: 'P0必做场景（15个）', list: [
+            '面试教室 (ch1)',
+            '邪神契约 (ch1+4)',
+            '羽书显化 (ch5)',
+            '10级周天采气 (ch38)',
+            '飞剑 (ch44)',
+            '寒星野劝降 (ch49)',
+            '季终钩子·云柱黑影 (ch50) ⭐',
+            '玉星寒首登场 (ch88) ⭐',
+            '背龙翻岳手10级 (ch84) ⭐',
+            '真灵根神经滋养 (ch99-100) ⭐',
+            '仿妖筋肉代言 (ch120)',
+            '玉星寒传授省钱理论 (ch132) ⭐',
+            '妙云首登场+脸模 (ch135) ⭐',
+            '辱蓝岭事件 (ch150) ⭐',
+            '筑基决战·玄冥重水 (ch200) ⭐'
+          ]}
+        ]
+      },
+      children: [
+        {
+          id: 'scene_p0',
+          label: 'P0核心场景',
+          sublabel: '15个必做',
+          color: '#7a3a10',
+          size: [120, 38],
+          info: {
+            title: 'P0必做场景（15个）',
+            tags: ['P0', '核心场景', 'CG必做'],
+            sections: [
+              { title: 'P0必做场景清单', list: [
+                '<span class="priority-p0">面试教室 (ch1)</span>',
+                '<span class="priority-p0">邪神契约 (ch1+4)</span>',
+                '<span class="priority-p0">羽书显化 (ch5)</span>',
+                '10级周天采气 (ch38)',
+                '飞剑 (ch44)',
+                '寒星野劝降 (ch49)',
+                '<span class="priority-p0">季终钩子·云柱黑影 (ch50) ⭐</span>',
+                '<span class="priority-p0">玉星寒首登场 (ch88) ⭐</span>',
+                '<span class="priority-p0">背龙翻岳手10级 (ch84) ⭐</span>',
+                '<span class="priority-p0">真灵根神经滋养 (ch99-100) ⭐</span>',
+                '仿妖筋肉代言 (ch120)',
+                '<span class="priority-p0">玉星寒传授省钱理论 (ch132) ⭐</span>',
+                '<span class="priority-p0">妙云首登场+脸模 (ch135) ⭐</span>',
+                '<span class="priority-p0">辱蓝岭事件 (ch150) ⭐</span>',
+                '<span class="priority-p0">筑基决战·玄冥重水 (ch200) ⭐</span>'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'scene_school',
+          label: '学校场景',
+          sublabel: '嵩阳·白龙·仙都',
+          color: '#7a3a10',
+          size: [120, 38],
+          info: {
+            title: '学校类场景',
+            tags: ['P1', '学校', '校园'],
+            sections: [
+              { title: '嵩阳高中场景', list: [
+                '示范班教室·面试教室·体育练功场',
+                '法赛现场·道心考场（VR灵界面罩）',
+                '小花园（背龙翻岳手修炼）',
+                '天台（羽书仪式倒计时）'
+              ]},
+              { title: '白龙高中场景', list: [
+                '武道竞赛场馆（660分走廊）',
+                '淘汰赛擂台（八强/四强/决赛）',
+                '急救区·观众席三大方阵'
+              ]},
+              { title: '仙都考场场景', list: [
+                '第一轮筑基考试大厅',
+                '暴食考场·武道考试擂台',
+                '玄冥重水决战擂台 ⭐'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'scene_life',
+          label: '生活场景',
+          sublabel: '贫困+都市',
+          color: '#7a3a10',
+          size: [120, 38],
+          info: {
+            title: '生活类场景',
+            tags: ['P1', '生活', '都市'],
+            sections: [
+              { title: '主角生活场景', list: [
+                '张羽贫民窟出租屋（P0）',
+                '中心大厦999层画展·安全通道·自助餐区',
+                '嵩阳市高架桥洞（白真真宣言地）',
+                '烂尾楼·工地·公寓看房蒙太奇',
+                '公交车上·地铁车厢通勤',
+                '暗学帮园区（地下补课教室）'
+              ]},
+              { title: 'CG重点UI', list: [
+                '法力贷APP界面（网贷弹窗+修真符咒融合）P0',
+                '羽书系统UI（全息面板+加点界面）P0',
+                '仙道功法购买网站·天眼符UI',
+                '红包符·防诈符·好感符·威压符'
+              ]}
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─────── 5. 美术风格 ───────
+    {
+      id: 'art',
+      label: '🎨 美术风格',
+      sublabel: '4个文件',
+      color: '#8b1a1a',
+      size: [130, 44],
+      info: {
+        title: '50-美术风格 (4个文件)',
+        tags: ['视觉风格猜想', '关键场景设计', '服装造型', '色彩情绪'],
+        sections: [
+          { title: '文件列表', list: [
+            '50-视觉风格猜想（冷峻几何+东方神秘）',
+            '50-关键场景设计（P0场景关键帧）',
+            '50-服装与造型（校服/战服/代言服）',
+            '50-色彩与情绪（五色体系）'
+          ]},
+          { title: '视觉风格支柱（5大差异化）', list: [
+            '<span class="priority-p0">修真+金融</span>：法力贷APP·抽象UI层',
+            '<span class="priority-p0">修真+游戏化</span>：羽书系统"+"加点',
+            '<span class="priority-p0">黑色幽默</span>：绝育/变性/抵押器官',
+            '<span class="priority-p0">商业讽刺</span>：金丹弟子/仿妖筋肉',
+            '<span class="priority-p0">季终钩子</span>：ch50无极云手+黑影'
+          ]}
+        ]
+      },
+      children: [
+        {
+          id: 'visual_style',
+          label: '视觉风格',
+          sublabel: '冷峻几何+东方神秘',
+          color: '#7a1010',
+          size: [120, 38],
+          info: {
+            title: '视觉风格猜想',
+            tags: ['P0', '美术', '风格'],
+            sections: [
+              { title: '整体调性', content: '修真+现代金融——冷峻几何+东方神秘的融合。' },
+              { title: '视觉关键词', list: [
+                '冷峻：金属灰/深蓝/金融感',
+                '几何：直线/棱角/极简构图',
+                '东方神秘：符咒/太极/阴阳符文',
+                '高科技感：HUD/全息UI/光效'
+              ]},
+              { title: '配色方案', list: [
+                '昆墟主楼：深蓝+银白+金（冷峻秩序）',
+                '地下层/暗学帮：血红+黑+紫（危险压抑）',
+                '战斗场景：红+金+白（热血激烈）',
+                '修仙/羽书：金+紫+白（神圣超凡）'
+              ]},
+              { title: '参考作品', list: [
+                '《赛博朋克：边缘行者》（金融+城市感）',
+                '《灵笼》（东方+科幻融合）',
+                '《凡人修仙传》（修真基础范本）',
+                '《BLAME!》（建筑几何感与垂直城市）'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'costume',
+          label: '服装造型',
+          sublabel: '校服·战服·代言服',
+          color: '#7a1010',
+          size: [120, 38],
+          info: {
+            title: '服装与造型设定',
+            tags: ['P1', '服装', '造型'],
+            sections: [
+              { title: '张羽服装线', list: [
+                '嵩阳高中校服（灰暗·朴素·高中阶段）',
+                '白龙高中校际赛战服（破损+血污版）',
+                '仿妖筋肉代言运动服（ch120后·品牌赞助）',
+                '练功服（健体/散手/背龙翻岳训练）'
+              ]},
+              { title: '白真真服装线', list: [
+                '嵩阳高中校服（初登场·冷艳）',
+                '白龙高中武道竞赛战服（胸口"1"徽章）',
+                '桥洞宣言·日常便服（逆光剪影设计）',
+                '筑基决战·作战服（破损·肩膀加强设计）'
+              ]},
+              { title: '重要配角造型', list: [
+                '玉星寒：紫云高中战服+冷酷气质',
+                '乐沐岚：紫云高中制服+富家女气场',
+                '邪神布娃娃：30cm破烂娃娃+眼睛发光',
+                '宋海龙：白龙高中队服+壮硕体格'
+              ]}
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─────── 6. 改编策略 ───────
+    {
+      id: 'adaptation',
+      label: '🎬 改编策略',
+      sublabel: '4个文件',
+      color: '#1a4a7a',
+      size: [130, 44],
+      info: {
+        title: '60-改编策略 (4个文件)',
+        tags: ['番剧结构', '节奏高潮', '删改建议', '风险红线'],
+        sections: [
+          { title: '文件列表', list: [
+            '60-番剧结构设想（26集三段式已定）',
+            '60-节奏与高潮点（5幕26集+30反转已定）',
+            '60-删改增补建议（P0/P1/P2分级）',
+            '60-风险与红线（敏感内容标注）'
+          ]},
+          { title: '改编核心原则', list: [
+            '<span class="priority-p0">节奏紧张：每集至少1个反转/爽点</span>',
+            '删繁就简：跳过日常水剧情，聚焦比赛+战斗+转折',
+            '屌丝逆袭：穷鬼高中生一路打脸资本+天骄',
+            '社会讽刺：修真金融化+消费主义黑色幽默',
+            '每集标注对应章节（确保追溯性）'
+          ]}
+        ]
+      },
+      children: [
+        {
+          id: 'structure',
+          label: '26集结构',
+          sublabel: '三段式·最新映射',
+          color: '#0d3a6a',
+          size: [120, 38],
+          info: {
+            title: '26集分集映射 · 最新版',
+            tags: ['P0', '26集', '结构'],
+            sections: [
+              { title: '26集完整映射', list: [
+                'EP01 ch1-3 嵩阳前史：面试+邪神契约',
+                'EP02 ch4-6 请神+羽书：反杀诡辩+系统解锁',
+                'EP03 ch7-10 健体3级：张羽穷途末路',
+                'EP04 ch11-14 嵩阳修行：周天采气+仙人跳',
+                'EP05 ch15-18 中心大厦：星火真人+仙韵集团',
+                'EP06 ch19-22 天人演武图：道心+武学',
+                'EP07 ch23-26 嵩阳内卷：月考+报名法赛',
+                'EP08 ch27-30 健体10级+道心：月考实战+VR',
+                'EP09 ch31-35 道心结果：疼痛考场+成绩出',
+                'EP10 ch36-40 10级周天+快乐心法：突破+补习',
+                'EP11 ch41-45 飞剑+法赛：天眼符+螺旋手里剑',
+                'EP12 ch46-48 法赛1-2关：熊不凡+寒星野',
+                'EP13 ch49-50 法赛终赛+季终钩子 ⭐',
+                'EP14 ch51-60 嵩阳余波+暗流',
+                'EP15 ch61-70 白龙校际赛：八强战',
+                'EP16 ch71-80 半决赛+决赛：冠军+掌声潮',
+                'EP17 ch81-90 庆功+玉星寒首登场 ⭐',
+                'EP18 ch91-100 暗学帮+真灵根+桥洞宣言',
+                'EP19 ch101-110 筑基前期：灵敏',
+                'EP20 ch111-120 天空柱+代言：12531kg',
+                'EP21 ch121-130 大日气海+战白龙',
+                'EP22 ch131-140 残牛+张翩翩告别',
+                'EP23 ch141-150 筑基测试+辱蓝岭 ⭐',
+                'EP24 ch151-175 筑基高潮：三大神药+春秋禅',
+                'EP25 ch176-195 玄冥决战前夜：圣体+邪神',
+                '<span class="priority-p0">EP26 ch196-202 同归于尽大结局 ⭐</span>'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'pacing',
+          label: '节奏高潮点',
+          sublabel: '30反转·5幕',
+          color: '#0d3a6a',
+          size: [120, 38],
+          info: {
+            title: '节奏与高潮点 · 30反转',
+            tags: ['P0', '节奏', '高潮'],
+            sections: [
+              { title: '五大幕·30个反转', list: [
+                '<span class="priority-p0">ACT1 绝望与觉醒</span>（EP01-05·7反转）：诡辩反杀→羽书觉醒→双10级→法赛突围→学生会打压',
+                '<span class="priority-p0">ACT2 逆袭之路</span>（EP06-09·6反转）：暗学帮→不灭印法→武道夺冠→灵根入体→桥洞宣言',
+                '<span class="priority-p0">ACT3 体育竞赛</span>（EP10-13·4反转）：肉体震撼→心脏突破→12531kg→捧杀打压',
+                '<span class="priority-p0">ACT4 资本真相</span>（EP14-18·5反转）：韭菜哲学→大日气海→真灵根轮换→种子进化→靠山离开',
+                '<span class="priority-p0">ACT5 筑基之战</span>（EP19-26·8反转）：估值未知→春秋速成→生产工具→狩猎邪神→雷电觉醒→圣体终成→打药大赛→同归于尽'
+              ]},
+              { title: 'P0高潮节点', list: [
+                'EP01：面试+邪神契约',
+                'EP03：健体3级·张羽穷途末路',
+                'EP08：健体10级+道心考试',
+                'EP13：无极云手+黑影（季终钩子）⭐',
+                'EP17：玉星寒首登场 ⭐',
+                'EP20：天空柱12531kg',
+                'EP24：筑基高潮·三大神药',
+                '<span class="priority-p0">EP26：玄冥重水·同归于尽 ⭐</span>'
+              ]}
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─────── 7. CG制作 ───────
+    {
+      id: 'cg',
+      label: '⚙️ CG制作要素',
+      sublabel: '4个文件',
+      color: '#2a5a2a',
+      size: [130, 44],
+      info: {
+        title: '70-CG制作要素 (4个文件)',
+        tags: ['角色建模', '场景建模', '特效清单', '动作捕捉'],
+        sections: [
+          { title: '文件列表', list: [
+            '70-角色建模清单（P0-P3分级）',
+            '70-场景建模清单（P0-P3分级）',
+            '70-特效清单（预算分配）',
+            '70-动作捕捉需求（战斗+情绪）'
+          ]},
+          { title: 'CG分级原则', list: [
+            '<span class="priority-p0">P0：60%预算</span>——主角+关键场景+核心特效',
+            '<span class="priority-p1">P1：25%预算</span>——重要配角+主要场景',
+            'P2：10%预算——一般场景+过渡',
+            'P3：5%预算——背景NPC+剪影'
+          ]}
+        ]
+      },
+      children: [
+        {
+          id: 'char_model',
+          label: '角色建模',
+          sublabel: 'S/A/B/C四级',
+          color: '#1a4a1a',
+          size: [120, 38],
+          info: {
+            title: '角色建模清单',
+            tags: ['P0', 'CG', '建模'],
+            sections: [
+              { title: 'S级核心角色（高模·必做）', list: [
+                '张羽（多套服装+变身·高难）',
+                '白真真（造型唯美+雷鸣特效·高难）',
+                '玉星寒（体育竞赛对手·中难）',
+                '邪神布娃娃（30cm+眼睛发光·中难）'
+              ]},
+              { title: 'A级重要角色（中模）', list: [
+                '高崇光（化神法骸300+件·中难）',
+                '萧玉容（磁极气场·中难）',
+                '链枢神君（邪教风格·中难）',
+                '道乾坤（仙气造型·中难）',
+                '乐沐岚（富家女气质）',
+                '宋海龙（壮硕体格）'
+              ]},
+              { title: '建模规范', list: [
+                'S级：高模+法骸/服装切换',
+                'A级：中模+标准贴图',
+                'B级：低模+简化处理',
+                'C级：剪影+背景NPC'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'fx_list',
+          label: '特效清单',
+          sublabel: '核心特效+预算',
+          color: '#1a4a1a',
+          size: [120, 38],
+          info: {
+            title: '特效清单（预算分配）',
+            tags: ['P0', 'CG特效', '预算60%'],
+            sections: [
+              { title: 'P0核心特效（60%预算）', list: [
+                '<span class="priority-p0">羽书UI</span>：符咒+现代界面融合（ch5）',
+                '<span class="priority-p0">法力贷APP</span>：网贷弹窗+修真符文（ch1）',
+                '<span class="priority-p0">无极云手</span>：白色云罡冲天（ch50）',
+                '<span class="priority-p0">10级突破</span>：金光+经脉透明化（ch38/84）',
+                '<span class="priority-p0">高中圣体</span>：肌肉微光+气场流动（ch191-197）',
+                '<span class="priority-p0">真灵根进化</span>：金色丝线+青色种子（ch99-100/154）',
+                '<span class="priority-p0">玄冥重水</span>：极高难度（ch200）',
+                '<span class="priority-p0">白真真雷电</span>：蓝色雷霆涌出（ch185）',
+                '<span class="priority-p0">心脏突破</span>：心跳可视化+胸口金光（ch115）',
+                '<span class="priority-p0">天空柱12531kg</span>：力量感逆推特效（ch118）'
+              ]}
+            ]
+          }
+        },
+        {
+          id: 'mocap',
+          label: '动作捕捉',
+          sublabel: '战斗+情绪',
+          color: '#1a4a1a',
+          size: [120, 38],
+          info: {
+            title: '动作捕捉需求',
+            tags: ['P0', '动捕', '战斗'],
+            sections: [
+              { title: 'P0战斗动捕', list: [
+                '健体三十六式（1-10级递进动作）',
+                '无极云手（10级白色云罡·气势）',
+                '背龙翻岳手（绊谁谁倒+重心可视化）',
+                '不灭印法·2小时速成蒙太奇',
+                '白真真：肩膀硬接戴行之一掌（慢镜头）',
+                '天空柱擎天：5秒逐秒特写（ch118）',
+                '玄冥重水：同归于尽最终一击（ch200）'
+              ]},
+              { title: 'P0情绪动捕', list: [
+                'ch1面试对话（紧张压抑·卑微）',
+                'ch4诡辩邪神（机智·眼神变化）',
+                'ch50季终钩子（云柱冲天·震惊）',
+                'ch100桥洞宣言（白真真逆光呐喊）',
+                'ch150"分高=一切"（愤怒反击）'
+              ]}
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─────── 8. 进度追踪 ───────
+    {
+      id: 'progress',
+      label: '📊 进度追踪',
+      sublabel: 'M1-M3 ✅',
+      color: '#4a4a1a',
+      size: [130, 44],
+      info: {
+        title: '90-进度追踪 (10个文件)',
+        tags: ['TODO', '里程碑', '进度', '质检'],
+        sections: [
+          { title: '里程碑状态', list: [
+            '<span class="milestone-done">✅ M1（2026-06-15）：知识库骨架搭建233个md</span>',
+            '<span class="milestone-done">✅ M2（2026-06-16）：1-202章章节摘要+原文</span>',
+            '<span class="milestone-done">✅ M3（2026-06-16）：场景/招数/角色CG要素100%</span>',
+            '<span class="milestone-pending">⬜ M4（待启动）：番剧分集大纲（26集映射已定）</span>',
+            '<span class="milestone-pending">⬜ M5（待启动）：核心场景分镜+关键帧</span>',
+            '<span class="milestone-pending">⬜ M6（待启动）：美术风格指南+角色设计图</span>'
+          ]},
+          { title: '最新知识库规模', list: [
+            '总文件数：<span class="priority-p0">783个</span>',
+            '世界观：94个（5核心+67招数+归档）',
+            '角色：79个（含主角7+配角72）',
+            '剧情：407个（202摘要+202原文+3叙事）',
+            '场景：166个（126通用+单章+索引+归档）',
+            '项目概览：7个',
+            '美术/改编/CG/参考/进度：24个',
+            '根目录：6个（MOC/立项/质检/CLAUDE等）'
+          ]},
+          { title: '质控战果（2026-06-17）', list: [
+            '26批端到端校对·202章评级（A1/B21/C53/D127）',
+            'A1清理：195文件修改（P等级/模板/CG标签/角色）',
+            'A2重写：23章P0重灾章节端到端重写',
+            'A3重写：179章剩余P0失实章节重写',
+            'A4修复：2处原文交叉污染',
+            '最终：<span class="priority-p0">202/202章摘要基于原文·0编造残留</span>',
+            '143详细+59中等+<span class="priority-p0">0低质</span>',
+            '4个关键事实校正：ch070/ch086/ch195/ch202'
+          ]}
+        ]
+      }
+    }
+  ]
+};
+
+// ============================================================
+// Layout Engine
+// ============================================================
+const W = 3200, H = 2400;
+const cx = W / 2, cy = H / 2;
+
+function layoutNodes(data) {
+  const nodes = [];
+  const edges = [];
+
+  data.x = cx;
+  data.y = cy;
+  nodes.push(data);
+
+  const firstLevel = data.children || [];
+  const n1 = firstLevel.length;
+  const r1 = 480;
+
+  const angles1 = [-100, -40, 20, 80, 140, 200, 250, 300];
+
+  firstLevel.forEach((child, i) => {
+    const angle = (angles1[i] || (i * 360 / n1)) * Math.PI / 180;
+    child.x = cx + r1 * Math.cos(angle);
+    child.y = cy + r1 * Math.sin(angle);
+    child.parentX = data.x;
+    child.parentY = data.y;
+    nodes.push(child);
+    edges.push({ x1: data.x, y1: data.y, x2: child.x, y2: child.y, color: child.color });
+
+    const secondLevel = child.children || [];
+    const n2 = secondLevel.length;
+    if (n2 === 0) return;
+
+    const r2 = 260;
+    const spreadAngle = Math.min(90, n2 * 28);
+
+    secondLevel.forEach((grandchild, j) => {
+      const baseAngle = angle;
+      const offset = n2 === 1 ? 0 : (j / (n2 - 1) - 0.5) * spreadAngle;
+      const childAngle = baseAngle + offset * Math.PI / 180;
+      grandchild.x = child.x + r2 * Math.cos(childAngle);
+      grandchild.y = child.y + r2 * Math.sin(childAngle);
+      grandchild.parentX = child.x;
+      grandchild.parentY = child.y;
+      nodes.push(grandchild);
+      edges.push({ x1: child.x, y1: child.y, x2: grandchild.x, y2: grandchild.y, color: grandchild.color });
+    });
+  });
+
+  return { nodes, edges };
+}
+
+// ============================================================
+// SVG Rendering
+// ============================================================
+const svg = document.getElementById('mindmap');
+const container = document.getElementById('canvas-container');
+
+let transform = { x: 0, y: 0, scale: 0.38 };
+
+function applyTransform() {
+  const g = document.getElementById('main-g');
+  if (g) {
+    g.setAttribute('transform', `translate(${transform.x},${transform.y}) scale(${transform.scale})`);
+  }
+}
+
+function renderMindmap() {
+  const { nodes, edges } = layoutNodes(mindmapData);
+
+  svg.innerHTML = '';
+  svg.setAttribute('viewBox', `0 0 ${container.clientWidth} ${container.clientHeight}`);
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  defs.innerHTML = `
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  `;
+  svg.appendChild(defs);
+
+  const mainG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  mainG.setAttribute('id', 'main-g');
+
+  edges.forEach(e => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const dx = e.x2 - e.x1;
+    const dy = e.y2 - e.y1;
+    const mx = e.x1 + dx * 0.5;
+    const my = e.y1 + dy * 0.5;
+    const d = `M ${e.x1} ${e.y1} Q ${mx} ${e.y1} ${e.x2} ${e.y2}`;
+    path.setAttribute('d', d);
+    path.setAttribute('class', 'edge');
+    path.setAttribute('stroke', e.color);
+    mainG.appendChild(path);
+  });
+
+  nodes.forEach(node => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'node-group');
+    g.setAttribute('data-id', node.id);
+
+    const w = node.size[0];
+    const h = node.size[1];
+    const x = node.x - w / 2;
+    const y = node.y - h / 2;
+
+    if (node.id === 'root') {
+      const rootGrad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+      rootGrad.setAttribute('id', 'rootGrad');
+      rootGrad.setAttribute('x1', '0%');
+      rootGrad.setAttribute('y1', '0%');
+      rootGrad.setAttribute('x2', '100%');
+      rootGrad.setAttribute('y2', '100%');
+      rootGrad.innerHTML = `
+        <stop offset="0%" style="stop-color:#d4a018;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#f0c040;stop-opacity:1" />
+      `;
+      defs.appendChild(rootGrad);
+
+      const glowRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      glowRect.setAttribute('x', x - 4);
+      glowRect.setAttribute('y', y - 4);
+      glowRect.setAttribute('width', w + 8);
+      glowRect.setAttribute('height', h + 8);
+      glowRect.setAttribute('rx', '14');
+      glowRect.setAttribute('fill', node.color);
+      glowRect.setAttribute('opacity', '0.3');
+      glowRect.setAttribute('filter', 'url(#glow-strong)');
+      g.appendChild(glowRect);
+    }
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', y);
+    rect.setAttribute('width', w);
+    rect.setAttribute('height', h);
+    rect.setAttribute('rx', node.id === 'root' ? '12' : '8');
+    rect.setAttribute('fill', node.id === 'root' ? 'url(#rootGrad)' : node.color);
+    rect.setAttribute('class', 'node-bg');
+    rect.setAttribute('stroke', 'rgba(255,255,255,0.2)');
+    rect.setAttribute('stroke-width', node.id === 'root' ? '2' : '1');
+    g.appendChild(rect);
+
+    const fontSize = node.id === 'root' ? 18 : (node.children ? 14 : 12);
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', node.x);
+    text.setAttribute('y', node.sublabel ? node.y - 8 : node.y);
+    text.setAttribute('class', 'node-label');
+    text.setAttribute('font-size', fontSize);
+    text.textContent = node.label;
+    g.appendChild(text);
+
+    if (node.sublabel) {
+      const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      sub.setAttribute('x', node.x);
+      sub.setAttribute('y', node.y + 12);
+      sub.setAttribute('class', 'node-sublabel');
+      sub.setAttribute('font-size', node.id === 'root' ? 12 : 10);
+      sub.textContent = node.sublabel;
+      g.appendChild(sub);
+    }
+
+    g.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showInfo(node);
+    });
+
+    mainG.appendChild(g);
+  });
+
+  svg.appendChild(mainG);
+  applyTransform();
+}
+
+// ============================================================
+// Info Panel
+// ============================================================
+function showInfo(node) {
+  const panel = document.getElementById('info-panel');
+  if (!node.info) return;
+
+  const info = node.info;
+  let html = `<h3>${info.title}</h3>`;
+
+  if (info.tags) {
+    html += '<div style="margin-bottom:8px">';
+    info.tags.forEach(t => {
+      html += `<span class="info-tag">${t}</span>`;
+    });
+    html += '</div>';
+  }
+
+  if (info.sections) {
+    info.sections.forEach(s => {
+      html += `<div class="info-section">`;
+      html += `<div class="info-section-title">${s.title}</div>`;
+      if (s.content) {
+        html += `<p>${s.content}</p>`;
+      }
+      if (s.list) {
+        html += '<ul>';
+        s.list.forEach(item => {
+          html += `<li>${item}</li>`;
+        });
+        html += '</ul>';
+      }
+      if (s.quotes) {
+        s.quotes.forEach(q => {
+          html += `<div class="quote">${q}</div>`;
+        });
+      }
+      html += '</div>';
+    });
+  }
+
+  panel.innerHTML = html;
+}
+
+// ============================================================
+// Pan & Zoom
+// ============================================================
+let isDragging = false;
+let dragStart = { x: 0, y: 0 };
+let transformStart = { x: 0, y: 0 };
+
+container.addEventListener('mousedown', (e) => {
+  if (e.target.closest('.node-group')) return;
+  isDragging = true;
+  dragStart = { x: e.clientX, y: e.clientY };
+  transformStart = { x: transform.x, y: transform.y };
+  container.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  transform.x = transformStart.x + (e.clientX - dragStart.x);
+  transform.y = transformStart.y + (e.clientY - dragStart.y);
+  applyTransform();
+});
+
+document.addEventListener('mouseup', () => {
+  isDragging = false;
+  container.style.cursor = 'grab';
+});
+
+container.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const rect = container.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  const newScale = Math.min(Math.max(transform.scale * delta, 0.1), 3);
+  const scaleChange = newScale / transform.scale;
+  transform.x = mouseX - scaleChange * (mouseX - transform.x);
+  transform.y = mouseY - scaleChange * (mouseY - transform.y);
+  transform.scale = newScale;
+  applyTransform();
+}, { passive: false });
+
+let lastTouchDist = null;
+container.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    isDragging = true;
+    dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    transformStart = { x: transform.x, y: transform.y };
+  }
+});
+container.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (e.touches.length === 1 && isDragging) {
+    transform.x = transformStart.x + (e.touches[0].clientX - dragStart.x);
+    transform.y = transformStart.y + (e.touches[0].clientY - dragStart.y);
+    applyTransform();
+  } else if (e.touches.length === 2) {
+    const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    if (lastTouchDist) {
+      const delta = dist / lastTouchDist;
+      transform.scale = Math.min(Math.max(transform.scale * delta, 0.1), 3);
+      applyTransform();
+    }
+    lastTouchDist = dist;
+  }
+}, { passive: false });
+container.addEventListener('touchend', () => { isDragging = false; lastTouchDist = null; });
+
+function resetView() {
+  const cw = container.clientWidth;
+  const ch = container.clientHeight;
+  transform.scale = 0.38;
+  transform.x = cw / 2 - W / 2 * transform.scale;
+  transform.y = ch / 2 - H / 2 * transform.scale;
+  applyTransform();
+}
+
+function zoomIn() {
+  const cw = container.clientWidth;
+  const ch = container.clientHeight;
+  const newScale = Math.min(transform.scale * 1.2, 3);
+  transform.x = cw / 2 - (cw / 2 - transform.x) * (newScale / transform.scale);
+  transform.y = ch / 2 - (ch / 2 - transform.y) * (newScale / transform.scale);
+  transform.scale = newScale;
+  applyTransform();
+}
+
+function zoomOut() {
+  const cw = container.clientWidth;
+  const ch = container.clientHeight;
+  const newScale = Math.max(transform.scale * 0.83, 0.1);
+  transform.x = cw / 2 - (cw / 2 - transform.x) * (newScale / transform.scale);
+  transform.y = ch / 2 - (ch / 2 - transform.y) * (newScale / transform.scale);
+  transform.scale = newScale;
+  applyTransform();
+}
+
+function togglePanel() {
+  const p = document.getElementById('info-panel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+
+// ============================================================
+// Init
+// ============================================================
+window.addEventListener('load', () => {
+  renderMindmap();
+  setTimeout(resetView, 50);
+});
+
+window.addEventListener('resize', () => {
+  svg.setAttribute('viewBox', `0 0 ${container.clientWidth} ${container.clientHeight}`);
+  resetView();
+});
+</script>
+</body>
+</html>

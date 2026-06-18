@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《没钱修什么仙》26集改编方案 · 屌丝逆袭版 · 全局脑图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  #header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    border-bottom: 1px solid #30363d;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  #header h1 {
+    font-size: 15px;
+    background: linear-gradient(135deg, #c9a227 0%, #f5d76e 50%, #c9a227 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  #header .subtitle { font-size: 11px; color: #8b949e; }
+  .controls { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+  .btn {
+    background: #21262d; border: 1px solid #30363d; color: #e6edf3;
+    padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 11px;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .btn:hover { background: #30363d; border-color: #8b949e; }
+  .btn.act-btn { padding: 4px 8px; font-size: 10px; }
+  .btn.act-btn.on { border-color: #f5d76e; color: #f5d76e; background: rgba(245,215,110,0.08); }
+  #canvas-container {
+    position: fixed; top: 48px; left: 0; right: 0; bottom: 0;
+    overflow: hidden; cursor: grab;
+  }
+  #canvas-container:active { cursor: grabbing; }
+  svg#mindmap { width: 100%; height: 100%; }
+  .node-group { cursor: pointer; }
+  .node-group:hover .node-bg { filter: brightness(1.25); }
+  .node-bg { transition: all 0.2s; rx: 6; ry: 6; }
+  .node-label {
+    font-family: 'Microsoft YaHei', sans-serif;
+    fill: #ffffff; dominant-baseline: central; text-anchor: middle;
+    pointer-events: none; font-weight: 600;
+  }
+  .node-sublabel {
+    font-family: 'Microsoft YaHei', sans-serif;
+    fill: rgba(255,255,255,0.65); dominant-baseline: central;
+    text-anchor: middle; pointer-events: none; font-size: 9px; font-weight: 400;
+  }
+  .edge { fill: none; stroke-width: 1.2; opacity: 0.4; }
+  #info-panel {
+    position: fixed; right: 12px; top: 60px;
+    width: 260px; max-height: calc(100vh - 72px); overflow-y: auto;
+    background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+    padding: 14px; font-size: 11px; line-height: 1.6;
+    transition: all 0.3s; z-index: 50;
+  }
+  #info-panel h3 { font-size: 13px; color: #f5d76e; margin-bottom: 6px; border-bottom: 1px solid #30363d; padding-bottom: 5px; }
+  #info-panel .info-tag {
+    display: inline-block; background: #21262d; border: 1px solid #30363d;
+    color: #8b949e; padding: 1px 5px; border-radius: 3px; font-size: 9px; margin: 1px;
+  }
+  #info-panel .info-section { margin-top: 8px; }
+  #info-panel .info-section-title { color: #8b949e; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  #info-panel p { color: #c9d1d9; margin-bottom: 4px; }
+  #info-panel ul { color: #c9d1d9; padding-left: 12px; }
+  #info-panel li { margin-bottom: 2px; font-size: 10.5px; }
+  #info-panel .hl { color: #ff6b35; font-weight: 600; }
+  #info-panel .p0 { color: #ff6b6b; font-weight: 700; }
+  #info-panel .quote { border-left: 2px solid #c9a227; padding-left: 6px; color: #f5d76e; font-style: italic; margin: 3px 0; font-size: 10px; }
+  #tip {
+    position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
+    background: rgba(22,27,34,0.9); border: 1px solid #30363d; border-radius: 16px;
+    padding: 5px 14px; font-size: 10px; color: #8b949e; pointer-events: none;
+  }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div>
+    <h1>⚡ 《没钱修什么仙》26集改编 · 全局脑图</h1>
+    <div class="subtitle">屌丝逆袭版 · 5幕26集 · 30个反转 · ch1-200</div>
+  </div>
+  <div class="controls">
+    <span style="color:#555;font-size:10px">筛选:</span>
+    <button class="btn act-btn on" onclick="filterAct(0)">全部</button>
+    <button class="btn act-btn" onclick="filterAct(1)" style="border-color:#c0392b;color:#e74c3c">ACT1</button>
+    <button class="btn act-btn" onclick="filterAct(2)" style="border-color:#27ae60;color:#2ecc71">ACT2</button>
+    <button class="btn act-btn" onclick="filterAct(3)" style="border-color:#2980b9;color:#3498db">ACT3</button>
+    <button class="btn act-btn" onclick="filterAct(4)" style="border-color:#d35400;color:#e67e22">ACT4</button>
+    <button class="btn act-btn" onclick="filterAct(5)" style="border-color:#8e44ad;color:#9b59b6">ACT5</button>
+    <span style="color:#333">|</span>
+    <button class="btn" onclick="resetView()">⌂</button>
+    <button class="btn" onclick="zoomIn()">＋</button>
+    <button class="btn" onclick="zoomOut()">−</button>
+    <button class="btn" onclick="togglePanel()">📋</button>
+  </div>
+</div>
+
+<div id="canvas-container"><svg id="mindmap" xmlns="http://www.w3.org/2000/svg"></svg></div>
+
+<div id="info-panel">
+  <h3>🗺️ 26集改编 · 全局脑图</h3>
+  <div class="info-section">
+    <div class="info-section-title">项目规格</div>
+    <ul>
+      <li>原作：熊狼狗《没钱修什么仙？》</li>
+      <li>改编范围：1-200章（第一季）</li>
+      <li>番剧规格：<span class="p0">26集 × 15分钟</span></li>
+      <li>改编原则：屌丝逆袭 · 节奏紧张 · 每集有反转</li>
+    </ul>
+  </div>
+  <div class="info-section">
+    <div class="info-section-title">操作提示</div>
+    <p>👆 点击节点查看详情</p>
+    <p>🖱️ 拖拽移动 · 滚轮缩放</p>
+    <p>🎯 点击幕按钮筛选单幕</p>
+  </div>
+  <div class="info-section">
+    <div class="info-section-title">数据统计</div>
+    <ul>
+      <li>总反转点：<span class="p0">30个</span></li>
+      <li>大战斗场面：6场</li>
+      <li>P0名场面：20+个</li>
+      <li>覆盖章节：1-200章</li>
+    </ul>
+  </div>
+</div>
+
+<div id="tip">点击节点查看详情 · 拖拽移动 · 滚轮缩放 · 幕按钮筛选</div>
+
+<script>
+// ============================================================
+// DATA: 26集改编方案
+// ============================================================
+const mindmapData = {
+  id: 'root',
+  label: '《没钱修什么仙》',
+  sublabel: '26集屌丝逆袭版 · 30反转',
+  color: '#c9a227',
+  textColor: '#0d1117',
+  size: [170, 52],
+  info: {
+    title: '《没钱修什么仙》26集改编 · 屌丝逆袭版',
+    tags: ['P0核心', '26集', '30反转', 'ch1-200'],
+    sections: [
+      { title: '改编核心原则', list: ['节奏紧张：每集至少1个反转/爽点', '删繁就简：跳过日常水剧情，聚焦比赛+战斗+转折', '屌丝逆袭：穷鬼高中生一路打脸资本+天骄', '社会讽刺：修真金融化+消费主义黑色幽默'] },
+      { title: '五大幕结构', list: ['ACT1 · 绝望与觉醒（EP01-05）：穿越负债→羽书觉醒→法赛突围', 'ACT2 · 逆袭之路（EP06-09）：暗学帮→不灭印法→武道夺冠→灵根入体', 'ACT3 · 体育竞赛（EP10-13）：四关连战→12531kg→夺冠即被捧杀', 'ACT4 · 资本真相（EP14-18）：60万代言→邪神哲学→灵根进化→靠山离开', 'ACT5 · 筑基之战（EP19-26）：第一轮三关→狩猎邪神→高中圣体→打药大赛→同归于尽'] }
+    ]
+  },
+  children: [
+
+    // ─── ACT 1: 绝望与觉醒 ───
+    {
+      id: 'act1', label: 'ACT 1 · 绝望与觉醒', sublabel: 'EP01-05 · 7反转',
+      color: '#c0392b', size: [165, 40],
+      info: {
+        title: 'ACT 1 · 绝望与觉醒',
+        tags: ['EP01-05', '5集', '7反转'],
+        sections: [
+          { title: '核心主轴', content: '穿越即负债70万 → 邪神契约 → 诡辩反杀 → 羽书觉醒 → 双10级挂逼启动 → 法赛突围 → 学生会打压' },
+          { title: '反转分布', list: ['EP01：邪神诡辩反杀', 'EP02：羽书系统觉醒', 'EP03：周天采气10级（被动吐纳10成）+法力年级第二', 'EP04：无极云手觉醒（白色狼烟冲天）+法赛第四名', 'EP05：学生会打压不让参赛（刚高兴就被算计）'] },
+          { title: '关键战斗', list: ['健体三十六式修炼（EP02-03）', '法赛第3关·无极云手觉醒（EP04）'] }
+        ]
+      },
+      children: [
+        {
+          id: 'ep01', label: 'EP01 我叫张羽', sublabel: 'ch1-8 · 🔄诡辩反杀',
+          color: '#a93226', size: [145, 36],
+          info: {
+            title: 'EP01 · 我叫张羽',
+            tags: ['ch1-8', '反转①：邪神诡辩'],
+            sections: [
+              { title: '📖 关键剧情', list: ['穿越即负债70万+面试被拒', '邪神布娃娃降临·三愿契约', '🔄 <span class="hl">反转①</span>：张羽诡辩反杀——"你选择失去一个未来大宗门弟子？还是给我时间？"'], quotes: ['"小子，请神仪式已经完成，该实现三个愿望了。"——邪神', '"妈，对不起。但我真的想修仙啊。"——张羽'] },
+              { title: '🎨 视觉风格', list: ['灰暗都市+霓虹修真金融UI叠化', '邪神出场：影子从布娃娃撕裂而出', '镜头：面试官俯拍→张羽仰拍（权力差）'] },
+              { title: '💥 重点视效', list: ['P0：邪神出场粒子特效+契约符文UI', '70万负债红色数字弹出', '张羽诡辩时眼神特写'] },
+              { title: '👤 人物资产', list: ['张羽', '邪神布娃娃', '母亲(声)', '面试官'] }
+            ]
+          }
+        },
+        {
+          id: 'ep02', label: 'EP02 妈，我想修仙', sublabel: 'ch9-24 · 🔄羽书觉醒',
+          color: '#a93226', size: [145, 36],
+          info: {
+            title: 'EP02 · 妈，我想修仙',
+            tags: ['ch9-24', '反转②：羽书觉醒'],
+            sections: [
+              { title: '📖 关键剧情', list: ['母亲拿出全部积蓄+兼职凑手术费', '🔄 <span class="hl">反转②</span>：羽书系统觉醒！技能面板全息弹出', '白真真首登场：冷若冰霜端着餐盘走过食堂'], quotes: ['"妈，对不起。但我真的想修仙啊。哪怕欠上一辈子还不上欠债，我也想修仙。"——张羽'] },
+              { title: '🎨 视觉风格', list: ['冷暖对比：家的暖色（母亲）vs世界的冷色（现实）', '镜头：母亲说"妈妈会帮你凑齐"→张羽瞳孔→羽书UI从瞳孔炸开'] },
+              { title: '💥 重点视效', list: ['P0：羽书UI首次弹出——半透明全息面板+文字逐行浮现', '健体三十六式第一遍练习蒙太奇', '白真真首登场：周围学生自动让开的冷艳气场'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真(首登场)', '母亲(声)'] }
+            ]
+          }
+        },
+        {
+          id: 'ep03', label: 'EP03 躺着也在修炼', sublabel: 'ch25-38 · 🔄双10级',
+          color: '#a93226', size: [145, 36],
+          info: {
+            title: 'EP03 · 躺着也在修炼',
+            tags: ['ch25-38', '反转③④：双10级'],
+            sections: [
+              { title: '📖 关键剧情', list: ['被同学看不起→埋头苦练', '🔄 <span class="hl">反转③</span>：周天采气法10级——被动吐纳达到主动10成，躺着修炼', '🔄 <span class="hl">反转④</span>：法力7.7→13.3，全年级第二！'] },
+              { title: '🎨 视觉风格', list: ['修炼内视：法力经脉流动（蓝色→金色渐变）', '10级突破：耳中呼啸幻音（观众听到风声+心跳叠加）'] },
+              { title: '💥 重点视效', list: ['P0双子星CG：周天采气10级+健体36式3级同步突破', '法力值数字从7.7跳至13.3的UI动画', '年级排名全息榜单：张羽从底部弹到第2'] },
+              { title: '👤 人物资产', list: ['张羽', '雷钧(武道老师)', '赵天行'] }
+            ]
+          }
+        },
+        {
+          id: 'ep04', label: 'EP04 法赛·白色狼烟', sublabel: 'ch39-50 · 🔄法赛突围',
+          color: '#a93226', size: [145, 36],
+          info: {
+            title: 'EP04 · 法赛·白色狼烟',
+            tags: ['ch39-50', '反转⑤⑥：无极云手+法赛第四'],
+            sections: [
+              { title: '📖 关键剧情', list: ['法赛开幕：嵩阳被三大名校包围、不被看好', '🔄 <span class="hl">反转⑤</span>：无极云手觉醒——掌心白色气流狂涌，狼烟冲天', '🔄 <span class="hl">反转⑥</span>：法赛第四名——嵩阳在名校包围中撕开裂隙', '白真真讽刺："我的羽子已经死了……"'], quotes: ['"此人在力量控制上的技巧，恐怕已经达到了炼气巅峰的水平。"——乐景辰'] },
+              { title: '🎨 视觉风格', list: ['竞技场大场面：红塔高中体育场+全息屏幕', '镜头：掌心白色气流特写→拉远狼烟冲天→严老师握拳'] },
+              { title: '💥 重点视效', list: ['P0：无极云手觉醒——7次法力震荡→白色无相云罡喷涌', '与其他选手云团对比特效', '法赛排名全息公布：张羽"第4名，273分"跳出'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '熊不凡', '宋海龙', '严老师', '乐沐岚'] }
+            ]
+          }
+        },
+        {
+          id: 'ep05', label: 'EP05 我是第四名', sublabel: 'ch51-65 · 🔄学生会打压',
+          color: '#a93226', size: [145, 36],
+          info: {
+            title: 'EP05 · 我是第四名',
+            tags: ['ch51-65', '反转⑦：刚高兴就被算计'],
+            sections: [
+              { title: '📖 关键剧情', list: ['法赛第四+奖金2万——张羽心潮澎湃', '🔄 <span class="hl">反转⑦</span>：学生会打压——不签约就禁赛，体育竞赛队被拒', '张羽选择不签约：宁可自己找出路也不被资本绑定'], quotes: ['"要是人人都送，岂不是对这次竞赛成绩好的学生不太公平？"——张羽嘴脸变化'] },
+              { title: '🎨 视觉风格', list: ['欢乐（奖金）→压抑（签约威胁）的色调断崖式转换', '镜头：合同全息弹出→张羽手指悬停→收回→拒绝'] },
+              { title: '💥 重点视效', list: ['合同条款3D高亮滚动', '体育竞赛队名单全息公布→张羽白真真名字被红色划掉'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '周澈尘(首登场)', '蓝岭', '王海'] }
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─── ACT 2: 逆袭之路 ───
+    {
+      id: 'act2', label: 'ACT 2 · 逆袭之路', sublabel: 'EP06-09 · 6反转',
+      color: '#27ae60', size: [165, 40],
+      info: {
+        title: 'ACT 2 · 逆袭之路',
+        tags: ['EP06-09', '4集', '6反转'],
+        sections: [
+          { title: '核心主轴', content: '暗学帮补课赚钱 → 不灭印法2小时速成 → 武道竞赛冠军 → 灵根入体 → 桥洞宣言' },
+          { title: '反转分布', list: ['EP06：暗学帮赚钱+不灭印法速成（1星避雷→2小时10级）', 'EP07：武道竞赛冠军（皮下罡气战术+全场掌声递进）', 'EP08：灵根主动入体（核心反转！灵根自己跑进张羽体内）', 'EP09：桥洞宣言（"我辈修道人，就应该住桥洞钻树林"）'] },
+          { title: '关键名场面', list: ['EP06：三条"1星避雷"评价浮空→张羽眼睛一亮→购买', 'EP07：扭断乐沐岚四肢丢出擂台+"坐"在身上嘲讽', 'EP07：全场掌声递进——赵天行→白真真→钱深→何大有→炼天极→宋海龙→楚秋河', 'EP08：白真真"我灵根没了！"张羽"什么东西从后面钻进来了？"', 'EP09：白真真指着桥洞逆光大喊宣言'] }
+        ]
+      },
+      children: [
+        {
+          id: 'ep06', label: 'EP06 你们不要我，我自己来', sublabel: 'ch66-79 · 🔄双反转',
+          color: '#229954', size: [145, 36],
+          info: {
+            title: 'EP06 · 你们不要我，我自己来',
+            tags: ['ch66-79', '反转⑧⑨：暗学帮+不灭印法速成'],
+            sections: [
+              { title: '📖 关键剧情', list: ['🔄 <span class="hl">反转⑧</span>：被学校堵死→暗学帮补课赚钱，每周6.5万', '工地学生群像：皮球肚/夜视瞳孔/劣质亢奋剂（黑色幽默）', '🔄 <span class="hl">反转⑨</span>：不灭印法——全平台1星差评"避雷"→张羽1分钟1级，2小时10级！'], quotes: ['"他们不花钱在这里，也会花别的地方，给谁榨干净不是榨？不如让我们顺便赚点。"——邪神'] },
+              { title: '🎨 视觉风格', list: ['地下世界：暗学帮园区灰暗+霓虹+防窥符咒', '仙道商城UI：全息购物界面+商品评价浮空'] },
+              { title: '💥 重点视效', list: ['P0：不灭印法修炼蒙太奇——1分钟1级→突击2小时→经脉强化', '三条"1星避雷"评价浮空→张羽点击购买', '工地学生群像：皮球肚+夜视瞳孔特写'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '黑鸦', '工地学生群像'] }
+            ]
+          }
+        },
+        {
+          id: 'ep07', label: 'EP07 武道竞赛冠军', sublabel: 'ch66-82 · 🏆夺冠',
+          color: '#229954', size: [145, 36],
+          info: {
+            title: 'EP07 · 武道竞赛冠军',
+            tags: ['ch66-82', '反转⑩⑪：皮下罡气+夺冠'],
+            sections: [
+              { title: '📖 关键剧情', list: ['🔄 <span class="hl">反转⑩</span>：vs炼天极——皮下罡气战术，看似血肉模糊实际皮肉伤', '🔄 <span class="hl">反转⑪</span>：vs宋海龙——全集中状态+战斗中练成背龙翻岳手', '🏆 <span class="hl">武道竞赛第一名！</span>穷鬼夺冠！', '乐沐岚内心："这两个穷人的下限……深不可测"'], quotes: ['"你说你很有钱，钱也是你力量的一部分。那我现在就要打爆你了，你试试看用钱来阻止我。"——张羽'] },
+              { title: '🎨 视觉风格', list: ['擂台战斗：方格擂台+全息计分板+观众席', '皮下罡气：皮肤半透明化显示罡气层', '血色无相云罡：白色被鲜血染红的视觉冲击'] },
+              { title: '💥 重点视效', list: ['P0：皮下罡气"护甲"半透明可视化', '背龙翻岳手10级：金色重心点标记+"绊谁谁倒"', '夺冠瞬间：张羽浑身是血举起手+白真真跳擂台"我们是冠军！"', '全场掌声递进7人逐一起立'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '炼天极', '宋海龙', '乐沐岚', '雷钧', '王海'] }
+            ]
+          }
+        },
+        {
+          id: 'ep08', label: 'EP08 我灵根没了', sublabel: 'ch96-100 · 🔄核心反转',
+          color: '#229954', size: [145, 36],
+          info: {
+            title: 'EP08 · 我灵根没了',
+            tags: ['ch96-100', '反转⑫：灵根主动入体（本作核心反转）'],
+            sections: [
+              { title: '📖 关键剧情', list: ['邪神回归：发现张羽是"牛股"→重新谈判', '🔄 <span class="hl">反转⑫（本作核心）</span>：白真真"我灵根没了！"→张羽"什么东西钻进来了？"', '灵根在丹田生根发芽+金色丝线蔓延全身', '白真真吐槽："我想借给他也是等他跪下来叫妈求我以后啊！"'], quotes: ['"我灵根是不是跑你肚子里去了？"——白真真'] },
+              { title: '🎨 视觉风格', list: ['奔跑+暧昧：跑车腿10级+白真真跳背+"硬硬的东西顶着我"', '灵根转移：深夜远郊小路→黑暗→金色光点飞向张羽'] },
+              { title: '💥 重点视效', list: ['P0：灵根入体——金色光点从后腰钻入→丹田爆炸→金色丝线如神经蔓延全身', '跑车腿10级：脚下炸开白色气浪', '白真真摸张羽小腹找灵根→尴尬反应（喜剧节拍）'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '邪神布娃娃(回归)', '张翩翩'] }
+            ]
+          }
+        },
+        {
+          id: 'ep09', label: 'EP09 住桥洞！', sublabel: 'ch100-105 · 🔄金句宣言',
+          color: '#229954', size: [145, 36],
+          info: {
+            title: 'EP09 · 住桥洞！',
+            tags: ['ch100-105', '反转⑬：桥洞宣言（本作核心金句）'],
+            sections: [
+              { title: '📖 关键剧情', list: ['灵根适配赤髓浑元气→神经滋养（自动吸收灵机）', '租房蒙太奇：地下室2万/车库100万押金/公寓被嘲讽——全被收割', '🔄 <span class="hl">反转⑬</span>：白真真指着桥洞——"我辈修道人，以天为被，以地为席，就应该住桥洞，钻树林，占烂尾楼！"'], quotes: ['"我辈修道人，以天为被，以地为席，就应该住桥洞，钻树林，占烂尾楼，把有限的钱都投入到修行中去！我早就想这么干了！"——白真真'] },
+              { title: '🎨 视觉风格', list: ['租房蒙太奇：4站快速切换（地下室暗→车库灰→公寓冷→工地脏）', '桥洞宣言：白真真指着高架下的桥洞→夕阳逆光剪影→BGM起'] },
+              { title: '💥 重点视效', list: ['P0：神经滋养——金色灵根丝线缠绕脊椎+自动吸纳灵机粒子', '租房蒙太奇：每一站价格标签越来越大越离谱', '桥洞宣言：白真真逆光大喊→背景音乐升key→EP09结尾高潮'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '赵天行', '车女'] }
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─── ACT 3: 体育竞赛 ───
+    {
+      id: 'act3', label: 'ACT 3 · 体育竞赛', sublabel: 'EP10-13 · 4反转',
+      color: '#2980b9', size: [165, 40],
+      info: {
+        title: 'ACT 3 · 体育竞赛',
+        tags: ['EP10-13', '4集', '4反转'],
+        sections: [
+          { title: '核心主轴', content: '体育竞赛四关连战 → 5000米心脏突破 → 天空柱12531kg → 总分第一 → 夺冠即被捧杀' },
+          { title: '反转分布', list: ['EP10：体育竞赛开幕——肉体4.95级震撼全场', 'EP11：5000米心脏突破——虽败犹荣，极限蜕变', 'EP12：天空柱12531kg——总分第一！力压玉星寒！', 'EP13："绝世天才"捧杀——夺冠即被算计，夸你是害你'] },
+          { title: '关键名场面', list: ['EP11：雷神擂鼓——躺在桌上双拳连环轰腹', 'EP11：白真真12针血拼疤痕化龙爪', 'EP12：熊文武10800kg擎天+李雪莲电话阻止玉星寒', 'EP12：张羽12531公斤擎天5秒逐秒特写', 'EP13：张羽从开心听吹捧→暴怒厌恶的变脸'] }
+        ]
+      },
+      children: [
+        {
+          id: 'ep10', label: 'EP10 体育竞赛·开幕', sublabel: 'ch106-113 · 🔄肉体震撼',
+          color: '#2471a3', size: [145, 36],
+          info: {
+            title: 'EP10 · 体育竞赛·开幕',
+            tags: ['ch106-113', '反转⑭：4.95级肉体震撼'],
+            sections: [
+              { title: '📖 关键剧情', list: ['体育竞赛开幕：紫云高中万米体育场馆', '🔄 <span class="hl">反转⑭</span>：肉体强度关——张羽4.95级震撼全场', '灵敏关：钢珠+光环+房间变形', '玉星寒前三关全部第一（200 vs 191分差距）'] },
+              { title: '🎨 视觉风格', list: ['大型体育场馆：万米室内馆+天空柱悬挂+全息转播+广告牌环绕', '镜头：张羽走进场馆远景→仰视天空柱→眼神坚定'] },
+              { title: '💥 重点视效', list: ['肉体强度检测：全息扫描+数字4.95弹出', '灵敏关：钢珠弹射+光环移动+房间变形', '玉星寒统治力展示：得分板200 vs 191'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '玉星寒(首大场面)', '乐沐岚', '宋海龙', '熊文武'] }
+            ]
+          }
+        },
+        {
+          id: 'ep11', label: 'EP11 5000米·心脏突破', sublabel: 'ch114-115 · 🔄虽败犹荣',
+          color: '#2471a3', size: [145, 36],
+          info: {
+            title: 'EP11 · 5000米·心脏突破',
+            tags: ['ch114-115', '反转⑮：心脏极限突破'],
+            sections: [
+              { title: '📖 关键剧情', list: ['5000米决赛：张羽vs玉星寒双雄对决', '玉星寒主动倒退让张羽领先（试探）', '🔄 <span class="hl">反转⑮</span>：张羽心脏极限突破——心跳如大鼓，打破自身极限', '白真真12针血拼→疤痕化龙爪撕裂→保住第三名'], quotes: ['"我要和羽子一起上十大！"——白真真'] },
+              { title: '🎨 视觉风格', list: ['速度感：第一视角+风景后移粒子拖尾', '心脏突破：心跳声可视化——咚→咚→狂跳→金光从胸口炸开'] },
+              { title: '💥 重点视效', list: ['P0：心脏突破——胸口金色光效+血管透明化+心跳声压过BGM', '玉星寒让张羽领先：并肩奔跑→减速微笑', '白真真12针：针尖入穴→疤痕赤红龙爪撕裂→怒吼'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '玉星寒', '乐沐岚', '熊文武'] }
+            ]
+          }
+        },
+        {
+          id: 'ep12', label: 'EP12 12531公斤', sublabel: 'ch116-118 · 🏆大反转',
+          color: '#2471a3', size: [145, 36],
+          info: {
+            title: 'EP12 · 12531公斤',
+            tags: ['ch116-118', '反转⑯：天空柱擎天+总分第一'],
+            sections: [
+              { title: '📖 关键剧情', list: ['天空柱三轮力量比试', '熊文武10800kg擎天（妖裔爆血+父亲命令）', '李雪莲电话阻止玉星寒全力："你的身体不属于你自己"', '🔄 <span class="hl">反转⑯</span>：张羽隐藏实力→最后一轮12531公斤！全场震惊！', '🏆 总分第一：341分！力压玉星寒338分夺冠！'], quotes: ['"现在的我……可以擎天！"——熊文武', '"12531公斤的力量从张羽体内轰然爆发，他的身躯就像一具无比脆弱又无比强壮的雕像。"'] },
+              { title: '🎨 视觉风格', list: ['力量感：天空柱从天而降（地面震动+低频音效）', '5秒逐秒特写：第1秒骨骼开裂→第3秒内出血→第5秒七窍溢血→微笑'] },
+              { title: '💥 重点视效', list: ['P0：12531公斤数字弹出+天空柱逆推+全集中黑白世界', '熊文武10800kg：龙鳞爆裂+血雾', '玉星寒捏爆手机', '10级功法融会贯通："积木"力量线条可视化'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '玉星寒', '熊文武', '王海', '李雪莲(声)'] }
+            ]
+          }
+        },
+        {
+          id: 'ep13', label: 'EP13 绝世天才？', sublabel: 'ch119-120 · 🔄黑色反转',
+          color: '#2471a3', size: [145, 36],
+          info: {
+            title: 'EP13 · 绝世天才？',
+            tags: ['ch119-120', '反转⑰：夺冠即被捧杀（商业打压）'],
+            sections: [
+              { title: '📖 关键剧情', list: ['总分排名公布：张羽341分🥇玉星寒338分🥈', '直播间乐景辰+刚山狂吹"绝世天才"', '🔄 <span class="hl">反转⑰（黑色反转）</span>：张翩翩来电揭穿——"绝世天才"是商业捧杀！压低商业价值！', '张羽暴怒："第一次发现吹捧这种事情，他竟然如此厌恶"'], quotes: ['"张羽愤怒了。刚刚还觉得悦耳的吹捧，此刻回想起来竟然是如此刺耳。"'] },
+              { title: '🎨 视觉风格', list: ['虚假辉煌→冰冷真相：直播间暖色→张羽表情僵住→冷色回收', '镜头：笑着听吹捧→手机响起→咧嘴到抿嘴到怒目'] },
+              { title: '💥 重点视效', list: ['P0：全息排名公布（张羽登顶CG高光）+ 直播间分屏', '张羽情绪转变：开心→困惑→愤怒的面部动画关键帧'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '玉星寒', '乐景辰(首登场)', '刚山', '张翩翩(声)'] }
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─── ACT 4: 资本真相 ───
+    {
+      id: 'act4', label: 'ACT 4 · 资本真相', sublabel: 'EP14-18 · 5反转',
+      color: '#d35400', size: [165, 40],
+      info: {
+        title: 'ACT 4 · 资本真相',
+        tags: ['EP14-18', '5集', '5反转'],
+        sections: [
+          { title: '核心主轴', content: '60万代言合同 → 邪神"榨干净"哲学 → 大日气海 → 公司暗战 → 灵根进化 → 靠山离开' },
+          { title: '反转分布', list: ['EP14：60万代言开心→邪神揭穿"十大与公司联手耍穷鬼"', 'EP15：大日气海新体系', 'EP16：真灵根开始吞吐日月精华', 'EP17：真灵根第一次进化（种子形态）', 'EP18：张翩翩离开→失去庇护，靠自己'] },
+          { title: '关键名场面', list: ['EP14：邪神"十大与公司联手耍穷鬼，耍得比我们邪神溜多了"', 'EP14：赵天行动心仿妖筋肉+嵩阳"疯狂动物城"预演', 'EP17：白真真小腹青色纹路→种子形成', 'EP18：张翩翩全息通话熄灭→张羽沉默握拳'] }
+        ]
+      },
+      children: [
+        {
+          id: 'ep14', label: 'EP14 韭菜送上门', sublabel: 'ch120-125 · 🔄哲学反转',
+          color: '#ba4a00', size: [145, 36],
+          info: {
+            title: 'EP14 · 韭菜送上门',
+            tags: ['ch120-125', '反转⑱：邪神"榨干净"哲学'],
+            sections: [
+              { title: '📖 关键剧情', list: ['仙韵集团代言合同：张羽60万/年+白真真40万/年', '"白学武功"宣传采访', '🔄 <span class="hl">反转⑱</span>：邪神"榨干净"哲学——"十大宗门和公司在一起耍穷鬼。耍得比我们邪神溜多了。"', '赵天行动心仿妖筋肉改造'], quotes: ['"这从头到尾，就是十大宗门和公司在一起耍他们。但耍的好啊，让他们心甘情愿地交钱，耍得比我们邪神溜多了。"——邪神'] },
+              { title: '🎨 视觉风格', list: ['商业虚伪→黑色幽默：采访灯光暖亮→围观学生如韭菜的广角', '邪神冷笑特写'] },
+              { title: '💥 重点视效', list: ['电子合同3D全息（条款高亮+签字指纹）', 'P0：仙韵展台学生如韭菜涌上蒙太奇', '嵩阳"疯狂动物城"预演蒙太奇'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '邪神布娃娃', '仙韵集团代表', '赵天行'] }
+            ]
+          }
+        },
+        {
+          id: 'ep15', label: 'EP15 大日气海', sublabel: 'ch125-135 · ⚡新体系',
+          color: '#ba4a00', size: [145, 36],
+          info: {
+            title: 'EP15 · 大日气海',
+            tags: ['ch125-135', '反转⑲：乐沐岚加入轮换训练'],
+            sections: [
+              { title: '📖 关键剧情', list: ['邪神推荐→张羽购入大日气海（光照被动吐纳+凝聚日月精华）', '🔄 <span class="hl">反转⑲</span>：乐沐岚加入轮换训练→张羽肉体强度飞速暴涨', '暗学帮扩张+真灵根轮换修炼'] },
+              { title: '🎨 视觉风格', list: ['光照修炼：清晨阳光→探照灯夜修→光线在体内转化为法力', '镜头：日出→闭眼吸收→体内金光→日落→探照灯'] },
+              { title: '💥 重点视效', list: ['大日气海：光照粒子→法力转化（金色光点吸入体内）', '真灵根轮换：灵根从张羽体内飞出→白真真体内→金光切换'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '邪神布娃娃', '乐沐岚'] }
+            ]
+          }
+        },
+        {
+          id: 'ep16', label: 'EP16 他们要耍我们', sublabel: 'ch136-143 · 🔄暗战',
+          color: '#ba4a00', size: [145, 36],
+          info: {
+            title: 'EP16 · 他们要耍我们',
+            tags: ['ch136-143', '反转⑳：真灵根吞吐日月精华'],
+            sections: [
+              { title: '📖 关键剧情', list: ['🔄 <span class="hl">反转⑳</span>：真灵根轮换→开始吞吐日月精华（白真真也能从光华吸收灵机）', '公司暗战升级：紫云/白龙角力', '周澈尘/蓝岭谋划打压', '张翩翩两个月后离开→失去庇护倒计时'] },
+              { title: '🎨 视觉风格', list: ['阴谋感：暗色会议室+全息投影', '日月精华：灵根沐浴在月光中→光华粒子被吸收'] },
+              { title: '💥 重点视效', list: ['真灵根吞吐日月精华：月光下金色粒子回旋→白真真身周光华漩涡', '多方势力阴谋蒙太奇'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '周澈尘', '蓝岭', '张翩翩'] }
+            ]
+          }
+        },
+        {
+          id: 'ep17', label: 'EP17 阿真你肚子怎么变大了', sublabel: 'ch153-154 · 🔄进化',
+          color: '#ba4a00', size: [145, 36],
+          info: {
+            title: 'EP17 · 阿真你肚子怎么变大了',
+            tags: ['ch153-154', '反转㉑：真灵根第一次进化（种子）'],
+            sections: [
+              { title: '📖 关键剧情', list: ['白真真察觉"肚子好像变大了"→小腹出现青色纹路', '🔄 <span class="hl">反转㉑</span>：真灵根收敛为青色种子——真灵根第一次进化！', '福姬宣布：灵根品质将迎来质变'] },
+              { title: '🎨 视觉风格', list: ['神秘+青色主题：小腹青色纹路发光→灵根收缩为种子', '镜头：白真真撩衣服→青色光芒从腹部透出→种子形成'] },
+              { title: '💥 重点视效', list: ['P0：青色种子形成——灵根丝线从全身收回小腹→凝聚为发光种子', '半透明皮肤+青色符文流转', '福姬宣布进化'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真(进化)', '福姬'] }
+            ]
+          }
+        },
+        {
+          id: 'ep18', label: 'EP18 姐走了', sublabel: 'ch155-159 · 🔄转折',
+          color: '#ba4a00', size: [145, 36],
+          info: {
+            title: 'EP18 · 姐走了',
+            tags: ['ch155-159', '反转㉒：失去最大靠山'],
+            sections: [
+              { title: '📖 关键剧情', list: ['🔄 <span class="hl">反转㉒</span>：张翩翩离开→张羽白真真失去最大靠山', '学生会+各公司压力开始渗透', '筑基考试消息传来——新篇章即将开启', '张羽决定：靠自己'] },
+              { title: '🎨 视觉风格', list: ['离别：冷色+空旷的办公室→全息通话结束→屏幕熄灭', '成长转折：张羽看着屏幕熄灭→沉默→握拳'] },
+              { title: '💥 重点视效', list: ['全息通话结束→张翩翩影像消散→办公室冷色', '筑基考试通知UI弹出'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '张翩翩(离开)', '周澈尘'] }
+            ]
+          }
+        }
+      ]
+    },
+
+    // ─── ACT 5: 筑基之战 ───
+    {
+      id: 'act5', label: 'ACT 5 · 筑基之战', sublabel: 'EP19-26 · 8反转',
+      color: '#8e44ad', size: [165, 40],
+      info: {
+        title: 'ACT 5 · 筑基之战',
+        tags: ['EP19-26', '8集', '8反转'],
+        sections: [
+          { title: '核心主轴', content: '第一轮三关（法力/暴食/武道）→ 狩猎邪神 → 高中圣体终成 → 打药大赛 → 同归于尽' },
+          { title: '反转分布', list: ['EP19：55号估值未知+暴食超越玉星寒', 'EP20：春秋无尽禅32分15秒速成+夜凌霄"顶峰再见"', 'EP21：龙人"生产工具"+玉星寒求败', 'EP22：狩猎邪神——六人自燃+"不得伤害邪神"反杀', 'EP23：白真真雷电觉醒+周家压迫+福姬"镇之以静"', 'EP24：高中圣体终成——扛吃扛药扛卷', 'EP25：打药大赛——"一次两片"+炼气圣体觉醒', 'EP26：白真真vs戴行之——医保归零同归于尽（卷末高潮）'] },
+          { title: '关键名场面', list: ['EP19：雷神擂鼓——张羽躺在桌上双拳连环轰腹', 'EP20：32分15秒速成八星+云景"我做不到"', 'EP21：龙人"你这可是生产工具！下金蛋的鸡！"', 'EP22：六信徒跳窗自燃→"不得伤害邪神"怒吼', 'EP23：白真真蹲教室插座充电+周阳无下半身', 'EP24：10功法图标连线→全身金光→属性面板暴涨', 'EP25："一次两片"仿凤功能素吓呆众神', 'EP26：白真真肩膀硬接→惊涛九转→医保归零'] }
+        ]
+      },
+      children: [
+        {
+          id: 'ep19', label: 'EP19 仙都·第一轮', sublabel: 'ch160-166 · 🔄双反转',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP19 · 仙都·第一轮',
+            tags: ['ch160-166', '反转㉓㉔：55号估值未知+超越玉星寒'],
+            sections: [
+              { title: '📖 关键剧情', list: ['仙都考场——戴行之/夜凌霄/云景登场', '🔄 <span class="hl">反转㉓</span>：55号"估值未知"震撼全场→误读为神秘富豪', '法力考试：自爆外置灵根→卡位20名戏耍', '🔄 <span class="hl">反转㉔</span>：暴食之争·雷神擂鼓——张羽第一次在考试中超越玉星寒！冲到14位！'] },
+              { title: '🎨 视觉风格', list: ['仙都考场：巨型穹顶+全息排名+外地人vs本地人对比', '雷神擂鼓：躺在桌上双拳如雷轰腹→雷鸣+气浪'] },
+              { title: '💥 重点视效', list: ['P0：雷神擂鼓——雷鸣特效+腹部凹陷+暴力美学', '55号估值未知：全息屏数字变"???"→全场静止', '排名变化：张羽14位/玉星寒16位定格'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '玉星寒(首负)', '戴行之(首登场)', '夜凌霄', '邓丙丁'] }
+            ]
+          }
+        },
+        {
+          id: 'ep20', label: 'EP20 春秋无尽禅', sublabel: 'ch167-172 · 🔄爽点',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP20 · 春秋无尽禅',
+            tags: ['ch167-172', '反转㉕㉖：八星速成+夜凌霄认可'],
+            sections: [
+              { title: '📖 关键剧情', list: ['武道考试第三关：自选功法（1-10星），2小时练成', '🔄 <span class="hl">反转㉕</span>：张羽选八星·春秋无尽禅（155万）→32分15秒速成！', '云景法骸眼判定："我做不到"', '第一轮通过：张羽14位/玉星寒16位/白真真20位', '🔄 <span class="hl">反转㉖</span>：夜凌霄主动打招呼——"顶峰再见"（首次被视作同档次）'] },
+              { title: '🎨 视觉风格', list: ['自选功法：全息商城面板（1-10星滚动+价格闪烁）', '速成蒙太奇：2小时倒计时→第1遍生疏→第7遍流畅→32分15秒举手'] },
+              { title: '💥 重点视效', list: ['P0：春秋无尽禅四十九式动作速成快剪', '计时器停止+张羽举手→全场震惊', '夜凌霄"顶峰再见"→两人对视→大笑'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '夜凌霄(认可)', '云景', '邓丙丁'] }
+            ]
+          }
+        },
+        {
+          id: 'ep21', label: 'EP21 生产工具与求败', sublabel: 'ch173-176 · 🔄名场面',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP21 · 生产工具与求败',
+            tags: ['ch173-176', '反转㉗：龙人"生产工具"+玉星寒求败'],
+            sections: [
+              { title: '📖 关键剧情', list: ['福姬提议卖张羽种子→红塔测试数据震撼', '🔄 <span class="hl">反转㉗</span>：龙人——"你这可是生产工具！下金蛋的鸡！"→收义子+生育总监诱惑', '张羽卖研究权得15万', '玉星寒求败：闭门切磋，以两万块留张羽', '无极云手10级碾压玉星寒→玉星寒痛下决心戒欲'] },
+              { title: '🎨 视觉风格', list: ['种子测试：全息数据面板弹出（法力88.14/肉体8.09）', '龙人"生育总监"：拍桌大笑→幻化小人跑向张羽的荒诞动画'] },
+              { title: '💥 重点视效', list: ['P0：龙人"生产工具"名场面（喜剧感+张羽无语表情）', '切磋：无极云手vs天罡气功的白色对撞', '玉星寒"关我屁事"→张羽转身→"两万"→立刻回头'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真', '玉星寒(求败)', '龙人', '福姬'] }
+            ]
+          }
+        },
+        {
+          id: 'ep22', label: 'EP22 狩猎邪神', sublabel: 'ch177-182 · 🔥高潮弧',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP22 · 狩猎邪神',
+            tags: ['ch177-182', '反转㉘：六人自燃+"不得伤害邪神"'],
+            sections: [
+              { title: '📖 关键剧情', list: ['10万中介费到账→邪神祸山+李泉浮出水面', '🔄 <span class="hl">反转㉘</span>：张羽伪装快递员送数学书（夹铁片）→匿名举报→李泉被捕', '六信徒跳窗自燃→张羽喊破身份触发仪式反噬', '以"不得伤害邪神"为盾→狩猎成功！', '羽书新一章：解锁链法图系统——高中圣体套装'] },
+              { title: '🎨 视觉风格', list: ['双线狩猎：张羽伪装快递员vs白真真监控烂尾楼', '六人自燃：信徒冒火→火焰反向吞噬邪神→仪式反噬'] },
+              { title: '💥 重点视效', list: ['P0：六信徒跳窗自燃→冲天火光→"不得伤害邪神"怒吼→火焰逆流', '伪装快递员：铁片夹层反光（伏笔）', '羽书链法图：10功法图标链接成圣体套装'] },
+              { title: '👤 人物资产', list: ['张羽', '白真真(狩猎)', '福姬(升级)', '邪神祸山', '宋虚六人'] }
+            ]
+          }
+        },
+        {
+          id: 'ep23', label: 'EP23 觉醒与压迫', sublabel: 'ch183-190 · 🔄夹缝求生',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP23 · 觉醒与压迫',
+            tags: ['ch183-190', '反转㉙㉚：雷电觉醒+蛰伏智慧'],
+            sections: [
+              { title: '📖 关键剧情', list: ['🔄 <span class="hl">反转㉙</span>：白真真愿望仪式完成→雷电属性觉醒！可插电充电修炼！', '白真真化身"学校电霸"', '春秋无尽禅10级→解锁蓄毒爆发术（胸口"禅"字爆发）', '周家出现：周阳下半身失踪+邪神硬盘镇压', '周家层层束缚：时间被蚕食+白真真被拍飞', '🔄 <span class="hl">反转㉚</span>：福姬劝蛰伏——"越是这种时候越要镇之以静"'] },
+              { title: '🎨 视觉风格', list: ['白真真雷电：蓝色雷霆从体内涌出+头发竖起', '周阳无下半身：全息投影→腰间以下空荡荡', '蓄毒爆发术：胸口"禅"字金纹→黑色粒子'] },
+              { title: '💥 重点视效', list: ['P0：白真真雷电觉醒——雷霆法力第一次涌出', '白真真被拍飞：慢镜头→翻滚→砸地→爬起来', '周阳出场：全息投影+下半身消失+空旷音效'] },
+              { title: '👤 人物资产', list: ['张羽(春秋10级)', '白真真(雷电觉醒)', '周阳(幕后人)', '云霓', '福姬'] }
+            ]
+          }
+        },
+        {
+          id: 'ep24', label: 'EP24 高中圣体', sublabel: 'ch191-192 · 🎉爽点',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP24 · 高中圣体',
+            tags: ['ch191-192', '反转㉛：扛吃扛药扛卷终成'],
+            sections: [
+              { title: '📖 关键剧情', list: ['白真真独战十人+送外卖养家', '🔄 <span class="hl">反转㉛</span>：张羽凑齐10门功法→高中圣体10/10终成！', '效果：所有炼气功法效率+2倍/效果+2倍', '张羽实力：肉体9.89/法力97.56/道心7级', '云霓秒批假条→第二轮考试开幕'], quotes: ['"扛吃，扛药，扛卷，果然不愧是高中圣体。"——张羽'] },
+              { title: '🎨 视觉风格', list: ['高中圣体觉醒：10功法图标依次点亮→连成人体脉络→金色光效炸裂', '白真真独战十人：快剪蒙太奇'] },
+              { title: '💥 重点视效', list: ['P0：10功法图标连线→全身金光→属性面板暴涨', '"扛吃扛药扛卷"黑屏白字依次弹出', '法力97.56/肉体9.89数字跳动'] },
+              { title: '👤 人物资产', list: ['张羽(高中圣体!)', '白真真(独战)', '云霓', '夜凌霄', '周阳(隐)'] }
+            ]
+          }
+        },
+        {
+          id: 'ep25', label: 'EP25 打药大赛', sublabel: 'ch193-199 · 🔥炼气圣体',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP25 · 打药大赛',
+            tags: ['ch193-199', '反转㉜："一次两片"+炼气圣体觉醒'],
+            sections: [
+              { title: '📖 关键剧情', list: ['体育赛道·打药大赛：免费自助23种药物', '三大神药各1500分', '🔄 <span class="hl">反转㉜</span>：张羽"一次两片"仿凤功能素→吓呆众神！', '夜凌霄服道解后智商降低（喜剧）', '张羽悟得——"高中圣体？这是炼气圣体！"', '疯狂吃药逆转→超越夜凌霄夺用药第一', '肉体9.91/法力97.6'] },
+              { title: '🎨 视觉风格', list: ['自助打药：全息药架+23种药物3D旋转+免费标签闪烁', '"一次两片"：众神惊恐→张羽淡定吞药→药力暴走→圣体镇压'] },
+              { title: '💥 重点视效', list: ['P0：疯狂吃药蒙太奇——药片针剂→体内药力如火山→炼气圣体镇压', '"一次两片"：全场凝固→3秒无事→众神松口气', '逆转排名：数字不断跳动→超越夜凌霄→第一', '喜剧+爽感并举：夜凌霄降智vs张羽越吃越猛'] },
+              { title: '👤 人物资产', list: ['张羽(炼气圣体!)', '夜凌霄(降智)', '黄子丑(震惊)', '众神'] }
+            ]
+          }
+        },
+        {
+          id: 'ep26', label: 'EP26 同归于尽·季终', sublabel: 'ch200+ · 🎬最终反转',
+          color: '#7d3c98', size: [145, 36],
+          info: {
+            title: 'EP26 · 同归于尽·季终',
+            tags: ['ch200+', '最终反转：医保归零同归于尽'],
+            sections: [
+              { title: '📖 关键剧情', list: ['武道擂台·白真真vs戴行之（张羽不出场）', '白真真自知胜率仅3-4成→故意激怒', '🔄 <span class="hl">最终反转</span>：白真真肩膀硬接戴行之一掌→近身拼命', '惊涛九转+真灵根10级推演+雷霆法力全力一击', 'VS 戴行之漫天狂风轰向丹田', '<span class="p0">轰——医保齐齐归零，同归于尽</span>', '黄子丑评价：白真真"向死而生，赌上一切"', '——季终——', '全季名场面回顾+ED+彩蛋'], quotes: ['"面对如此简单的挑衅，我怎么可能中招？"——戴行之心道', '"向死而生，赌上一切的勇气。"——黄子丑评白真真'] },
+              { title: '🎨 视觉风格', list: ['4道残影围杀→白真真撇头硬接→慢镜头', '同归于尽：鲜血凝固+画面褪色→全白→全黑"医保归零"', '声音设计：最后一声碰撞→心跳声渐弱→静默→ED起'] },
+              { title: '💥 重点视效', list: ['P0：白真真硬接一掌——肩膀特写+慢镜头', '医保齐零：两个1,000,000同时归零弹窗', '全季闪回：60秒26帧→停在桥洞夕阳', '彩蛋：黑屏→金色裂缝→"嵩阳……出了个有意思的小家伙"→愈合'] },
+              { title: '👤 人物资产', list: ['白真真(终极一战)', '戴行之(同归于尽)', '黄子丑(裁判)', '?彩蛋BOSS(声)'] }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// Layout Engine
+// ============================================================
+const W = 3600, H = 2400;
+const cx = W / 2, cy = H / 2;
+
+function layoutNodes(data) {
+  const nodes = [];
+  const edges = [];
+  data.x = cx; data.y = cy;
+  nodes.push(data);
+
+  const firstLevel = data.children || [];
+  const n1 = firstLevel.length;
+  const r1 = 440;
+
+  // Angles for 5 acts - evenly spaced with offsets for child spread
+  const angles1 = [-135, -67, 0, 67, 135];
+
+  firstLevel.forEach((child, i) => {
+    const angle = angles1[i] * Math.PI / 180;
+    child.x = cx + r1 * Math.cos(angle);
+    child.y = cy + r1 * Math.sin(angle);
+    child.parentX = data.x;
+    child.parentY = data.y;
+    nodes.push(child);
+    edges.push({ x1: data.x, y1: data.y, x2: child.x, y2: child.y, color: child.color });
+
+    const secondLevel = child.children || [];
+    const n2 = secondLevel.length;
+    if (n2 === 0) return;
+
+    const r2 = 210;
+    const spreadAngle = n2 <= 4 ? 70 : Math.min(100, n2 * 12);
+
+    secondLevel.forEach((grandchild, j) => {
+      const baseAngle = angle;
+      const offset = n2 === 1 ? 0 : (j / (n2 - 1) - 0.5) * spreadAngle;
+      const childAngle = baseAngle + offset * Math.PI / 180;
+      grandchild.x = child.x + r2 * Math.cos(childAngle);
+      grandchild.y = child.y + r2 * Math.sin(childAngle);
+      grandchild.parentX = child.x;
+      grandchild.parentY = child.y;
+      grandchild.act = child.id.replace('act','');
+      nodes.push(grandchild);
+      edges.push({ x1: child.x, y1: child.y, x2: grandchild.x, y2: grandchild.y, color: grandchild.color });
+    });
+  });
+
+  return { nodes, edges };
+}
+
+// ============================================================
+// SVG Rendering
+// ============================================================
+const svg = document.getElementById('mindmap');
+const container = document.getElementById('canvas-container');
+
+let transform = { x: 0, y: 0, scale: 0.35 };
+
+function applyTransform() {
+  const g = document.getElementById('main-g');
+  if (g) g.setAttribute('transform', `translate(${transform.x},${transform.y}) scale(${transform.scale})`);
+}
+
+function renderMindmap() {
+  const { nodes, edges } = layoutNodes(mindmapData);
+  svg.innerHTML = '';
+  svg.setAttribute('viewBox', `0 0 ${container.clientWidth} ${container.clientHeight}`);
+
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  defs.innerHTML = `
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow-strong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  `;
+  svg.appendChild(defs);
+
+  const mainG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  mainG.setAttribute('id', 'main-g');
+
+  // Edges
+  edges.forEach(e => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const dx = e.x2 - e.x1, dy = e.y2 - e.y1;
+    const d = `M ${e.x1} ${e.y1} Q ${e.x1 + dx*0.5} ${e.y1} ${e.x2} ${e.y2}`;
+    path.setAttribute('d', d);
+    path.setAttribute('class', 'edge');
+    path.setAttribute('stroke', e.color);
+    mainG.appendChild(path);
+  });
+
+  // Nodes
+  nodes.forEach(node => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'node-group');
+    g.setAttribute('data-id', node.id);
+    g.setAttribute('data-act', node.act || '0');
+
+    const w = node.size[0], h = node.size[1];
+    const x = node.x - w/2, y = node.y - h/2;
+
+    // Glow for root
+    if (node.id === 'root') {
+      const gr = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      gr.setAttribute('x', x-4); gr.setAttribute('y', y-4);
+      gr.setAttribute('width', w+8); gr.setAttribute('height', h+8);
+      gr.setAttribute('rx', '12'); gr.setAttribute('fill', node.color);
+      gr.setAttribute('opacity', '0.3'); gr.setAttribute('filter', 'url(#glow-strong)');
+      g.appendChild(gr);
+    }
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', x); rect.setAttribute('y', y);
+    rect.setAttribute('width', w); rect.setAttribute('height', h);
+    rect.setAttribute('rx', node.id === 'root' ? '10' : '6');
+    rect.setAttribute('fill', node.color);
+    rect.setAttribute('class', 'node-bg');
+    rect.setAttribute('stroke', 'rgba(255,255,255,0.15)');
+    rect.setAttribute('stroke-width', node.id === 'root' ? '2' : '1');
+    g.appendChild(rect);
+
+    const fontSize = node.id === 'root' ? 16 : (node.children ? 13 : 11);
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', node.x);
+    text.setAttribute('y', node.sublabel ? node.y - 7 : node.y);
+    text.setAttribute('class', 'node-label');
+    text.setAttribute('font-size', fontSize);
+    text.textContent = node.label;
+    g.appendChild(text);
+
+    if (node.sublabel) {
+      const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      sub.setAttribute('x', node.x);
+      sub.setAttribute('y', node.y + 11);
+      sub.setAttribute('class', 'node-sublabel');
+      sub.setAttribute('font-size', node.id === 'root' ? 11 : 9);
+      sub.textContent = node.sublabel;
+      g.appendChild(sub);
+    }
+
+    g.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showInfo(node);
+    });
+
+    mainG.appendChild(g);
+  });
+
+  svg.appendChild(mainG);
+  applyTransform();
+}
+
+// ============================================================
+// Info Panel
+// ============================================================
+function showInfo(node) {
+  const panel = document.getElementById('info-panel');
+  if (!node.info) return;
+  const info = node.info;
+  let html = `<h3>${info.title}</h3>`;
+  if (info.tags) {
+    html += '<div style="margin-bottom:6px">';
+    info.tags.forEach(t => { html += `<span class="info-tag">${t}</span>`; });
+    html += '</div>';
+  }
+  if (info.sections) {
+    info.sections.forEach(s => {
+      html += `<div class="info-section">`;
+      html += `<div class="info-section-title">${s.title}</div>`;
+      if (s.content) html += `<p>${s.content}</p>`;
+      if (s.list) {
+        html += '<ul>';
+        s.list.forEach(item => { html += `<li>${item}</li>`; });
+        html += '</ul>';
+      }
+      if (s.quotes) {
+        s.quotes.forEach(q => { html += `<div class="quote">${q}</div>`; });
+      }
+      html += '</div>';
+    });
+  }
+  panel.innerHTML = html;
+}
+
+// ============================================================
+// Act Filter
+// ============================================================
+let currentAct = 0;
+
+function filterAct(act) {
+  currentAct = act;
+  document.querySelectorAll('.act-btn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.act-btn')[act]?.classList.add('on');
+
+  const groups = document.querySelectorAll('.node-group');
+  groups.forEach(g => {
+    const nodeAct = parseInt(g.getAttribute('data-act'));
+    if (act === 0 || nodeAct === act || isNaN(nodeAct)) {
+      g.style.display = '';
+    } else {
+      g.style.display = 'none';
+    }
+  });
+
+  // Show default info
+  if (act === 0) showInfo(mindmapData);
+  else {
+    const actMap = {1:'act1',2:'act2',3:'act3',4:'act4',5:'act5'};
+    const target = actMap[act];
+    const node = mindmapData.children.find(c => c.id === target);
+    if (node) showInfo(node);
+  }
+}
+
+// ============================================================
+// Pan & Zoom
+// ============================================================
+let isDragging = false;
+let dragStart = { x: 0, y: 0 };
+let transformStart = { x: 0, y: 0 };
+
+container.addEventListener('mousedown', (e) => {
+  if (e.target.closest('.node-group')) return;
+  isDragging = true;
+  dragStart = { x: e.clientX, y: e.clientY };
+  transformStart = { x: transform.x, y: transform.y };
+  container.style.cursor = 'grabbing';
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  transform.x = transformStart.x + (e.clientX - dragStart.x);
+  transform.y = transformStart.y + (e.clientY - dragStart.y);
+  applyTransform();
+});
+
+document.addEventListener('mouseup', () => {
+  isDragging = false;
+  container.style.cursor = 'grab';
+});
+
+container.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const rect = container.getBoundingClientRect();
+  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  const ns = Math.min(Math.max(transform.scale * delta, 0.1), 3);
+  const sc = ns / transform.scale;
+  transform.x = mx - sc * (mx - transform.x);
+  transform.y = my - sc * (my - transform.y);
+  transform.scale = ns;
+  applyTransform();
+}, { passive: false });
+
+// Touch
+let lastTouchDist = null;
+container.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    isDragging = true;
+    dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    transformStart = { x: transform.x, y: transform.y };
+  }
+});
+container.addEventListener('touchmove', (e) => {
+  e.preventDefault();
+  if (e.touches.length === 1 && isDragging) {
+    transform.x = transformStart.x + (e.touches[0].clientX - dragStart.x);
+    transform.y = transformStart.y + (e.touches[0].clientY - dragStart.y);
+    applyTransform();
+  } else if (e.touches.length === 2) {
+    const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    if (lastTouchDist) {
+      const delta = dist / lastTouchDist;
+      transform.scale = Math.min(Math.max(transform.scale * delta, 0.1), 3);
+      applyTransform();
+    }
+    lastTouchDist = dist;
+  }
+}, { passive: false });
+container.addEventListener('touchend', () => { isDragging = false; lastTouchDist = null; });
+
+function resetView() {
+  const cw = container.clientWidth, ch = container.clientHeight;
+  transform.scale = 0.35;
+  transform.x = cw/2 - W/2 * transform.scale;
+  transform.y = ch/2 - H/2 * transform.scale;
+  applyTransform();
+}
+
+function zoomIn() {
+  const cw = container.clientWidth, ch = container.clientHeight;
+  const ns = Math.min(transform.scale * 1.2, 3);
+  transform.x = cw/2 - (cw/2 - transform.x) * (ns/transform.scale);
+  transform.y = ch/2 - (ch/2 - transform.y) * (ns/transform.scale);
+  transform.scale = ns;
+  applyTransform();
+}
+
+function zoomOut() {
+  const cw = container.clientWidth, ch = container.clientHeight;
+  const ns = Math.max(transform.scale * 0.83, 0.1);
+  transform.x = cw/2 - (cw/2 - transform.x) * (ns/transform.scale);
+  transform.y = ch/2 - (ch/2 - transform.y) * (ns/transform.scale);
+  transform.scale = ns;
+  applyTransform();
+}
+
+function togglePanel() {
+  const p = document.getElementById('info-panel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+
+// Init
+window.addEventListener('load', () => {
+  renderMindmap();
+  setTimeout(() => { resetView(); showInfo(mindmapData); }, 50);
+});
+window.addEventListener('resize', () => {
+  svg.setAttribute('viewBox', `0 0 ${container.clientWidth} ${container.clientHeight}`);
+  resetView();
+});
+</script>
+</body>
+</html>
