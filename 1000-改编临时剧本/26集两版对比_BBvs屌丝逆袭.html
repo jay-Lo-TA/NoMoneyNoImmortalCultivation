@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《没钱修什么仙》26集方案 · BB版 vs 屌丝逆袭版</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #f5f7fa;
+    color: #2c3e50;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 40px 20px 30px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 26px; font-weight: 700; letter-spacing: 2px;
+  }
+  .header .sub {
+    font-size: 14px; opacity: 0.8; margin-top: 6px;
+  }
+  .badge-row { margin-top: 12px; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin: 3px 4px;
+    font-size: 12px;
+  }
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: white;
+    border-bottom: 1px solid #e0e4e8;
+    padding: 8px 16px;
+    text-align: center;
+    overflow-x: auto; white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .nav a {
+    display: inline-block; padding: 5px 14px; margin: 0 2px;
+    text-decoration: none; color: #2c3e50; font-size: 13px;
+    border-radius: 6px;
+  }
+  .nav a:hover { background: #f0f2f5; }
+  .nav a.bb { color: #3498db; font-weight: 600; }
+  .nav a.nx { color: #e67e22; font-weight: 600; }
+
+  /* Section */
+  .sec-title {
+    font-size: 22px; font-weight: 700;
+    margin: 32px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e0e4e8;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-title .tag {
+    display: inline-block; font-size: 11px; padding: 2px 10px;
+    border-radius: 10px; color: white; font-weight: 600;
+  }
+  .tag-same { background: #2ecc71; }
+  .tag-diff { background: #e74c3c; }
+  .tag-bb { background: #3498db; }
+  .tag-nx { background: #e67e22; }
+
+  /* Stats grid */
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .stat-card.bb { border-top: 4px solid #3498db; }
+  .stat-card.nx { border-top: 4px solid #e67e22; }
+  .stat-card h3 { font-size: 15px; margin-bottom: 6px; }
+  .stat-card .num { font-size: 28px; font-weight: 700; }
+  .stat-card.bb .num { color: #3498db; }
+  .stat-card.nx .num { color: #e67e22; }
+  .stat-card ul { list-style: none; padding: 0; margin-top: 6px; }
+  .stat-card li { font-size: 13px; color: #7f8c8d; padding: 2px 0; }
+  .stat-card li::before { content: '▸ '; }
+
+  /* Card */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .card h3 { font-size: 16px; margin-bottom: 10px; }
+  .card p, .card li { font-size: 14px; color: #444; }
+  .card ul { list-style: none; padding: 0; }
+  .card li { padding: 4px 0 4px 18px; position: relative; }
+  .card li::before { content: ''; position: absolute; left: 2px; top: 12px; width: 8px; height: 8px; border-radius: 2px; }
+  .card li.same::before { background: #2ecc71; }
+  .card li.bb::before { background: #3498db; }
+  .card li.nx::before { background: #e67e22; }
+
+  /* Two-col */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0; }
+
+  .col {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .col h4 { font-size: 14px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 2px solid; }
+  .col.bb h4 { color: #3498db; border-color: #3498db; }
+  .col.nx h4 { color: #e67e22; border-color: #e67e22; }
+  .col ul { list-style: none; padding: 0; }
+  .col li { font-size: 13px; color: #555; padding: 3px 0; position: relative; padding-left: 14px; }
+  .col li::before { content: '• '; position: absolute; left: 0; font-weight: bold; }
+  .col.bb li::before { color: #3498db; }
+  .col.nx li::before { color: #e67e22; }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  th {
+    background: #1a1a2e;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e4e8;
+    vertical-align: top;
+  }
+  tr:hover td { background: #f8f9fa; }
+  .col-label { width: 22%; background: #fafbfc; font-weight: 600; }
+  .col-bb { width: 39%; }
+  .col-nx { width: 39%; }
+
+  .hl {
+    display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 2px 0;
+  }
+  .hl-bb { background: #eef5fb; border-left: 3px solid #3498db; }
+  .hl-nx { background: #fef5ea; border-left: 3px solid #e67e22; }
+
+  .ta { text-align: center; font-size: 12px; }
+
+  .insight {
+    background: linear-gradient(135deg, #fef9e7, #fdebd0);
+    border-left: 4px solid #f39c12;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  .insight strong { color: #d35400; }
+
+  .divider { height: 1px; background: #e0e4e8; margin: 24px 0; }
+
+  .footer {
+    text-align: center;
+    padding: 24px 16px;
+    color: #7f8c8d;
+    font-size: 13px;
+    border-top: 1px solid #e0e4e8;
+    margin-top: 30px;
+  }
+
+  /* Phase bars */
+  .bar { display: flex; height: 36px; border-radius: 8px; overflow: hidden; margin: 8px 0; font-size: 11px; font-weight: 700; }
+  .bar div { display: flex; align-items: center; justify-content: center; color: #fff; }
+  .bb1 { background: #3498db; } .bb2 { background: #2980b9; } .bb3 { background: #1a5276; } .bb4 { background: #0d3b5c; }
+  .nx1 { background: #e67e22; } .nx2 { background: #d35400; } .nx3 { background: #ba4a00; } .nx4 { background: #a04000; } .nx5 { background: #873600; }
+
+  @media (max-width: 768px) {
+    .stats, .two-col { grid-template-columns: 1fr; }
+    .container { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>《没钱修什么仙》26集方案 · BB版 vs 屌丝逆袭版</h1>
+  <div class="sub">两个完整26集大纲的全面对比 — 结构、叙事、分集、情节、风格</div>
+  <div class="badge-row">
+    <span class="badge">🔵 BB版 · 4阶段 · 完整26集</span>
+    <span class="badge">🟠 屌丝逆袭版 · 5幕 · 完整26集</span>
+    <span class="badge">均基于第1-202章</span>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="#overview" class="bb">总览</a>
+  <a href="#structure" class="nx">结构</a>
+  <a href="#same" class="bb">相同点</a>
+  <a href="#diff" class="nx">差异点</a>
+  <a href="#episodes" class="bb">分集对比</a>
+  <a href="#key-scenes" class="nx">关键情节</a>
+  <a href="#summary" class="bb">总结</a>
+</div>
+
+<div class="container">
+
+  <!-- ======== 总览 ======== -->
+  <div class="sec-title" id="overview">📊 总览 <span class="tag tag-same">概览</span></div>
+
+  <div class="stats">
+    <div class="stat-card bb">
+      <h3>🔵 BB版</h3>
+      <div class="num">26集 · 4阶段</div>
+      <ul>
+        <li>文件：26集改编_BB版.html</li>
+        <li>结构：四阶段递进式叙事</li>
+        <li>章节：第1-40章 → 第41-86章 → 第87-150章 → 第151-202章</li>
+        <li>特点：剧情完整、世界观详尽、社会批判全面</li>
+        <li>CG：10个P0必做CG段落列表</li>
+        <li>辅助：附分集节奏总表 + 主题曲建议</li>
+      </ul>
+    </div>
+    <div class="stat-card nx">
+      <h3>🟠 屌丝逆袭版</h3>
+      <div class="num">26集 · 5幕</div>
+      <ul>
+        <li>文件：26集改编-屌丝逆袭版.html</li>
+        <li>结构：五幕式紧凑叙事</li>
+        <li>章节：第1-33章 → 第34-69章 → 第70-106章 → 第107-152章 → 第153-202章</li>
+        <li>特点：32个反转爽点、节奏激进、情绪冲击强</li>
+        <li>视效：P0/P1分级标注 + 6大战斗场面</li>
+        <li>辅助：每集人物资产清单 + 镜头设计提示</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======== 结构对比 ======== -->
+  <div class="sec-title" id="structure">🏗️ 叙事结构 <span class="tag tag-diff">核心差异</span></div>
+
+  <p style="font-size:14px; color:#555; margin-bottom:8px;"><strong>BB版 · 4阶段（按剧情发展阶段）</strong></p>
+  <div class="bar">
+    <div class="bb1" style="flex:23;">嵩阳入学篇<br>第1-6集</div>
+    <div class="bb2" style="flex:23;">法赛与武道竞赛篇<br>第7-12集</div>
+    <div class="bb3" style="flex:31;">暗学帮与市竞赛篇<br>第13-20集</div>
+    <div class="bb4" style="flex:23;">筑基考试·季终篇<br>第21-26集</div>
+  </div>
+
+  <p style="font-size:14px; color:#555; margin:14px 0 8px;"><strong>屌丝逆袭版 · 5幕（按情绪高点和反转主题）</strong></p>
+  <div class="bar">
+    <div class="nx1" style="flex:19;">绝望与<br>觉醒<br>EP1-5</div>
+    <div class="nx2" style="flex:16;">逆袭<br>之路<br>EP6-9</div>
+    <div class="nx3" style="flex:16;">体育<br>竞赛<br>EP10-13</div>
+    <div class="nx4" style="flex:19;">资本<br>真相<br>EP14-18</div>
+    <div class="nx5" style="flex:30;">筑基之战<br>EP19-26</div>
+  </div>
+
+  <div class="card">
+    <h3>结构差异解读</h3>
+    <p>BB版将"暗学帮"和"市竞赛"合并为一个8集段落（Phase 3），叙事连贯，内容密度最高。</p>
+    <p>屌丝逆袭版将其拆分为<strong>"逆袭之路"（4集）</strong> + <strong>"体育竞赛"（4集）</strong> + <strong>"资本真相"（5集）</strong>三个独立幕，每一幕都有明确的情感标签——觉醒→逆袭→竞赛→真相→决战。这么做的好处是每一幕主题聚焦，观众的情绪曲线更清晰；代价是过渡情节被大幅压缩。</p>
+    <p style="margin-top:8px;"><strong>BB版</strong>的Phase 3（8集）包含了：邪神谈判→暗学帮→真灵根→竞赛前夕→速度与力量→代言人→大日气海→繁育基地→筑基测试，内容极其丰富但部分观众可能觉得节奏偏慢。<strong>屌丝逆袭版</strong>将同样内容压缩为"逆袭之路+体育竞赛"（8集），删去了繁育基地、灵机保护区等"世界观注水"场景，更聚焦核心冲突。</p>
+  </div>
+
+  <!-- ======== 叙事策略对比 ======== -->
+  <div class="sec-title" id="same">✅ 相同改编内容 <span class="tag tag-same">共同点</span></div>
+
+  <div class="card">
+    <h3>两版共同的核心剧情节点</h3>
+    <ul>
+      <li class="same"><strong>穿越开局</strong>：穿越即负债70万，余额50元，面试被拒</li>
+      <li class="same"><strong>邪神契约</strong>：布娃娃邪神（福姬）降临，天台仪式，契约订立</li>
+      <li class="same"><strong>羽书觉醒</strong>：漆黑厚书从掌心显化，数据面板，"运功即修成功法"</li>
+      <li class="same"><strong>法赛/无极云手</strong>：张羽法赛中觉醒无极云手，法则气泡爆炸，排名第四</li>
+      <li class="same"><strong>学生会打压</strong>：逼迫签约，张羽拒绝，不签约就不让参赛</li>
+      <li class="same"><strong>暗学帮</strong>：被堵死后去暗学帮补课赚钱，化名"马云腾"</li>
+      <li class="same"><strong>武道竞赛夺冠</strong>：三校武道竞赛，对炼天极→宋海龙→乐沐岚，最终夺冠</li>
+      <li class="same"><strong>白真真灵根入体</strong>："我灵根没了"→灵根主动跑进张羽体内，丹田生根发芽</li>
+      <li class="same"><strong>桥洞宣言</strong>：租房全失败→白真真"住桥洞钻树林占烂尾楼"宣言</li>
+      <li class="same"><strong>体育竞赛/12531公斤</strong>：天空柱力量比试→12531公斤擎天→总分第一夺冠</li>
+      <li class="same"><strong>商业捧杀</strong>：乐景辰+刚山狂吹"绝世天才"→张翩翩揭穿是压低商业价值</li>
+      <li class="same"><strong>仙韵代言</strong>：张羽60万/年+白真真40万/年，邪神金句"十大宗门和公司一起耍穷鬼"</li>
+      <li class="same"><strong>张翩翩告别</strong>：头像变灰飞升，"我的目光只会看着上面不会回头"</li>
+      <li class="same"><strong>筑基考试/道心测试</strong>：邓丙丁主持，道心测试"估值未知？？？"</li>
+      <li class="same"><strong>大日气海</strong>：光照被动吐纳，凝聚日月精华</li>
+      <li class="same"><strong>真灵根进化</strong>：灵根收敛为青色种子，第一次进化</li>
+      <li class="same"><strong>邪神狩猎</strong>：福姬恢复1级位格，狩猎其他邪神吸收</li>
+      <li class="same"><strong>高中圣体→炼气圣体</strong>：圣体突破，药物吸收代谢能力提升</li>
+      <li class="same"><strong>玄冥重水季终</strong>：-1422/-10000米张羽放弃，夜凌霄"最完美高中生肉体"</li>
+      <li class="same"><strong>白真真同归于尽</strong>：医保归零，肩膀硬接一掌，电光步反杀</li>
+      <li class="same"><strong>双骄立誓</strong>：张羽"超越" vs 夜凌霄"永居第一"，第2季悬念</li>
+    </ul>
+  </div>
+
+  <!-- ======== 差异分析 ======== -->
+  <div class="sec-title" id="diff">🔄 核心差异分析 <span class="tag tag-diff">关键区别</span></div>
+
+  <table>
+    <tr><th class="col-label">维度</th><th class="col-bb">🔵 BB版</th><th class="col-nx">🟠 屌丝逆袭版</th></tr>
+    <tr>
+      <td>叙事策略</td>
+      <td><span class="hl hl-bb">完整叙事，起承转合清晰</span><br>注重世界构建和情感铺垫</td>
+      <td><span class="hl hl-nx">反转驱动，节奏激进</span><br>32个反转堆叠，删繁就简直奔爽点</td>
+    </tr>
+    <tr>
+      <td>社会批判深度</td>
+      <td><strong>保留最完整</strong><br>移植真相（高二穷鬼筋肉移植给富人）<br>呼吸收费（空气1999元/立方米）<br>厕所餐桌（倒数50名厕所吃饭）<br>分数种姓论（钱深演讲）<br>繁育基地（孵化室熊母+电击项圈）</td>
+      <td><strong>核心保留但简化</strong><br>移植真相简化处理<br>无呼吸收费场景<br>无厕所餐桌场景<br>无繁育基地场景<br>邪神哲学台词替代部分批判</td>
+    </tr>
+    <tr>
+      <td>世界观细节</td>
+      <td><strong>最丰富</strong><br>神辅考核（第9集独立集）<br>箓书系统+拜神扣款机制<br>灵界面罩→灵界虚拟考场<br>天约同契合同机制<br>仙都城上城祥云vs下城黑夜</td>
+      <td><strong>删繁就简</strong><br>无神辅考核独立集<br>无箓书/拜神系统<br>灵界相关内容合并<br>聚焦主线逆袭冲突</td>
+    </tr>
+    <tr>
+      <td>开场/第1集</td>
+      <td>面试→法力贷广告→天台请神→羽书<br>侧重压迫感和世界展示</td>
+      <td>面试+诡辩反杀→母亲积蓄→邪神契约<br>侧重主角智商和情感冲击</td>
+    </tr>
+    <tr>
+      <td>母亲线</td>
+      <td>第1集短信声音"绝育/变性都支持"<br>较简略</td>
+      <td><strong>EP 02"妈，我想修仙"</strong><br>母亲拿出全部积蓄+声音出演<br>情感暴击强化</td>
+    </tr>
+    <tr>
+      <td>法赛安排</td>
+      <td>分散处理：第3集预告→第7-8集正式比赛<br>中间穿插中心大厦+演武图</td>
+      <td><strong>集中处理</strong>：EP 04-05两集搞定<br>法赛开幕→无极云手觉醒→第四名→奖金</td>
+    </tr>
+    <tr>
+      <td>中心大厦/演武图</td>
+      <td><strong>第3集整集重点</strong><br>999层云海+"三个分层世界"<br>天人演武图金光CG</td>
+      <td>未单独成集，相关内容整合</td>
+    </tr>
+    <tr>
+      <td>体育竞赛</td>
+      <td>Phase 2末尾武道竞赛（第10-12集）<br>Phase 3开头市竞赛（第15-16集）<br><strong>两次竞赛分开</strong></td>
+      <td><strong>合并为ACT 3体育竞赛（EP 10-13）</strong><br>四集连战：开幕→5000米→12531公斤→捧杀</td>
+    </tr>
+    <tr>
+      <td>暗学帮</td>
+      <td>第13-14集系统展开<br>"速学武功"1小时掘墓掌重点描写</td>
+      <td>EP 06集中处理<br>侧重"不灭印法"1星差评→1分钟1级反差爽感</td>
+    </tr>
+    <tr>
+      <td>白真真断臂</td>
+      <td>第11集简述：剑斩"痔疮破绽"但右臂被扯断惨胜</td>
+      <td><strong>重点描写</strong>：0.5倍速慢镜+肩膀硬接+医保归零数字爆炸+电光步反杀</td>
+    </tr>
+    <tr>
+      <td>移植真相</td>
+      <td><strong>第12集重点揭露</strong><br>"高一买高二穷鬼的肉"社会批判P0</td>
+      <td>简化处理或无专项集数</td>
+    </tr>
+    <tr>
+      <td>中心反派</td>
+      <td>周澈尘（学生会）贯穿<br>星火真人/李雪莲线铺垫</td>
+      <td>周澈尘出现但戏份相对减少<br>更聚焦资本体系本身的反派性</td>
+    </tr>
+    <tr>
+      <td>季终集</td>
+      <td>药物狂潮→炼气圣体→白真真同归<br>→玄冥重水→双骄立誓<br>（一集打包所有事件）</td>
+      <td><strong>EP 25-26两集展开</strong><br>EP 25双线交战+白真真同归<br>EP 26定海柱+夜凌霄三重功体+双骄誓言+彩蛋</td>
+    </tr>
+  </table>
+
+  <!-- ======== 分集对照表 ======== -->
+  <div class="sec-title" id="episodes">📋 全26集标题对照 <span class="tag tag-bb">逐集对照</span></div>
+
+  <table>
+    <tr><th>集数</th><th>🔵 BB版</th><th>🟠 屌丝逆袭版</th><th>章节范围差异</th></tr>
+    <tr><td class="ta">1</td><td>面试与请神</td><td>我叫张羽</td><td>BB 1-5章 / 屌丝 1-6章</td></tr>
+    <tr><td class="ta">2</td><td>嵩阳学渣</td><td>妈，我想修仙</td><td>BB 6-12章 / 屌丝 7-12章</td></tr>
+    <tr><td class="ta">3</td><td>法赛与中心大厦</td><td>躺着也在修炼</td><td>BB 13-18章 / 屌丝 13-18章</td></tr>
+    <tr><td class="ta">4</td><td>天武炼心</td><td>法赛·白色狼烟</td><td>BB 19-25章 / 屌丝 19-25章</td></tr>
+    <tr><td class="ta">5</td><td>月考与实战</td><td>我是第四名</td><td>BB 26-33章 / 屌丝 26-33章</td></tr>
+    <tr><td class="ta">6</td><td>学霸现</td><td>你们不要我，我自己来</td><td>BB 34-40章 / 屌丝 34-42章</td></tr>
+    <tr><td class="ta">7</td><td>法赛风云</td><td>武道竞赛冠军</td><td>BB 41-48章 / 屌丝 43-51章</td></tr>
+    <tr><td class="ta">8</td><td>无极云手</td><td>我灵根没了</td><td>BB 49-55章 / 屌丝 52-60章</td></tr>
+    <tr><td class="ta">9</td><td>神辅考核</td><td>住桥洞！</td><td>BB 56-62章 / 屌丝 61-69章</td></tr>
+    <tr><td class="ta">10</td><td>武道补习</td><td>体育竞赛·开幕</td><td>BB 63-70章 / 屌丝 70-77章</td></tr>
+    <tr><td class="ta">11</td><td>八强战</td><td>5000米·心脏突破</td><td>BB 72-78章 / 屌丝 78-85章</td></tr>
+    <tr><td class="ta">12</td><td>冠军</td><td>12531公斤</td><td>BB 79-86章 / 屌丝 86-95章</td></tr>
+    <tr><td class="ta">13</td><td>邪神谈判</td><td>绝世天才？</td><td>BB 87-94章 / 屌丝 96-106章</td></tr>
+    <tr><td class="ta">14</td><td>真灵根</td><td>韭菜送上门</td><td>BB 95-102章 / 屌丝 107-115章</td></tr>
+    <tr><td class="ta">15</td><td>竞赛前夕</td><td>大日气海</td><td>BB 103-110章 / 屌丝 116-124章</td></tr>
+    <tr><td class="ta">16</td><td>速度与力量</td><td>他们要耍我们</td><td>BB 111-118章 / 屌丝 125-133章</td></tr>
+    <tr><td class="ta">17</td><td>代言人</td><td>阿真你肚子怎么变大了</td><td>BB 119-126章 / 屌丝 134-143章</td></tr>
+    <tr><td class="ta">18</td><td>大日气海</td><td>姐走了</td><td>BB 127-134章 / 屌丝 144-152章</td></tr>
+    <tr><td class="ta">19</td><td>繁育基地与告别</td><td>四选一·第一轮</td><td>BB 135-142章 / 屌丝 153-161章</td></tr>
+    <tr><td class="ta">20</td><td>筑基测试</td><td>肉体考试</td><td>BB 143-150章 / 屌丝 162-168章</td></tr>
+    <tr><td class="ta">21</td><td>真灵根进化</td><td>再战玉星寒</td><td>BB 151-158章 / 屌丝 169-174章</td></tr>
+    <tr><td class="ta">22</td><td>第一轮筑基考试</td><td>极限突破</td><td>BB 159-166章 / 屌丝 175-184章</td></tr>
+    <tr><td class="ta">23</td><td>春秋无尽禅</td><td>第二轮·开打</td><td>BB 167-174章 / 屌丝 185-194章</td></tr>
+    <tr><td class="ta">24</td><td>邪神狩猎</td><td>用药狂潮·三大神药</td><td>BB 175-182章 / 屌丝 195-199章</td></tr>
+    <tr><td class="ta">25</td><td>高中圣体</td><td>同归于尽·定海柱</td><td>BB 183-192章 / 屌丝 199-201章</td></tr>
+    <tr><td class="ta">26</td><td>玄冥重水·季终</td><td>最完美的高中生肉体</td><td>BB 193-202章 / 屌丝 202章</td></tr>
+  </table>
+
+  <div class="insight">
+    <strong>💡 章节分配差异分析：</strong> 屌丝逆袭版后段（第12集后）的章节分配比BB版更激进——BB版每集约6-8章均匀分配，屌丝逆袭版从第23集开始每集覆盖10章左右，节奏明显加快。这是因为屌丝逆袭版删去了神辅考核、箓书系统、繁育基地等"世界观填充"内容，将省出来的篇幅集中到筑基考试的核心冲突上。
+  </div>
+
+  <!-- ======== 关键情节处理 ======== -->
+  <div class="sec-title" id="key-scenes">🎬 关键情节的不同处理 <span class="tag tag-nx">细节差异</span></div>
+
+  <div class="card">
+    <h3>⚡ 同一情节，不同处理的7个典型</h3>
+    <table>
+      <tr><th class="col-label">情节</th><th>🔵 BB版处理</th><th>🟠 屌丝逆袭版处理</th></tr>
+      <tr>
+        <td><strong>邪神回归谈判</strong></td>
+        <td>第13集：同归于尽逼退→变念珠→引荐暗学帮<br>侧重胆量和博弈</td>
+        <td>EP 08：邪神发现张羽是"牛股"→重新谈判<br>侧重商业逻辑</td>
+      </tr>
+      <tr>
+        <td><strong>暗学帮</strong></td>
+        <td>第13-14集系统展开，速学武功（1小时掘墓掌）<br>侧重系统性和过程</td>
+        <td>EP 06集中处理，不灭印法1星差评→1分钟1级<br>侧重反差爽感</td>
+      </tr>
+      <tr>
+        <td><strong>真灵根借走</strong></td>
+        <td>第14集：穿插双幽朋跳楼→乐沐岚朋友圈→<br>白真真纹身伪装→借走灵根，多线并行</td>
+        <td>EP 08：突出奔跑+暧昧喜剧感，"硬硬的东西顶着我"→<br>灵根入体CG，喜剧+惊奇并存</td>
+      </tr>
+      <tr>
+        <td><strong>体育竞赛</strong></td>
+        <td>第15-16集：排名链→5000米→天空柱→<br>12531公斤夺冠，2集紧凑</td>
+        <td>EP 10-12：三集展开→肉体强度关→5000米心脏突破<br>→12531公斤逐秒特写，更有充分渲染</td>
+      </tr>
+      <tr>
+        <td><strong>商业捧杀</strong></td>
+        <td>第17集：张羽高兴→张翩翩来电揭穿→愤怒<br>→"绝世天才"是算计，标准反转</td>
+        <td>EP 13：直播间暖色→电话→冷色→<br>"第一次发现吹捧自己如此厌恶"，情绪更细致</td>
+      </tr>
+      <tr>
+        <td><strong>白真真同归于尽</strong></td>
+        <td>第26集后半段简述为"医保归零，爆炸"<br>较简略</td>
+        <td><strong>EP 25重点高潮</strong>：0.5倍速慢镜→肩膀硬接→<br>医保归零数字爆炸→电光步反杀，两集铺垫</td>
+      </tr>
+      <tr>
+        <td><strong>季终双骄立誓</strong></td>
+        <td>第26集：张羽放弃→立誓→夜凌霄立誓→悬念</td>
+        <td><strong>EP 26更完整</strong>：道心7级短板暴露→引爆春秋无尽禅<br>毒素→-1422米含血放弃→夜凌霄三重功体展开<br>→双骄誓言交错剪辑→彩蛋电话探查</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ======== 风格特色对比 ======== -->
+  <div class="two-col">
+    <div class="col bb">
+      <h4>🔵 BB版风格特色</h4>
+      <ul>
+        <li>标题偏书面/文学性（"天武炼心""代言人""繁育基地与告别"）</li>
+        <li>每集有完整的情感收束</li>
+        <li>社会批判全面展开（移植/呼吸/厕所/种姓等）</li>
+        <li>旁支人物充分（学长江柠、云景、双幽朋等）</li>
+        <li>10个P0 CG段落列表明确</li>
+        <li>有主题曲建议（OP电子摇滚/ED抒情钢琴）</li>
+        <li>节奏表标注情感基调曲线</li>
+        <li>倾向文学性较强的改编</li>
+      </ul>
+    </div>
+    <div class="col nx">
+      <h4>🟠 屌丝逆袭版风格特色</h4>
+      <ul>
+        <li>标题偏网感/口语化（"妈，我想修仙""躺着也在修炼"）</li>
+        <li>每集力求有高能反转名场面</li>
+        <li>社会批判简化为金句（邪神哲学台词）</li>
+        <li>聚焦主线角色，旁支删减</li>
+        <li>P0/P1视效分级标注+6大战斗场面</li>
+        <li>32个反转编号可量化情绪曲线</li>
+        <li>每集运镜设计提示+人物main/key清单</li>
+        <li>倾向商业化/市场导向的改编</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ======== 总结 ======== -->
+  <div class="sec-title" id="summary">🎯 总结：如何选择 <span class="tag tag-same">决策参考</span></div>
+
+  <div class="two-col">
+    <div class="col bb">
+      <h4>选BB版 if...<br><span style="font-size:12px;font-weight:400;color:#7f8c8d;">适合重视故事完整性的场景</span></h4>
+      <ul>
+        <li>想要保留<strong>移植真相、呼吸收费</strong>等社会批判</li>
+        <li>需要<strong>神辅考核、箓书、拜神扣款</strong>等世界观细节</li>
+        <li>希望<strong>旁支人物</strong>（学长江柠、云景、双幽朋、安安）有戏份</li>
+        <li>喜欢<strong>沉稳叙事</strong>，每集有完整起承转合</li>
+        <li>作品定位偏向<strong>"修仙资本寓言"</strong></li>
+        <li>目标观众：<strong>喜欢深度和思辨的观众</strong></li>
+      </ul>
+    </div>
+    <div class="col nx">
+      <h4>选屌丝逆袭版 if...<br><span style="font-size:12px;font-weight:400;color:#7f8c8d;">适合追求爽点和节奏的场景</span></h4>
+      <ul>
+        <li>想要<strong>每集都有高能反转</strong>，32个爽点支撑情绪曲线</li>
+        <li>愿意<strong>删繁就简</strong>，舍去世界观过渡情节</li>
+        <li>要求<strong>主角主角成长线高度聚焦</strong>，旁支尽量少</li>
+        <li>需要<strong>激进紧凑的节奏</strong>，每集15分钟信息密度最大</li>
+        <li>作品定位偏向<strong>"草根逆袭爽番"</strong></li>
+        <li>目标观众：<strong>追求追番快感的观众</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="insight">
+    <strong>🎬 导演建议：</strong> 两个版本不互斥。最佳策略是<strong>以BB版的世界观完整性和社会批判深度为骨架</strong>（保留神辅考核、移植真相、呼吸收费等核心世界构建），再<strong>吸收屌丝逆袭版的32个反转爽点来重新分配高潮位置</strong>。BB版提供深度，屌丝逆袭版提供节奏——将BB版"讲什么"和屌丝逆袭版"怎么排"结合起来，就是最优的26集方案。<br><br>
+    <strong>具体操作：</strong>
+    <br>① 用BB版的分阶段结构做骨架（4阶段划分合理，保留）
+    <br>② 将屌丝逆袭版的32个反转标注到BB版的骨架上，重新分配CG预算
+    <br>③ BB版保留的社会批判场景（移植、呼吸收费）是IP的独特竞争力，不能删
+    <br>④ 但BB版中节奏偏慢的过渡集数（如神辅考核、繁育基地）参考屌丝逆袭版的删减方式压缩篇幅
+    <br>⑤ 季终集参考屌丝逆袭版的两集设计（第25集双线交战+第26集双骄立誓），给季终更充分的渲染空间
+  </div>
+
+  <div class="divider"></div>
+
+  <table>
+    <tr><th class="col-label">最终对比项</th><th>🔵 BB版</th><th>🟠 屌丝逆袭版</th></tr>
+    <tr><td>分段方式</td><td>4阶段</td><td>5幕</td></tr>
+    <tr><td>反转/高能标记</td><td>10个P0 CG段落</td><td>32个反转编号+P0/P1分级</td></tr>
+    <tr><td>社会批判</td><td>完整保留</td><td>核心保留但简化</td></tr>
+    <tr><td>世界观细节</td><td>丰富（神辅/箓书等）</td><td>删繁就简</td></tr>
+    <tr><td>镜头设计描述</td><td>无，剧情概述为主</td><td>有基础镜头设计提示</td></tr>
+    <tr><td>人物管理</td><td>角色表（按性质分类）</td><td>人物标签（main/key）</td></tr>
+    <tr><td>战斗场面</td><td>散布在各集中</td><td>6大战斗场面集中分布</td></tr>
+    <tr><td>季终集</td><td>一集打包</td><td>两集展开</td></tr>
+    <tr><td>主题曲建议</td><td>有</td><td>无</td></tr>
+    <tr><td>叙事速度</td><td>沉稳，张弛有度</td><td>激进，反转密集</td></tr>
+    <tr><td>核心定位</td><td>修仙资本寓言</td><td>草根逆袭爽番</td></tr>
+  </table>
+
+  <div class="footer">
+    <p>《没钱修什么仙》26集改编方案 · BB版 vs 屌丝逆袭版</p>
+    <p style="margin-top:4px;">基于 26集改编_BB版.html · 26集改编-屌丝逆袭版.html</p>
+  </div>
+
+</div>
+
+</body>
+</html>

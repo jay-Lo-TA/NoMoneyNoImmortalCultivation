@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《没钱修什么仙？》26集动画番剧 · 完整分集大纲</title>
+<style>
+  :root {
+    --phase1: #4a90d9;
+    --phase2: #e67e22;
+    --phase3: #27ae60;
+    --phase4: #e74c3c;
+    --bg: #f5f7fa;
+    --card-bg: #ffffff;
+    --text: #2c3e50;
+    --text-light: #7f8c8d;
+    --border: #e0e4e8;
+    --tag-bg: #f0f2f5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 48px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(74,144,217,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(231,76,60,0.1) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 2px;
+  }
+  .header .subtitle {
+    font-size: 15px;
+    opacity: 0.85;
+    position: relative;
+    z-index: 1;
+    line-height: 1.8;
+  }
+  .header .subtitle span {
+    display: inline-block;
+    margin: 0 8px;
+  }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin: 4px 3px;
+    font-size: 13px;
+  }
+
+  /* Navigation */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .nav::-webkit-scrollbar { height: 3px; }
+  .nav::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+  .nav a {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 0 2px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: #f0f2f5; }
+  .nav a.phase1 { color: var(--phase1); }
+  .nav a.phase2 { color: var(--phase2); }
+  .nav a.phase3 { color: var(--phase3); }
+  .nav a.phase4 { color: var(--phase4); }
+
+  /* Container */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  /* Section title */
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 32px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--border);
+  }
+
+  /* Structure table (overview) */
+  .structure-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .structure-table th {
+    background: #1a1a2e;
+    color: white;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .structure-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .structure-table tr:last-child td { border-bottom: none; }
+  .structure-table tr:nth-child(1) td { border-left: 4px solid var(--phase1); }
+  .structure-table tr:nth-child(2) td { border-left: 4px solid var(--phase2); }
+  .structure-table tr:nth-child(3) td { border-left: 4px solid var(--phase3); }
+  .structure-table tr:nth-child(4) td { border-left: 4px solid var(--phase4); }
+  .structure-table tr:hover td { background: #f8f9fa; }
+  .phase-label {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+  }
+  .phase1-bg { background: var(--phase1); }
+  .phase2-bg { background: var(--phase2); }
+  .phase3-bg { background: var(--phase3); }
+  .phase4-bg { background: var(--phase4); }
+
+  /* Rhythm bar */
+  .rhythm-bar {
+    display: flex;
+    height: 32px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 16px 0;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .rhythm-bar div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: flex 0.3s;
+  }
+  .rhythm-bar .r1 { background: var(--phase1); flex: 2; }
+  .rhythm-bar .r2 { background: var(--phase2); flex: 2; }
+  .rhythm-bar .r3 { background: var(--phase3); flex: 2; }
+  .rhythm-bar .r4 { background: var(--phase4); flex: 1; }
+
+  /* Episode card */
+  .episode {
+    background: var(--card-bg);
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .episode:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+  .episode.phase1 { border-left-color: var(--phase1); }
+  .episode.phase2 { border-left-color: var(--phase2); }
+  .episode.phase3 { border-left-color: var(--phase3); }
+  .episode.phase4 { border-left-color: var(--phase4); }
+
+  .episode-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .episode-number {
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .episode-title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .episode-chapters {
+    font-size: 13px;
+    color: var(--text-light);
+    background: var(--tag-bg);
+    padding: 2px 10px;
+    border-radius: 10px;
+  }
+  .episode-phase-tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+  }
+
+  .episode-block {
+    margin: 14px 0;
+  }
+  .episode-block h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .episode-block p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  /* Mini tables for characters and scenes */
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 6px 0 10px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .mini-table th {
+    background: #f0f2f5;
+    padding: 6px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  .mini-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #f0f2f5;
+  }
+  .mini-table tr:last-child td { border-bottom: none; }
+
+  .tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag-protagonist { background: #ffe0e0; color: #c0392b; }
+  .tag-heroine { background: #ffd6e0; color: #d6336c; }
+  .tag-antagonist { background: #ffd0d0; color: #a00; }
+  .tag-support { background: #e8f0fe; color: #1967d2; }
+  .tag-ally { background: #e6f4ea; color: #1e7e34; }
+  .tag-group { background: #f3e8ff; color: #7c3aed; }
+  .tag-rival { background: #fff3e0; color: #e65100; }
+
+  /* Highlights list */
+  .highlights {
+    list-style: none;
+    padding: 0;
+  }
+  .highlights li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .highlights li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--phase1);
+  }
+  .episode.phase1 .highlights li::before { background: var(--phase1); }
+  .episode.phase2 .highlights li::before { background: var(--phase2); }
+  .episode.phase3 .highlights li::before { background: var(--phase3); }
+  .episode.phase4 .highlights li::before { background: var(--phase4); }
+
+  /* Rhythm table at bottom */
+  .rhythm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 20px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .rhythm-table th {
+    background: #1a1a2e;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .rhythm-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .rhythm-table tr:nth-child(even) td { background: #fafbfc; }
+  .rhythm-table tr:hover td { background: #f0f2f5; }
+
+  /* Production tips */
+  .prod-tips {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .prod-tips h3 {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+  .prod-tips ul {
+    list-style: none;
+    padding: 0;
+  }
+  .prod-tips li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 14px;
+  }
+  .prod-tips li::before {
+    content: '•';
+    position: absolute;
+    left: 4px;
+    color: var(--phase1);
+    font-weight: bold;
+  }
+  .cg-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: cg;
+  }
+  .cg-list li {
+    counter-increment: cg;
+    padding: 8px 0 8px 36px;
+    position: relative;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .cg-list li:last-child { border-bottom: none; }
+  .cg-list li::before {
+    content: counter(cg);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #1a1a2e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Phase divider */
+  .phase-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 36px 0 20px;
+  }
+  .phase-divider .line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+  }
+  .phase-divider .phase-title {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: 16px;
+    color: white;
+    white-space: nowrap;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 640px) {
+    .header h1 { font-size: 22px; }
+    .episode { padding: 16px; }
+    .episode-title { font-size: 17px; }
+    .structure-table { font-size: 12px; }
+    .structure-table th, .structure-table td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>《没钱修什么仙？》26集动画番剧</h1>
+  <div class="subtitle">
+    <span>原作：网络小说《没钱修什么仙？》前202章</span><br>
+    <span class="badge">26集 × 15分钟</span>
+    <span class="badge">第一季</span>
+    <span class="badge">基于30-剧情目录章节摘要</span>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="#overview">总览</a>
+  <span style="color:#ddd;margin:0 2px;">|</span>
+  <a href="#phase1" class="phase1">第1-6集</a>
+  <a href="#ep1">1</a><a href="#ep2">2</a><a href="#ep3">3</a><a href="#ep4">4</a><a href="#ep5">5</a><a href="#ep6">6</a>
+  <span style="color:#ddd;margin:0 2px;">|</span>
+  <a href="#phase2" class="phase2">第7-12集</a>
+  <a href="#ep7">7</a><a href="#ep8">8</a><a href="#ep9">9</a><a href="#ep10">10</a><a href="#ep11">11</a><a href="#ep12">12</a>
+  <span style="color:#ddd;margin:0 2px;">|</span>
+  <a href="#phase3" class="phase3">第13-20集</a>
+  <a href="#ep13">13</a><a href="#ep14">14</a><a href="#ep15">15</a><a href="#ep16">16</a><a href="#ep17">17</a><a href="#ep18">18</a><a href="#ep19">19</a><a href="#ep20">20</a>
+  <span style="color:#ddd;margin:0 2px;">|</span>
+  <a href="#phase4" class="phase4">第21-26集</a>
+  <a href="#ep21">21</a><a href="#ep22">22</a><a href="#ep23">23</a><a href="#ep24">24</a><a href="#ep25">25</a><a href="#ep26">26</a>
+</div>
+
+<div class="container">
+
+<!-- Overall Structure -->
+<h2 class="section-title" id="overview">总体结构</h2>
+
+<div class="rhythm-bar">
+  <div class="r1">开场定调<br>1-2集</div>
+  <div class="r2">发展蓄力<br>3-8集</div>
+  <div class="r3">加速连击<br>9-14集</div>
+  <div class="r4">高潮+季终<br>15-26集</div>
+</div>
+
+<table class="structure-table">
+  <thead>
+    <tr><th>段落</th><th>集数</th><th>原作章节</th><th>核心主线</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="phase-label phase1-bg">嵩阳入学篇</span></td>
+      <td>第1-6集</td>
+      <td>第1-40章</td>
+      <td>面试→请神仪式→羽书觉醒→法赛→中心大厦→天人演武图→月考→甲级合同</td>
+    </tr>
+    <tr>
+      <td><span class="phase-label phase2-bg">法赛与武道竞赛篇</span></td>
+      <td>第7-12集</td>
+      <td>第41-86章</td>
+      <td>法赛比赛→无极云手→神辅考核→三校武道竞赛→冠军→兼职移植</td>
+    </tr>
+    <tr>
+      <td><span class="phase-label phase3-bg">暗学帮与市竞赛篇</span></td>
+      <td>第13-20集</td>
+      <td>第87-150章</td>
+      <td>邪神谈判→暗学帮→真灵根→嵩阳市竞赛→代言人→筑基资格证→大日气海→筑基测试</td>
+    </tr>
+    <tr>
+      <td><span class="phase-label phase4-bg">筑基考试·季终篇</span></td>
+      <td>第21-26集</td>
+      <td>第151-202章</td>
+      <td>真灵根进化→第一轮筑基考试→春秋无尽禅→邪神狩猎→高中圣体→玄冥重水季终</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Episode 1 -->
+<div id="phase1" class="phase-divider">
+  <div class="line"></div>
+  <span class="phase-title phase1-bg">第一段 · 嵩阳入学篇</span>
+  <div class="line"></div>
+</div>
+
+<div class="episode phase1" id="ep1">
+  <div class="episode-header">
+    <span class="episode-number">第1集</span>
+    <span class="episode-title">面试与请神</span>
+    <span class="episode-chapters">第1-5章</span>
+    <span class="episode-phase-tag phase1-bg">嵩阳入学</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>贫民窟少年张羽收到嵩阳高中面试通知，背负原身70万灵币债务。面试现场，三位面试官按数据评分，将"绝育"视为"向道决心"，张羽因分数不够被划为"备选"。离开时看到法力贷弹窗广告："您的五千后备金已准备完毕，只需十秒即可到账"。回到破旧出租屋，母亲短信告知"不论你选绝育还是变性，妈都支持你"。绝望之际，张羽走上天台，摆出猩红蜡烛与破烂布娃娃——邪神仪式启动。符号1/10在掌心浮现。第5章：一本漆黑如墨的厚书"羽书"从掌心显化，自动翻页——左页人物画像，右页数据面板（道心/法力/肉体/武功/道术），"运功即修成功法"机制激活。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>全程核心</td></tr>
+        <tr><td>嵩阳高中面试官三人</td><td><span class="tag tag-support">配角</span></td><td>中年男/中年女/老年男</td></tr>
+        <tr><td>母亲（短信声音）</td><td><span class="tag tag-support">配角</span></td><td>未露脸</td></tr>
+        <tr><td>邪神布娃娃</td><td><span class="tag tag-antagonist">反派</span></td><td>天台仪式首登场</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>开场·贫民窟</td><td>清晨</td><td>嵩阳市郊区出租屋</td><td>断电断水，50元余额</td></tr>
+        <tr><td>面试现场</td><td>上午</td><td>嵩阳高中招生办</td><td>冷白光，数据屏幕，压迫感</td></tr>
+        <tr><td>法力贷广告</td><td>白天</td><td>街头电子屏</td><td>霓虹弹窗，赛博朋克感</td></tr>
+        <tr><td>天台仪式</td><td>黄昏</td><td>烂尾楼天台</td><td>猩红蜡烛，破烂布娃娃，符号发光</td></tr>
+        <tr><td>羽书显化</td><td>夜晚</td><td>出租屋</td><td>漆黑厚书从掌心浮现，数据面板发光</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>开篇定调</strong>：法力贷广告与自然世界的无缝融合，瞬间建立"修仙×金融"的独特定位</li>
+      <li><strong>震撼开场</strong>：70万债务+绝育/变性选项，极致压迫感</li>
+      <li><strong>视觉奇观</strong>：天台仪式，猩红蜡烛+黑色符号1/10浮现</li>
+      <li><strong>核心外挂登场</strong>：羽书显化CG，数据面板可视化——动画差异化核心</li>
+      <li><strong>悬念钩子</strong>：黑暗中邪神布娃娃的清脆女声——"你，想修仙吗？"</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase1" id="ep2">
+  <div class="episode-header">
+    <span class="episode-number">第2集</span>
+    <span class="episode-title">嵩阳学渣</span>
+    <span class="episode-chapters">第6-12章</span>
+    <span class="episode-phase-tag phase1-bg">嵩阳入学</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽穿越降临，继承原身记忆与债务。5点生物钟被迫起床，1.5小时挤公交前往嵩阳高中。学校内部是彻底的"分数至上"地狱——武道课肉体强度排名大屏幕高悬，学渣随时面临退学打工。白真真登场：冷脸少女，全校总分第一，却在花园里跪地向"爹"借钱——那个"爹"就是张羽。白真真闻到张羽几天没洗澡的味道，果断转账500元。张羽查看身体数据：道心1级、法力7.7、肉体0.83，排名年级第19。张羽开始修炼周天采气法，勇猛精进，羽书熟练度持续提升。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td></td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>冷脸+跪地反差萌</td></tr>
+        <tr><td>周天翊</td><td><span class="tag tag-support">配角</span></td><td>同桌，八卦王</td></tr>
+        <tr><td>钱深</td><td><span class="tag tag-support">配角</span></td><td>肉体强度榜第1</td></tr>
+        <tr><td>王海</td><td><span class="tag tag-antagonist">反派</span></td><td>体育老师，推销神象力</td></tr>
+        <tr><td>何大有</td><td><span class="tag tag-support">配角</span></td><td>校董之子，月考第三</td></tr>
+        <tr><td>雷钧</td><td><span class="tag tag-support">配角</span></td><td>武道课老师</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>清晨通勤</td><td>早晨</td><td>公交+街道</td><td>拥挤，阶层分明</td></tr>
+        <tr><td>嵩阳高中教室</td><td>上午</td><td>示范班教室</td><td>大屏幕排名，压抑</td></tr>
+        <tr><td>小花园</td><td>午休</td><td>宿舍楼后方</td><td>私密，白真真跪地名场面</td></tr>
+        <tr><td>出租屋</td><td>夜晚</td><td>郊区破屋</td><td>黑暗，邪神符号微光</td></tr>
+        <tr><td>烂尾楼修炼</td><td>深夜</td><td>废弃烂尾楼</td><td>羽书发光，苦练</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>反差萌名场面</strong>：冷脸年级第一白真真→花园跪地"爹借点钱"</li>
+      <li><strong>阶层震撼</strong>：白真真闻味识别张羽几天没洗澡→直接转账500元</li>
+      <li><strong>数据可视化</strong>：教室里的大屏幕肉体强度排名，动画化视觉冲击</li>
+      <li><strong>修炼起步</strong>：周天采气法修炼蒙太奇，羽书数据面板更新</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase1" id="ep3">
+  <div class="episode-header">
+    <span class="episode-number">第3集</span>
+    <span class="episode-title">法赛与中心大厦</span>
+    <span class="episode-chapters">第13-18章</span>
+    <span class="episode-phase-tag phase1-bg">嵩阳入学</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>嵩阳高中法力课，严老师宣布市法赛设奖，第一名10万灵币——张羽摆脱债务的路径清晰化。张羽拿到临时安保工作，工作地点：嵩阳中心大厦999层云中厅。电梯直达高空，落地窗俯瞰云海——"三个分层世界"台词震撼登场。白真真现身：画展侍者，时薪500灵币，清冷质问张羽"少走几十年弯路，不好吗？"。李雪莲首登场：银色长发（疑法骸），红色礼服法宝火光流动。第18章高潮：李雪莲揭幕"天人演武图"——金光笼罩全场，画中男子隔空一拳击中炼天极。张羽暗中"白学武功"算账，试图复制画中招式。星火真人（李雪莲父亲）察觉张羽资质，暗中观察。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>保安身份+白学武功</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>侍者身份，时薪500</td></tr>
+        <tr><td>严老师</td><td><span class="tag tag-support">配角</span></td><td>法力课老师，宣布法赛</td></tr>
+        <tr><td>李雪莲</td><td><span class="tag tag-support">配角</span></td><td>金丹真人女儿，首登场</td></tr>
+        <tr><td>炼天极</td><td><span class="tag tag-support">配角</span></td><td>紫云高中，被画中男子击中</td></tr>
+        <tr><td>星火真人</td><td><span class="tag tag-support">配角</span></td><td>暗处观察</td></tr>
+        <tr><td>赵天行</td><td><span class="tag tag-support">配角</span></td><td>保安同事</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>法力课</td><td>上午</td><td>嵩阳高中教室</td><td>走神率大屏幕</td></tr>
+        <tr><td>中心大厦999层</td><td>白天</td><td>嵩阳市地标</td><td>云海俯瞰，阶层符号</td></tr>
+        <tr><td>画展主厅</td><td>下午</td><td>同建筑</td><td>上千平米，浮华修仙上流</td></tr>
+        <tr><td>天人演武图揭幕</td><td>白天</td><td>画展主厅</td><td>金光笼罩，修仙视觉奇观</td></tr>
+        <tr><td>白学武功</td><td>夜晚</td><td>烂尾楼</td><td>张羽复盘招式，羽书记录</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>OP/ED级画面</strong>：中心大厦999层云海俯瞰，"三个分层世界"定调镜头</li>
+      <li><strong>阶层震撼</strong>：鲍鱼龙虾一斤3-4万 vs 张羽400/时保安工资</li>
+      <li><strong>视觉奇观</strong>：天人演武图揭幕，金光笼罩全场，画中男子隔空出拳</li>
+      <li><strong>智斗名场面</strong>：张羽"白学武功"算账，试图复制招式</li>
+      <li><strong>悬念钩子</strong>：星火真人暗中观察，"这少年...有意思"</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase1" id="ep4">
+  <div class="episode-header">
+    <span class="episode-number">第4集</span>
+    <span class="episode-title">天武炼心</span>
+    <span class="episode-chapters">第19-25章</span>
+    <span class="episode-phase-tag phase1-bg">嵩阳入学</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>天人演武图的恐怖威压让张羽道心受创——惊怖与道心考验并行。张羽在烂尾楼苦练参悟，试图还原演武图招式。星火真人已收"15岁半小时练成天武炼心诀"的天才为弟子，婉拒张羽但赠送天武炼心诀使用版权。李雪莲白送张羽1万灵币+版权——反差名场面。张羽签订学校合同，了解灵根与气海体系。第22章合同签订现场揭露学校签约机制：高二批量签约投钱，高一耀眼者会被破格抢签。钱深质问张羽："你平时考试是不是故意考差？"抛出"分数种姓论"——修仙世界，分数决定一切，穷人永无出头之日。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>参悟+签合同</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>讲解合同机制</td></tr>
+        <tr><td>李雪莲</td><td><span class="tag tag-support">配角</span></td><td>白送1万+版权</td></tr>
+        <tr><td>星火真人</td><td><span class="tag tag-support">配角</span></td><td>婉拒收徒，赠版权</td></tr>
+        <tr><td>钱深</td><td><span class="tag tag-support">配角</span></td><td>分数种姓论</td></tr>
+        <tr><td>武青青</td><td><span class="tag tag-support">配角</span></td><td>主动加联系方式</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>道心受创</td><td>夜晚</td><td>烂尾楼</td><td>演武图余威，惊怖</td></tr>
+        <tr><td>参悟苦练</td><td>深夜</td><td>烂尾楼</td><td>羽书记录，天武炼心诀修炼</td></tr>
+        <tr><td>合同谈判</td><td>白天</td><td>中心大厦会议室</td><td>李雪莲反差慷慨</td></tr>
+        <tr><td>学校走廊</td><td>课间</td><td>嵩阳高中</td><td>钱深质问，分数种姓论</td></tr>
+        <tr><td>天台对话</td><td>放学后</td><td>学校天台</td><td>白真真讲解合同</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>反差名场面</strong>：李雪莲白送1万+天武炼心诀版权 vs 星火真人婉拒</li>
+      <li><strong>社会批判</strong>：钱深"分数种姓论"——修仙世界的阶层固化锐利批判</li>
+      <li><strong>合同机制</strong>：学校签约体系揭露，张羽白真真的"商品价值"量化</li>
+      <li><strong>功法获取</strong>：天武炼心诀——张羽核心功法之一到手</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase1" id="ep5">
+  <div class="episode-header">
+    <span class="episode-number">第5集</span>
+    <span class="episode-title">月考与实战</span>
+    <span class="episode-chapters">第26-33章</span>
+    <span class="episode-phase-tag phase1-bg">嵩阳入学</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>法赛报名与月考同时到来。张羽疯狂考间冲刺，修炼道术与实战技术。第29章实战考试：张羽在擂台上展现修炼成果。第30章掌力比拼和道心考试——道心考试使用灵界面罩，意识进入灵界。第31章张羽首次进入灵界体验道心考试环境，发现灵界是"道心虚拟考场"。法力和体育考试衔接，张羽发现肉体弱但法力有潜力。体育考试中张羽体力垫底，王海给出"选择适合自己的功法"对策。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>月考冲刺+实战考试</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>协助复习</td></tr>
+        <tr><td>王海</td><td><span class="tag tag-antagonist">反派</span></td><td>体育考试对策</td></tr>
+        <tr><td>雷钧</td><td><span class="tag tag-support">配角</span></td><td>武道课监考</td></tr>
+        <tr><td>何大有</td><td><span class="tag tag-support">配角</span></td><td>实战考试对手</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>考间冲刺</td><td>考前</td><td>嵩阳高中教室/烂尾楼</td><td>疯狂复习蒙太奇</td></tr>
+        <tr><td>实战擂台</td><td>上午</td><td>嵩阳高中武道场</td><td>大屏幕抽签，白线方格</td></tr>
+        <tr><td>道心考场</td><td>上午</td><td>病房布置考场</td><td>灵界面罩VR转场，意识空间</td></tr>
+        <tr><td>体育考试</td><td>下午</td><td>操场</td><td>体力测试，张羽垫底</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>视觉奇观</strong>：灵界面罩VR转场，意识进入灵界——动画化表现力高峰</li>
+      <li><strong>战斗名场面</strong>：实战考试擂台对决</li>
+      <li><strong>数据面板</strong>：羽书记录考试数据，成长可视化</li>
+      <li><strong>悬念钩子</strong>：灵界——道心虚拟考场的设定揭露</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase1" id="ep6">
+  <div class="episode-header">
+    <span class="episode-number">第6集</span>
+    <span class="episode-title">学霸现</span>
+    <span class="episode-chapters">第34-40章</span>
+    <span class="episode-phase-tag phase1-bg">嵩阳入学</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>月考成绩公布，张羽道心暴涨成学霸，白真真也名列前茅——"成绩出，学霸现"。张羽选择功法，放弃安全选项选了难度高的周天采气法。第36章甲级合同签约现场，张羽白真真拒绝学生会合同，决心凭自己考十大。张翩翩登场撑腰——25亿存款威压逼退学生会。第38章周天采气法修炼突破10级，法力暴涨。第39章心法获取，第40章快乐心法和法赛补习开始——张羽为法赛全力准备。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>道心暴涨+周天采气10级</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>名列前茅</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>25亿存款撑腰，首登场</td></tr>
+        <tr><td>周澈尘</td><td><span class="tag tag-support">配角</span></td><td>学生会逼签</td></tr>
+        <tr><td>雷钧</td><td><span class="tag tag-support">配角</span></td><td>功法选择指导</td></tr>
+        <tr><td>何大有</td><td><span class="tag tag-support">配角</span></td><td>月考竞争</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>成绩公布</td><td>白天</td><td>嵩阳高中教室</td><td>大屏幕排名，张羽道心暴涨</td></tr>
+        <tr><td>甲级合同签约</td><td>白天</td><td>嵩阳高中礼堂</td><td>张翩翩25亿威压</td></tr>
+        <tr><td>周天采气突破</td><td>夜晚</td><td>烂尾楼</td><td>法力暴涨CG</td></tr>
+        <tr><td>法赛补习</td><td>数日</td><td>嵩阳高中/烂尾楼</td><td>快乐心法修炼</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>逆袭时刻</strong>：张羽道心暴涨成学霸——从学渣到学霸的反转</li>
+      <li><strong>张翩翩登场</strong>：25亿存款威压逼退学生会——霸气名场面</li>
+      <li><strong>周天采气10级</strong>：法力暴涨CG——修炼成果可视化</li>
+      <li><strong>法赛准备</strong>：快乐心法+法赛补习——下一阶段目标确立</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Phase 2 -->
+<div id="phase2" class="phase-divider">
+  <div class="line"></div>
+  <span class="phase-title phase2-bg">第二段 · 法赛与武道竞赛篇</span>
+  <div class="line"></div>
+</div>
+
+<div class="episode phase2" id="ep7">
+  <div class="episode-header">
+    <span class="episode-number">第7集</span>
+    <span class="episode-title">法赛风云</span>
+    <span class="episode-chapters">第41-48章</span>
+    <span class="episode-phase-tag phase2-bg">法赛竞赛</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>法赛正式开始。密谋与联盟并行——各方势力在法赛中博弈。法赛阵容公布，张羽以化解型法力出战。联盟和法赛第一关：张羽以无极云手化解多轮攻击。飞剑对决——张羽面对飞剑型选手的精彩攻防。紫云药登场，法赛中使用药物提升实力的暗流浮现。"大山"——强力对手登场，张羽法赛中遇到真正挑战。第48章"争"——法赛进入白热化争夺阶段。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>无极云手化解术</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>法赛参赛</td></tr>
+        <tr><td>炼天极</td><td><span class="tag tag-support">配角</span></td><td>紫云高中选手</td></tr>
+        <tr><td>雷钧</td><td><span class="tag tag-support">配角</span></td><td>法赛指导</td></tr>
+        <tr><td>法赛对手</td><td><span class="tag tag-group">群演</span></td><td>飞剑型/力量型选手</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>法赛开幕</td><td>上午</td><td>嵩阳高中法赛擂台</td><td>大屏幕，观众席</td></tr>
+        <tr><td>联盟密谋</td><td>赛前</td><td>教室/走廊</td><td>各方势力博弈</td></tr>
+        <tr><td>飞剑对决</td><td>赛中</td><td>法赛擂台</td><td>飞剑vs无极云手</td></tr>
+        <tr><td>紫云药暗流</td><td>赛间</td><td>后台</td><td>药物提升实力</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>战斗系列</strong>：无极云手化解多轮攻击——以柔克刚的战斗美学</li>
+      <li><strong>飞剑对决</strong>：飞剑型选手vs张羽化解术——攻防视觉冲击</li>
+      <li><strong>紫云药暗流</strong>：法赛中使用药物的暗流——社会批判</li>
+      <li><strong>白热化争夺</strong>：法赛进入"争"阶段——竞争升级</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase2" id="ep8">
+  <div class="episode-header">
+    <span class="episode-number">第8集</span>
+    <span class="episode-title">无极云手</span>
+    <span class="episode-chapters">第49-55章</span>
+    <span class="episode-phase-tag phase2-bg">法赛竞赛</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>法赛结果揭晓——张羽以化解法力获前十名！无极云手达到关键等级，张羽实力显著提升。但变化和加码随之而来：暗流涌动，各方势力开始盯上张羽。月考结束，风雨欲来。第54章天武炼心——张羽天武炼心诀修炼深化。第55章张羽抉择——面对多方势力的拉拢与威胁，张羽做出关键选择，决定走自己的路。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>法赛前十+关键抉择</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>法赛配合</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>暗中指导</td></tr>
+        <tr><td>周澈尘</td><td><span class="tag tag-support">配角</span></td><td>学生会施压</td></tr>
+        <tr><td>雷钧</td><td><span class="tag tag-support">配角</span></td><td>武道指导</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>法赛结果</td><td>白天</td><td>法赛擂台</td><td>前十名公布</td></tr>
+        <tr><td>无极云手修炼</td><td>夜晚</td><td>烂尾楼</td><td>突破关键等级CG</td></tr>
+        <tr><td>暗流涌动</td><td>数日</td><td>嵩阳高中</td><td>各方势力暗中博弈</td></tr>
+        <tr><td>张羽抉择</td><td>夜晚</td><td>出租屋/天台</td><td>独自思考，做出选择</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>法赛前十</strong>：穷高中生法赛逆袭——阶段性成果</li>
+      <li><strong>天武炼心深化</strong>：核心功法修炼CG</li>
+      <li><strong>暗流涌动</strong>：多方势力盯上张羽——压迫感升级</li>
+      <li><strong>关键抉择</strong>：张羽决定走自己的路——角色成长时刻</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase2" id="ep9">
+  <div class="episode-header">
+    <span class="episode-number">第9集</span>
+    <span class="episode-title">神辅考核</span>
+    <span class="episode-chapters">第56-62章</span>
+    <span class="episode-phase-tag phase2-bg">法赛竞赛</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽参加神辅考核——一项特殊的选拔测试。通过考核后，张羽获得前往嵩阳（本部/上级机构）的资格。学长登场，展示更高层次的修仙世界。威压——张羽首次感受到来自高阶修士的压迫。最强高一——张羽在高一学生中的地位确立。箓书——张羽开始研究箓书系统，发现拜神扣款机制。拜神——张羽通过箓书与神灵体系产生联系，道术体系理解深化。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>神辅考核+箓书研究</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>协助</td></tr>
+        <tr><td>学长</td><td><span class="tag tag-support">配角</span></td><td>展示更高层次修仙世界</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>箓书指导</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>神辅考核</td><td>白天</td><td>嵩阳高中考场</td><td>特殊测试环境</td></tr>
+        <tr><td>前往嵩阳本部</td><td>白天</td><td>嵩阳本部</td><td>更高层次的修仙世界</td></tr>
+        <tr><td>威压体验</td><td>同场</td><td>同地点</td><td>高阶修士压迫感</td></tr>
+        <tr><td>箓书研究</td><td>夜晚</td><td>出租屋</td><td>箓书系统，拜神扣款</td></tr>
+        <tr><td>拜神</td><td>深夜</td><td>意识空间</td><td>与神灵体系联系</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>神辅考核</strong>：特殊选拔测试——张羽获得新资格</li>
+      <li><strong>威压名场面</strong>：首次感受高阶修士压迫——世界观层次扩展</li>
+      <li><strong>箓书系统</strong>：拜神扣款机制——修仙世界的"付费祈愿"设定</li>
+      <li><strong>道术深化</strong>：张羽对道术体系理解迈上新台阶</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase2" id="ep10">
+  <div class="episode-header">
+    <span class="episode-number">第10集</span>
+    <span class="episode-title">武道补习</span>
+    <span class="episode-chapters">第63-70章</span>
+    <span class="episode-phase-tag phase2-bg">法赛竞赛</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>第63章"轰杀，朋友"——张羽在战斗中展现实力，同时友谊线推进。变化——局势持续变化，张羽需要适应。武道补习开始——为接下来的三校武道竞赛做准备。耗尽积蓄——张羽为修炼投入全部资源。第67章竞赛开始：嵩阳高中三校武道竞赛正式启动。差距评分——张羽看到自己与顶尖选手的差距。分组——竞赛分组结果公布。第70章隐藏灵根——白真真隐藏灵根首次亮相，以消失术击败虎云涛。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>武道补习+竞赛开始</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>隐藏灵根首秀</td></tr>
+        <tr><td>宋海龙</td><td><span class="tag tag-support">配角</span></td><td>白龙高中选手，首登场</td></tr>
+        <tr><td>乐沐岚</td><td><span class="tag tag-support">配角</span></td><td>紫云高中选手，首登场</td></tr>
+        <tr><td>虎云涛</td><td><span class="tag tag-support">配角</span></td><td>红塔高中选手</td></tr>
+        <tr><td>雷钧</td><td><span class="tag tag-support">配角</span></td><td>武道指导</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>轰杀战斗</td><td>白天</td><td>嵩阳高中</td><td>战斗名场面</td></tr>
+        <tr><td>武道补习</td><td>数日</td><td>烂尾楼/武道场</td><td>苦练蒙太奇</td></tr>
+        <tr><td>竞赛开幕</td><td>上午</td><td>白龙高中赛场</td><td>三校齐聚，热闹</td></tr>
+        <tr><td>分组公布</td><td>同场</td><td>白龙高中</td><td>竞争格局</td></tr>
+        <tr><td>隐藏灵根首秀</td><td>赛中</td><td>白龙高中擂台</td><td>消失术击败虎云涛</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>战斗名场面</strong>：轰杀——张羽实力展示</li>
+      <li><strong>穷的代价</strong>：耗尽积蓄——为修炼倾尽所有的决心</li>
+      <li><strong>三校竞赛</strong>：嵩阳/白龙/紫云三校齐聚——世界观扩展</li>
+      <li><strong>隐藏灵根首秀</strong>：白真真消失术击败虎云涛——女主实力展示</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase2" id="ep11">
+  <div class="episode-header">
+    <span class="episode-number">第11集</span>
+    <span class="episode-title">八强战</span>
+    <span class="episode-chapters">第72-78章</span>
+    <span class="episode-phase-tag phase2-bg">法赛竞赛</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>竞赛进入淘汰赛阶段。压制——张羽以技巧弥补肉体差距。八强战：张羽vs炼天极，炼天极打药+念广告，爆裂波动拳vs无极云手+不灭印法。浴血奋战——张羽天武炼心诀全集中状态实战，技巧碾压肉体。狂风暴雨——白真真vs熊文武，剑斩"痔疮破绽"但右臂被扯断惨胜。穷四强战：乐沐岚vs白真真——白真真因"性价比"认输，将乐沐岚破绽告诉张羽。张羽vs宋海龙——1000万医保vs7万，张羽战斗中现学背龙翻岳手。二强决出——张羽晋级决赛。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>八强战+四强战</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>断臂惨胜+认输转让</td></tr>
+        <tr><td>炼天极</td><td><span class="tag tag-support">配角</span></td><td>打药+念广告黑色幽默</td></tr>
+        <tr><td>熊文武</td><td><span class="tag tag-support">配角</span></td><td>白真真对手</td></tr>
+        <tr><td>宋海龙</td><td><span class="tag tag-support">配角</span></td><td>1000万医保</td></tr>
+        <tr><td>乐沐岚</td><td><span class="tag tag-support">配角</span></td><td>40万收买未果</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>4万紧急转账买使用权</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>八强战</td><td>上午</td><td>白龙高中擂台</td><td>炼天极打药+广告</td></tr>
+        <tr><td>白真真vs熊文武</td><td>下午</td><td>白龙高中擂台</td><td>断臂惨胜</td></tr>
+        <tr><td>四强战</td><td>傍晚</td><td>白龙高中擂台</td><td>性价比认输+现学武功</td></tr>
+        <tr><td>二强决出</td><td>傍晚</td><td>白龙高中擂台</td><td>张羽晋级决赛</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>八强战</strong>：炼天极"打药+念广告"黑色幽默——"书山有路钱为径"</li>
+      <li><strong>白真真断臂</strong>：剑斩"痔疮破绽"但右臂被扯断惨胜——女主浴血</li>
+      <li><strong>性价比认输</strong>：白真真"穷人要有性价比"——认输转让破绽给张羽</li>
+      <li><strong>现学盗版武功</strong>：张羽战斗中破解背龙翻岳手——白学能力高潮</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase2" id="ep12">
+  <div class="episode-header">
+    <span class="episode-number">第12集</span>
+    <span class="episode-title">冠军</span>
+    <span class="episode-chapters">第79-86章</span>
+    <span class="episode-phase-tag phase2-bg">法赛竞赛</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>决赛：乐沐岚40万收买张羽未果，800万内丹+法络灵根狂轰。白真真远程指导洁癖破绽，张羽洒血近身。第80章：张羽脱负重服+洒血近身+2级背龙翻岳手扭断乐沐岚四肢夺冠！白真真跳擂台"我们是冠军！"。竞赛收官：宋海龙雇张羽陪练。功法三选一，张羽独立反选赤髓浑元气。竞赛名额争夺继续。张羽开始兼职——白天上课晚上工作。第86章移植——特殊培养计划真相揭露：高二穷鬼筋肉移植到高一富人身上。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>夺冠+陪练+兼职</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>远程指导+"我们是冠军"</td></tr>
+        <tr><td>乐沐岚</td><td><span class="tag tag-support">配角</span></td><td>决赛对手，被扭断四肢</td></tr>
+        <tr><td>宋海龙</td><td><span class="tag tag-support">配角</span></td><td>雇张羽陪练</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>紧急转账</td></tr>
+        <tr><td>双幽朋</td><td><span class="tag tag-support">配角</span></td><td>移植供体</td></tr>
+        <tr><td>蓝岭</td><td><span class="tag tag-support">配角</span></td><td>"花钱就是买分"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>决赛</td><td>傍晚</td><td>白龙高中擂台</td><td>全场观众，夺冠高潮</td></tr>
+        <tr><td>庆功宴</td><td>晚上</td><td>饭店</td><td>功法选择，帝王蟹vs预制菜</td></tr>
+        <tr><td>陪练</td><td>数日</td><td>白龙高中练功房</td><td>宋海龙陪练</td></tr>
+        <tr><td>兼职蒙太奇</td><td>全天</td><td>食堂+安保点</td><td>白天上课晚上打工</td></tr>
+        <tr><td>移植真相</td><td>白天</td><td>嵩阳高中食堂</td><td>"高一买高二穷鬼的肉"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>夺冠高潮</strong>：扭断乐沐雁四肢+白真真"我们是冠军！"——季中高潮</li>
+      <li><strong>白学能力</strong>：现学背龙翻岳手+赤髓浑元气反选——独立判断力</li>
+      <li><strong>移植真相</strong>：高二穷鬼筋肉移植到高一富人——社会批判P0</li>
+      <li><strong>穷学生日常</strong>：陪练+兼职——打工修仙两不误</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Phase 3 -->
+<div id="phase3" class="phase-divider">
+  <div class="line"></div>
+  <span class="phase-title phase3-bg">第三段 · 暗学帮与市竞赛篇</span>
+  <div class="line"></div>
+</div>
+
+<div class="episode phase3" id="ep13">
+  <div class="episode-header">
+    <span class="episode-number">第13集</span>
+    <span class="episode-title">邪神谈判</span>
+    <span class="episode-chapters">第87-94章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽白真真天台互练，相互发现对方"开挂"——"不洗澡了""不拉屎了"较劲。仙韵集团群体广告+玉星寒首登场。第89章邪神谈判：邪神布娃娃归来谈判，张羽以无相云罡同归于尽姿态逼退。邪神撤愿+变念珠挂张羽脖子，提议黑暗补课界。昆墟黑暗面揭露：帮派=大公司夜壶，深海教育集团=正规补习+暗学帮双面。张羽速学武功——羽书专精速学，1小时挖掘掌从零到行云流水。暗学帮试课：5天4门10级功法，化名"马云腾"登场。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>邪神谈判+暗学帮</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>天台互练发现开挂</td></tr>
+        <tr><td>邪神布娃娃</td><td><span class="tag tag-ally">同盟</span></td><td>谈判+变念珠</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-support">配角</span></td><td>仙韵集团代言人，首登场</td></tr>
+        <tr><td>蔡头</td><td><span class="tag tag-support">配角</span></td><td>暗学帮老师</td></tr>
+        <tr><td>黑鸦</td><td><span class="tag tag-support">配角</span></td><td>暗学帮验货人</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>天台互练</td><td>傍晚</td><td>嵩阳高中天台</td><td>相互发现开挂</td></tr>
+        <tr><td>邪神谈判</td><td>夜晚</td><td>出租屋</td><td>邪神变念珠</td></tr>
+        <tr><td>昆墟黑暗面</td><td>夜晚</td><td>远郊园区</td><td>帮派正规化产业链</td></tr>
+        <tr><td>速学武功</td><td>深夜</td><td>烂尾楼</td><td>羽书1小时速成</td></tr>
+        <tr><td>暗学帮试课</td><td>数日</td><td>暗学帮地下基地</td><td>化名马云腾</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>天台互练</strong>：相互发现对方开挂——"不洗澡了""不拉屎了"较劲P0</li>
+      <li><strong>邪神谈判</strong>：同归于尽逼退邪神——主角胆量名场面</li>
+      <li><strong>羽书速学</strong>：1小时挖掘掌从零到行云流水——gameplay机制高潮</li>
+      <li><strong>暗学帮</strong>：化名"马云腾"——双重身份喜剧</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase3" id="ep14">
+  <div class="episode-header">
+    <span class="episode-number">第14集</span>
+    <span class="episode-title">真灵根</span>
+    <span class="episode-chapters">第95-102章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>月考何大有662第一。双幽朋跳楼被张羽接住。邪神发现白真真有真灵根！乐沐岚朋友圈脱敏+委托炼天极买衣。张羽天台邀白真真入伙暗学帮。白真真纹身+假发+垫子伪装成精神小妹。第98章末段："我灵根没了""什么东西钻进来了"——悬念炸裂。第99章：白真真真灵根主动借走给张羽，钻入丹田生根发芽+蔓延全身神经滋养——全书最戏剧性转折之一。第100章：真灵根适配赤髓浑元气产生神经滋养。租房蒙太奇全失败。白真真"我决定不租房了"桥洞宣言——"住桥洞钻树林占烂尾楼，把钱投入修行"。第101-102章：张羽白真真在桥洞真灵根轮换训练，争夺竞赛名额，肉体强度碾压。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>真灵根借走+桥洞修炼</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>真灵根主动借走+桥洞宣言</td></tr>
+        <tr><td>邪神</td><td><span class="tag tag-ally">同盟</span></td><td>发现真灵根</td></tr>
+        <tr><td>双幽朋</td><td><span class="tag tag-support">配角</span></td><td>跳楼被接住</td></tr>
+        <tr><td>乐沐岚</td><td><span class="tag tag-support">配角</span></td><td>朋友圈脱敏</td></tr>
+        <tr><td>何大有</td><td><span class="tag tag-support">配角</span></td><td>月考第一</td></tr>
+        <tr><td>炼天极</td><td><span class="tag tag-support">配角</span></td><td>买衣伏笔</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>月考/跳楼</td><td>白天</td><td>嵩阳高中</td><td>双幽朋跳楼</td></tr>
+        <tr><td>暗学帮入伙</td><td>傍晚</td><td>嵩阳高中天台</td><td>白真真纹身伪装</td></tr>
+        <tr><td>真灵根借走</td><td>夜晚</td><td>远郊路上</td><td>灵根钻入丹田CG</td></tr>
+        <tr><td>桥洞安家</td><td>夜晚</td><td>桥洞</td><td>"住桥洞钻树林"宣言</td></tr>
+        <tr><td>竞赛名额</td><td>白天</td><td>嵩阳体育馆</td><td>肉体强度碾压</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>真灵根借走</strong>：白真真灵根主动钻入张羽丹田——全书最戏剧性转折之一</li>
+      <li><strong>桥洞宣言</strong>："住桥洞钻树林占烂尾楼，把钱投入修行"——P0金句</li>
+      <li><strong>跳楼事件</strong>：双幽朋跳楼被张羽接住——社会批判</li>
+      <li><strong>白真真伪装</strong>：纹身+假发+垫子变精神小妹——喜剧桥段</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase3" id="ep15">
+  <div class="episode-header">
+    <span class="episode-number">第15集</span>
+    <span class="episode-title">竞赛前夕</span>
+    <span class="episode-chapters">第103-110章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽花4万买隐匿符基础版。竞赛到来——嵩阳包大巴前往紫云高中。张翩翩"公司战场延伸"论。白龙"仿妖筋肉"怪物方阵登场。紫云体育馆数万人入场。肉体强度排名链公布：楚秋河4.49→炼天极4.56→张羽4.95，引发"嵩阳高中是什么东西"震惊。紫云"厕所餐桌"学渣政策——倒数50名厕所吃饭。乐沐岚问"我能摸一下你吗？我可以给钱"。第109章完整排名：张羽4.95→虎云涛4.98→宋海龙5.03→熊文武5.05→玉星寒5.07登顶。灵敏专项赛——高速钢珠闪避。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>4.95级肉体强度震惊全场</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>参赛</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-support">配角</span></td><td>5.07级登顶</td></tr>
+        <tr><td>乐沐岚</td><td><span class="tag tag-support">配角</span></td><td>2000元摸张羽手</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>公司战场延伸论</td></tr>
+        <tr><td>王海</td><td><span class="tag tag-support">配角</span></td><td>竞赛带队</td></tr>
+        <tr><td>楚秋河</td><td><span class="tag tag-support">配角</span></td><td>白龙高中</td></tr>
+        <tr><td>虎云涛</td><td><span class="tag tag-support">配角</span></td><td>红塔高中</td></tr>
+        <tr><td>熊文武</td><td><span class="tag tag-support">配角</span></td><td>红塔高中</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>大巴出发</td><td>午夜</td><td>大巴车</td><td>紫云消毒通道区别对待</td></tr>
+        <tr><td>紫云体育馆</td><td>上午</td><td>紫云高中</td><td>数万人入场</td></tr>
+        <tr><td>肉体强度排名</td><td>上午</td><td>紫云体育馆大屏幕</td><td>排名链公布</td></tr>
+        <tr><td>厕所餐桌</td><td>午餐</td><td>紫云食堂</td><td>倒数50名厕所吃饭</td></tr>
+        <tr><td>灵敏专项赛</td><td>下午</td><td>紫云变形体育场</td><td>高速钢珠闪避</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>排名链公布</strong>：张羽4.95级震惊全场——"嵩阳高中是什么东西"</li>
+      <li><strong>厕所餐桌</strong>：倒数50名厕所吃饭——阶层压迫视觉化</li>
+      <li><strong>摸手付费</strong>：乐沐岚2000元摸张羽手——荒诞喜剧</li>
+      <li><strong>数万人入场</strong>：紫云体育馆竞赛规模——世界观扩展</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase3" id="ep16">
+  <div class="episode-header">
+    <span class="episode-number">第16集</span>
+    <span class="episode-title">速度与力量</span>
+    <span class="episode-chapters">第111-118章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>5000米决赛：张羽与玉星寒天武炼心诀对视，玉星寒口型"跟上"邀战。张羽借宋海龙挡风阻后发力，与5.07级玉星寒并驾齐驱。张羽心脏极限突破但惜败玉星寒居第二。白真真扎12针血拼保第三——"我要和羽子一起上十大！"。力量关：天空柱从天而降。张羽第二轮刻意隐藏实力。第三轮：熊文武10800公斤"擎天"筋肉爆裂。张羽上报12531公斤全场震惊——10级功法融会贯通，穷鬼4.96级凡人肉体撑起全场最重天空柱！玉星寒承认落败。王海鉴定"执教生涯天份最高学生"。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>5000米第二+天空柱12531公斤冠军</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>5000米第一，力量关认输</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>12针血拼第三</td></tr>
+        <tr><td>熊文武</td><td><span class="tag tag-support">配角</span></td><td>10800公斤擎天</td></tr>
+        <tr><td>宋海龙</td><td><span class="tag tag-support">配角</span></td><td>挡风阻</td></tr>
+        <tr><td>王海</td><td><span class="tag tag-support">配角</span></td><td>"天份最高学生"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>5000米决赛</td><td>上午</td><td>紫云环形跑道</td><td>虎云涛四肢着地领跑</td></tr>
+        <tr><td>赛后休整</td><td>中午</td><td>紫云休息区</td><td>疯狂进食冲刺</td></tr>
+        <tr><td>天空柱力量关</td><td>下午</td><td>紫云体育馆</td><td>天空柱从天而降</td></tr>
+        <tr><td>12531公斤</td><td>下午</td><td>紫云体育馆</td><td>全场震惊，夺冠</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>5000米对决</strong>：张羽vs玉星寒并驾齐驱——rivalry确立</li>
+      <li><strong>天空柱夺冠</strong>：12531公斤擎天——穷鬼凡人肉体撑起最重天空柱P0</li>
+      <li><strong>白真真血拼</strong>：12针保第三——"我要和羽子一起上十大！"</li>
+      <li><strong>装逼金句</strong>："把我能做到的事情，做出来就好了"</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase3" id="ep17">
+  <div class="episode-header">
+    <span class="episode-number">第17集</span>
+    <span class="episode-title">代言人</span>
+    <span class="episode-chapters">第119-126章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽341分总分第一夺冠！但乐景辰联手刚山吹捧"绝世天才"实为商业捧杀，张翩翩来电揭露算计。仙韵集团代言人合同：张羽60万/年+白真真40万/年。邪神金句："这从头到尾，就是十大宗门和公司在一起耍他们"。第121-122章：玉星寒主动让价陪练。张翩翩揭天骄班真相——白真真够不到标准。张羽绝望"你会被玩死的，阿真"——情感核爆。第123章：张翩翩揭露"被隐藏的路"——昆墟1层一年仅4个筑基证名额。邪神首次揭露真名"福姬"。第125-126章：张羽确定"残牛舍身心诀+大日气海"双修方案。福姬抛炸弹——白龙高中藏邪神、张翩翩走"神道"。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>夺冠+代言人+筑基路</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>代言人+"你会被玩死的"</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>揭露算计+筑基路+天骄班真相</td></tr>
+        <tr><td>福姬</td><td><span class="tag tag-ally">同盟</span></td><td>真名揭露+双修方案</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>让价陪练</td></tr>
+        <tr><td>乐景辰</td><td><span class="tag tag-support">配角</span></td><td>商业捧杀</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>夺冠+捧杀</td><td>下午</td><td>紫云体育馆</td><td>商业捧杀揭露</td></tr>
+        <tr><td>代言人签约</td><td>傍晚</td><td>紫云休息区</td><td>60万+40万合同</td></tr>
+        <tr><td>天骄班真相</td><td>夜晚</td><td>桥洞</td><td>"你会被玩死的，阿真"</td></tr>
+        <tr><td>筑基路揭示</td><td>深夜</td><td>张翩翩居所</td><td>4个名额+福姬真名</td></tr>
+        <tr><td>双修方案</td><td>深夜</td><td>同地点</td><td>残牛舍身+大日气海</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>总分第一</strong>：341分夺冠——阶段性巅峰</li>
+      <li><strong>情感核爆</strong>："你会被玩死的，阿真"——张羽绝望P0</li>
+      <li><strong>邪神金句</strong>："十大宗门和公司在一起耍他们"——社会批判</li>
+      <li><strong>福姬真名</strong>：邪神首次揭露真名——关系新阶段</li>
+      <li><strong>筑基路</strong>：被隐藏的路——4个名额，新目标确立</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase3" id="ep18">
+  <div class="episode-header">
+    <span class="episode-number">第18集</span>
+    <span class="episode-title">大日气海</span>
+    <span class="episode-chapters">第127-134章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽12000元/小时陪练乐沐岚近战，双方裤子俱碎。张羽识破乐沐岚体表"汗水"实为紫云药渣。大日气海12万买入，第一层本需一月光照被张羽片刻突破。白真真"羽子你好香"。大日气海推至3级且越练越黑。从四人中选定乐沐岚60平2000元月租房。大日气海4级/法力44.3。踏入白龙高中目睹"兽人王国"仿妖筋肉满大街。玉星寒提出纯肉体实战训练，推动8级龙象崩山掌。大日气海推至10级/法力46.8。白真真破体剑气10级配无形剑术。残牛舍身心诀3万买入。住进乐沐岚公寓，8折药品渠道打通。仙韵集团拍广告，妙云化妆师亮相。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>大日气海10级+龙象崩山掌</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>破体剑气10级</td></tr>
+        <tr><td>乐沐岚</td><td><span class="tag tag-support">配角</span></td><td>陪练+租房给张羽</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>实战训练+龙象崩山掌</td></tr>
+        <tr><td>福姬</td><td><span class="tag tag-ally">同盟</span></td><td>残牛舍身心诀推荐</td></tr>
+        <tr><td>妙云</td><td><span class="tag tag-support">配角</span></td><td>仙韵化妆师，首登场</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>陪练乐沐岚</td><td>白天</td><td>紫云练功房</td><td>裤子碎裂+药渣汗水</td></tr>
+        <tr><td>大日气海修炼</td><td>夜晚</td><td>桥洞/公寓</td><td>片刻破境CG</td></tr>
+        <tr><td>白龙高中</td><td>白天</td><td>白龙高中</td><td>"兽人王国"仿妖筋肉</td></tr>
+        <tr><td>住进公寓</td><td>傍晚</td><td>紫云外60平公寓</td><td>2000元月租</td></tr>
+        <tr><td>拍广告</td><td>白天</td><td>仙韵大楼</td><td>妙云化妆</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>裤子碎裂</strong>：陪练乐沐岚双方裤子俱碎——喜剧名场面</li>
+      <li><strong>大日气海10级</strong>：片刻破境→10级——修炼速度可视化</li>
+      <li><strong>兽人王国</strong>：白龙高中仿妖筋肉满大街——世界观震撼</li>
+      <li><strong>龙象崩山掌</strong>：玉星寒推动8级——新功法获取</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase3" id="ep19">
+  <div class="episode-header">
+    <span class="episode-number">第19集</span>
+    <span class="episode-title">繁育基地与告别</span>
+    <span class="episode-chapters">第135-142章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>残牛舍身心诀10级突破。张羽蹭乐沐岚药水炼体，三层叠加炼体。红塔灵机保护区——门票5元但空气1999元/立方米计费。"这是我以前呼吸的是什么？"——连呼吸都要花钱的阶级震撼。繁育基地参观：孵化室熊母、电击项圈成品室。安安小熊猫形态登场。灵脉蹭气一小时8000谈下。高考结束，张翩翩电话告别——"我快要走了……我的目光只会看着上面不会回头"。第140章：张翩翩留三张符（冻结/雷鸣/神行）+五条叮嘱，头像变灰飞升。张羽白真真赶往仙都城报名。仙都上城祥云vs下城常年黑夜的视觉冲击。第141-142章：厕所隔间穿越传送至考场，签天约同契合同交3万报名费。云景0.64秒、夜凌霄0.65秒破金属大门。张羽深感与仙都爷差距。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>残牛10级+告别张翩翩+报名</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>同往仙都城</td></tr>
+        <tr><td>张翩翩</td><td><span class="tag tag-support">配角</span></td><td>告别飞升，留符叮嘱</td></tr>
+        <tr><td>安安</td><td><span class="tag tag-support">配角</span></td><td>小熊猫形态，首登场</td></tr>
+        <tr><td>熊文武</td><td><span class="tag tag-support">配角</span></td><td>繁育基地</td></tr>
+        <tr><td>云景</td><td><span class="tag tag-rival">对手</span></td><td>0.64秒破门，首登场</td></tr>
+        <tr><td>夜凌霄</td><td><span class="tag tag-rival">对手</span></td><td>0.65秒破门，首登场</td></tr>
+        <tr><td>邓丙丁</td><td><span class="tag tag-support">配角</span></td><td>筑基考官，首登场</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>保护区</td><td>白天</td><td>红塔灵机保护区</td><td>空气1999元/立方米</td></tr>
+        <tr><td>繁育基地</td><td>白天</td><td>红塔繁育基地</td><td>孵化室+电击项圈</td></tr>
+        <tr><td>张翩翩告别</td><td>傍晚</td><td>嵩阳火车站</td><td>头像变灰飞升</td></tr>
+        <tr><td>仙都城</td><td>夜晚</td><td>仙都城</td><td>上城祥云vs下城黑夜</td></tr>
+        <tr><td>考场报名</td><td>上午</td><td>仙都考场</td><td>厕所传送+天约同契</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>呼吸收费</strong>：空气1999元/立方米——阶级震撼P0</li>
+      <li><strong>张翩翩告别</strong>："我的目光只会看着上面不会回头"——情感高潮P0</li>
+      <li><strong>仙都城</strong>：上城祥云vs下城黑夜——世界观视觉冲击</li>
+      <li><strong>仙都爷差距</strong>：云景0.64秒/夜凌霄0.65秒破门——实力差距可视化</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase3" id="ep20">
+  <div class="episode-header">
+    <span class="episode-number">第20集</span>
+    <span class="episode-title">筑基测试</span>
+    <span class="episode-chapters">第143-150章</span>
+    <span class="episode-phase-tag phase3-bg">暗学帮</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>道心测试幻境启动——张羽凭"怕破产"拒诱。邓丙丁"人分灰尘蝼蚁牛马人"体系。道心测试价格牌摊开：玉星寒13亿投降、白真真12亿换张羽机会、云景50亿为家族投降。唯独张羽让邓丙丁看不懂——上百亿仍不投降！邓丙丁查张翩翩档案被动过手脚。"张羽，估值未知？？？，道心测试未能测试出极限"。道心测试嘉奖：张羽30万/白真真15万无息贷款。福姬苏醒催猎杀邪神。张羽多平台借贷100万、白真真90万——"炼体就是要打药！修仙就是要借贷！"。安安被发展成"内鬼"。张羽突飞猛进：法力69.4/肉体6.81/道心5级，龙象崩山掌10级激活"龙筋象骨"。白真真完虐蓝岭——胸口刻"大专生"三字。周澈尘下最后通牒，张羽"分高就是一切"嵩阳精神反击。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>道心unknown极限+突飞猛进</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>12亿换张羽机会+完虐蓝岭</td></tr>
+        <tr><td>邓丙丁</td><td><span class="tag tag-support">配角</span></td><td>道心考官，"估值未知？？？"</td></tr>
+        <tr><td>福姬</td><td><span class="tag tag-ally">同盟</span></td><td>苏醒催猎杀</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>13亿投降</td></tr>
+        <tr><td>云景</td><td><span class="tag tag-rival">对手</span></td><td>50亿投降</td></tr>
+        <tr><td>蓝岭</td><td><span class="tag tag-support">配角</span></td><td>被白真真完虐</td></tr>
+        <tr><td>周澈尘</td><td><span class="tag tag-support">配角</span></td><td>最后通牒</td></tr>
+        <tr><td>安安</td><td><span class="tag tag-support">配角</span></td><td>被发展成内鬼</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>道心幻境</td><td>意识内</td><td>仙都幻境</td><td>价格牌摊开</td></tr>
+        <tr><td>嘉奖公布</td><td>考后</td><td>仙都考场/列车</td><td>30万+15万贷款</td></tr>
+        <tr><td>疯狂借贷</td><td>数日</td><td>公寓/多平台</td><td>100万+90万</td></tr>
+        <tr><td>突飞猛进</td><td>数周</td><td>嵩阳练功场</td><td>法力69.4/肉体6.81</td></tr>
+        <tr><td>辱蓝岭</td><td>白天</td><td>嵩阳练功场</td><td>胸口刻"大专生"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>道心测试</strong>：上百亿仍不投降——"估值未知？？？"P0</li>
+      <li><strong>疯狂借贷</strong>："炼体就是要打药！修仙就是要借贷！"——借贷决心宣言</li>
+      <li><strong>突飞猛进</strong>：法力69.4/肉体6.81/道心5级——数据面板暴涨</li>
+      <li><strong>辱蓝岭</strong>：白真真胸口刻"大专生"——阶级反击名场面</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Phase 4 -->
+<div id="phase4" class="phase-divider">
+  <div class="line"></div>
+  <span class="phase-title phase4-bg">第四段 · 筑基考试·季终篇</span>
+  <div class="line"></div>
+</div>
+
+<div class="episode phase4" id="ep21">
+  <div class="episode-header">
+    <span class="episode-number">第21集</span>
+    <span class="episode-title">真灵根进化</span>
+    <span class="episode-chapters">第151-158章</span>
+    <span class="episode-phase-tag phase4-bg">筑基考试</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽"分高就是一切"反击周澈尘，十招之约被压成三招之约。战周澈尘——张羽嵩阳精神反杀嵩阳既得利益者。张羽的人脉展现——多方势力关系网浮现。"阿真你肚子怎么大了？"——真灵根进化适应大日气海产生身体变化。真灵根第一次进化——灵根成长可视化。灵界修行，穷盟现身——新势力登场。阿真开厂，张羽打工——白真真创业线启动。真残牛真舍身真心法——残牛舍身心诀进阶。第158章：张羽发动仪式——邪神仪式再次启动，为第一轮筑基考试做准备。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>战周澈尘+发动仪式</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>真灵根进化+开厂</td></tr>
+        <tr><td>周澈尘</td><td><span class="tag tag-support">配角</span></td><td>被反击</td></tr>
+        <tr><td>福姬</td><td><span class="tag tag-ally">同盟</span></td><td>仪式协助</td></tr>
+        <tr><td>穷盟</td><td><span class="tag tag-support">配角</span></td><td>新势力，首登场</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>战周澈尘</td><td>白天</td><td>嵩阳练功场</td><td>三招之约</td></tr>
+        <tr><td>真灵根进化</td><td>夜晚</td><td>公寓</td><td>灵根成长CG</td></tr>
+        <tr><td>灵界修行</td><td>意识内</td><td>灵界</td><td>穷盟现身</td></tr>
+        <tr><td>阿真开厂</td><td>白天</td><td>嵩阳市</td><td>白真真创业</td></tr>
+        <tr><td>发动仪式</td><td>深夜</td><td>烂尾楼</td><td>邪神仪式CG</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>辱蓝岭续</strong>：战周澈尘——"分高就是一切"嵩阳精神反杀</li>
+      <li><strong>真灵根进化</strong>：灵根成长可视化——核心外挂升级</li>
+      <li><strong>阿真开厂</strong>：白真真创业线——角色多元化</li>
+      <li><strong>发动仪式</strong>：邪神仪式再次启动——为筑基考试蓄力</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase4" id="ep22">
+  <div class="episode-header">
+    <span class="episode-number">第22集</span>
+    <span class="episode-title">第一轮筑基考试</span>
+    <span class="episode-chapters">第159-166章</span>
+    <span class="episode-phase-tag phase4-bg">筑基考试</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>参加第一轮筑基考试——截影仪式与仙都列车出发。神秘张羽——考场上张羽的表现引发关注。小丑位召唤——张羽被分配"小丑位"，暗含特殊机制。最强高中生——张羽展现实力，"深不可测的张羽"名号传开。暴食——张羽的消化力展现，对药物的吸收能力超群。第165章张羽的消化力——药物代谢速度震惊全场。第166章与玉星寒的再决胜负——张羽vs玉星寒正面对决。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>小丑位+深不可测+暴食消化</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>参赛</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>再决胜负</td></tr>
+        <tr><td>邓丙丁</td><td><span class="tag tag-support">配角</span></td><td>监考</td></tr>
+        <tr><td>夜凌霄</td><td><span class="tag tag-rival">对手</span></td><td>同场考试</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>仙都列车</td><td>白天</td><td>仙都列车</td><td>前往考场</td></tr>
+        <tr><td>筑基考场</td><td>上午</td><td>仙都考场</td><td>小丑位分配</td></tr>
+        <tr><td>暴食消化</td><td>考试中</td><td>考场</td><td>药物代谢CG</td></tr>
+        <tr><td>再决胜负</td><td>考试中</td><td>考场</td><td>张羽vs玉星寒</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>小丑位</strong>：特殊机制分配——悬念感</li>
+      <li><strong>暴食消化</strong>：药物代谢速度震惊全场——"深不可测"</li>
+      <li><strong>再决胜负</strong>：张羽vs玉星寒正面对决——rivalry升级</li>
+      <li><strong>深不可测</strong>：张羽名号传开——实力认可</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase4" id="ep23">
+  <div class="episode-header">
+    <span class="episode-number">第23集</span>
+    <span class="episode-title">春秋无尽禅</span>
+    <span class="episode-chapters">第167-174章</span>
+    <span class="episode-phase-tag phase4-bg">筑基考试</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>最后一场武道考试——第一轮筑基考试武道赛道。张羽的痛心——考试中遭遇挫折。第169章"我练成了"——张羽修炼成功关键功法。第170章春秋无尽禅——张羽练成春秋无尽禅，可在战斗中抽取对方生命力！第171章通过考试——张羽通过第一轮筑基考试。第172章第二轮分组，夜凌霄的战意——夜凌霄首次主动向张羽打招呼，战意点燃。张羽的生产工具——新功法/法器获取。种子买卖——张羽的商业线推进。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>春秋无尽禅+通过考试</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>参赛</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>同场</td></tr>
+        <tr><td>夜凌霄</td><td><span class="tag tag-rival">对手</span></td><td>首次主动打招呼，战意</td></tr>
+        <tr><td>邓丙丁</td><td><span class="tag tag-support">配角</span></td><td>监考</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>武道考试</td><td>上午</td><td>仙都考场</td><td>最后一场</td></tr>
+        <tr><td>春秋无尽禅</td><td>考试中</td><td>意识空间</td><td>抽取生命力CG</td></tr>
+        <tr><td>通过考试</td><td>考后</td><td>考场大屏幕</td><td>结果公布</td></tr>
+        <tr><td>第二轮分组</td><td>数日后</td><td>仙都考场</td><td>分组公布</td></tr>
+        <tr><td>夜凌霄打招呼</td><td>放学后</td><td>考场外</td><td>首次认可</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>春秋无尽禅</strong>：练成核心功法——抽取生命力机制可视化P0</li>
+      <li><strong>通过考试</strong>：第一轮筑基考试通过——阶段性目标达成</li>
+      <li><strong>夜凌霄战意</strong>：首次主动打招呼——rivalry正式确立</li>
+      <li><strong>第二轮预告</strong>：分组公布——下一阶段对决预告</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase4" id="ep24">
+  <div class="episode-header">
+    <span class="episode-number">第24集</span>
+    <span class="episode-title">邪神狩猎</span>
+    <span class="episode-chapters">第175-182章</span>
+    <span class="episode-phase-tag phase4-bg">筑基考试</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>张羽辛苦挣钱——为第二轮筑基考试筹集资金。激发玉星寒的潜力——张羽与玉星寒的陪练/对战推动双方进步。第177章狩猎开始——福姬恢复1级下位邪神位格，张羽决定主动出击狩猎其他邪神。第178章千万诱惑——狩猎过程中的利益诱惑。第179章张羽的雷霆出击——张羽主动出击，雷霆手段。第180章阻击六大强者——大规模战斗。第181章狩猎邪神成功——张羽成功狩猎邪神，福姬吸收位格。第182章羽书新一章——羽书更新，新能力解锁。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>邪神狩猎策划者</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>协助</td></tr>
+        <tr><td>福姬</td><td><span class="tag tag-ally">同盟</span></td><td>恢复1级位格，吸收</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>被激发潜力</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>辛苦挣钱</td><td>数日</td><td>嵩阳市</td><td>打工+陪练</td></tr>
+        <tr><td>狩猎策划</td><td>夜晚</td><td>烂尾楼</td><td>地图铺开，计划制定</td></tr>
+        <tr><td>雷霆出击</td><td>白天</td><td>嵩阳市</td><td>主动出击</td></tr>
+        <tr><td>阻击六大强者</td><td>白天</td><td>多地点</td><td>大规模战斗</td></tr>
+        <tr><td>狩猎成功</td><td>傍晚</td><td>狩猎地点</td><td>福姬吸收位格</td></tr>
+        <tr><td>羽书更新</td><td>夜晚</td><td>出租屋</td><td>新一章解锁CG</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>邪神狩猎</strong>：张羽主动出击——信息差爽感+现代思维修仙世界</li>
+      <li><strong>雷霆出击</strong>：张羽的战斗名场面</li>
+      <li><strong>福姬吸收</strong>：邪神位格恢复——福姬实力提升</li>
+      <li><strong>羽书新一章</strong>：新能力解锁——核心外挂升级</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase4" id="ep25">
+  <div class="episode-header">
+    <span class="episode-number">第25集</span>
+    <span class="episode-title">高中圣体</span>
+    <span class="episode-chapters">第183-192章</span>
+    <span class="episode-phase-tag phase4-bg">筑基考试</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>第183章邪神晋级，巡查关注——福姬晋级引发嵩阳市巡查队注意。第184章被问询的张羽——张羽被巡查队问询，危机逼近。第185章真真潜力，仪式上身——白真真潜力爆发，邪神仪式上身。第186章学校电霸，10级春秋——春秋无尽禅升至10级，张羽成为"学校电霸"。第187-188章嵩阳豪族，张羽威胁，层层束缚——嵩阳豪族势力介入，张羽面临层层束缚。第189章张羽的时间——时间紧迫。第190章潜伏爪牙，等待良机——张羽隐忍等待。第191章高中圣体——张羽达成"高中圣体"突破！第192章圣体终成，考试假条——圣体最终成型，获得第二轮筑基考试假条。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>巡查问询+高中圣体</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>潜力爆发+仪式上身</td></tr>
+        <tr><td>福姬</td><td><span class="tag tag-ally">同盟</span></td><td>晋级引发巡查</td></tr>
+        <tr><td>嵩阳豪族</td><td><span class="tag tag-group">群演</span></td><td>层层束缚</td></tr>
+        <tr><td>嵩阳市巡查队</td><td><span class="tag tag-group">群演</span></td><td>问询张羽</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>巡查关注</td><td>白天</td><td>嵩阳市</td><td>巡查队介入</td></tr>
+        <tr><td>被问询</td><td>白天</td><td>巡查队办公处</td><td>危机压迫</td></tr>
+        <tr><td>仪式上身</td><td>夜晚</td><td>烂尾楼</td><td>白真真潜力爆发CG</td></tr>
+        <tr><td>层层束缚</td><td>数日</td><td>嵩阳市</td><td>豪族介入</td></tr>
+        <tr><td>高中圣体突破</td><td>深夜</td><td>烂尾楼</td><td>圣体成型CG P0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>巡查危机</strong>：巡查队问询——福姬身份是否暴露的紧张感</li>
+      <li><strong>白真真仪式上身</strong>：潜力爆发——邪神力觉醒前兆</li>
+      <li><strong>春秋10级</strong>：学校电霸——功法满级</li>
+      <li><strong>高中圣体</strong>：圣体突破CG——核心成长P0</li>
+    </ul>
+  </div>
+</div>
+
+<div class="episode phase4" id="ep26">
+  <div class="episode-header">
+    <span class="episode-number">第26集</span>
+    <span class="episode-title">玄冥重水·季终</span>
+    <span class="episode-chapters">第193-202章</span>
+    <span class="episode-phase-tag phase4-bg">筑基考试</span>
+  </div>
+
+  <div class="episode-block">
+    <h4>📖 剧情概述</h4>
+    <p>第二轮筑基考试开始。好学生就该打药——考试中药物使用白热化。三大神药——顶级药物登场。一口吃两片——张羽疯狂吃药策略。第197章高中圣体？炼气圣体！——张羽从"高中圣体"突破至"炼气圣体"，对药物的负荷/吸收/代谢能力提升至炼气期极限。考试暂停——突发状况导致考试暂停。第199章用药第一，玄冥重水——张羽在药物使用上排名第一，进入玄冥重水考试环境。第200章同归于尽——白真真与对手同归于尽，医保归零，爆炸。第201章张羽最好的修炼条件——张羽获得最佳修炼条件。第202章最完美的高中生肉体——夜凌霄被绿洲集团评为"最完美的高中生肉体"。张羽在-1422米因道心不足放弃，但立誓"超越"。夜凌霄立誓"永居第一"。画面定格，第1季完。</p>
+  </div>
+
+  <div class="episode-block">
+    <h4>👥 出场角色</h4>
+    <table class="mini-table">
+      <thead><tr><th>角色</th><th>性质</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>张羽</td><td><span class="tag tag-protagonist">主角</span></td><td>炼气圣体+玄冥重水+立誓超越</td></tr>
+        <tr><td>白真真</td><td><span class="tag tag-heroine">女主</span></td><td>同归于尽，医保归零</td></tr>
+        <tr><td>夜凌霄</td><td><span class="tag tag-rival">对手</span></td><td>"最完美的高中生肉体"+立誓</td></tr>
+        <tr><td>玉星寒</td><td><span class="tag tag-rival">对手</span></td><td>参赛</td></tr>
+        <tr><td>邓丙丁</td><td><span class="tag tag-support">配角</span></td><td>监考</td></tr>
+        <tr><td>福姬</td><td><span class="tag tag-ally">同盟</span></td><td>季终现身</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>🏙️ 场景设定</h4>
+    <table class="mini-table">
+      <thead><tr><th>场景</th><th>时间</th><th>地点</th><th>环境</th></tr></thead>
+      <tbody>
+        <tr><td>第二轮考试</td><td>上午</td><td>仙都考场</td><td>药物白热化</td></tr>
+        <tr><td>炼气圣体突破</td><td>考试中</td><td>考场</td><td>圣体升级CG P0</td></tr>
+        <tr><td>玄冥重水</td><td>考试中</td><td>玄冥重水环境</td><td>-10000米压力模拟</td></tr>
+        <tr><td>同归于尽</td><td>赛末</td><td>考场擂台</td><td>医保归零，爆炸</td></tr>
+        <tr><td>立誓</td><td>考后</td><td>考场/仙都</td><td>张羽vs夜凌霄对视</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="episode-block">
+    <h4>⭐ 主要看点</h4>
+    <ul class="highlights">
+      <li><strong>疯狂吃药</strong>："好学生就该打药"——药物策略喜剧+紧张</li>
+      <li><strong>炼气圣体</strong>：高中圣体→炼气圣体突破——核心成长完成P0</li>
+      <li><strong>玄冥重水</strong>：-10000米压力环境——动画视觉奇观</li>
+      <li><strong>同归于尽</strong>：白真真医保归零+爆炸——情感暴击</li>
+      <li><strong>季终对立</strong>：张羽立誓"超越" vs 夜凌霄立誓"永居第一"——第2季最大悬念</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Rhythm Summary -->
+<h2 class="section-title">分集节奏总表</h2>
+
+<table class="rhythm-table">
+  <thead>
+    <tr><th>集数</th><th>章节范围</th><th>核心事件</th><th>情感基调</th><th>悬念钩子</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>1-5</td><td>面试+请神+羽书</td><td>绝望→奇幻</td><td>邪神契约</td></tr>
+    <tr><td>2</td><td>6-12</td><td>嵩阳学渣</td><td>压抑→幽默</td><td>债务如何偿还</td></tr>
+    <tr><td>3</td><td>13-18</td><td>法赛+中心大厦+演武图</td><td>阶层震撼</td><td>星火真人观察</td></tr>
+    <tr><td>4</td><td>19-25</td><td>天武炼心+合同</td><td>社会批判</td><td>分数种姓论</td></tr>
+    <tr><td>5</td><td>26-33</td><td>月考+实战+灵界</td><td>紧张→突破</td><td>灵界设定</td></tr>
+    <tr><td>6</td><td>34-40</td><td>学霸现+甲级合同</td><td>逆袭→豪迈</td><td>张翩翩25亿</td></tr>
+    <tr><td>7</td><td>41-48</td><td>法赛风云</td><td>战斗爽快</td><td>能否进前十</td></tr>
+    <tr><td>8</td><td>49-55</td><td>无极云手+抉择</td><td>成长→抉择</td><td>张羽的选择</td></tr>
+    <tr><td>9</td><td>56-62</td><td>神辅考核+箓书</td><td>探索→深化</td><td>道术体系</td></tr>
+    <tr><td>10</td><td>63-70</td><td>武道补习+竞赛开始</td><td>热血→期待</td><td>隐藏灵根</td></tr>
+    <tr><td>11</td><td>72-78</td><td>八强战+四强战</td><td>浴血→智斗</td><td>决赛对手</td></tr>
+    <tr><td>12</td><td>79-86</td><td>冠军+移植真相</td><td>巅峰→震惊</td><td>移植黑幕</td></tr>
+    <tr><td>13</td><td>87-94</td><td>邪神谈判+暗学帮</td><td>黑暗→速学</td><td>暗学帮身份</td></tr>
+    <tr><td>14</td><td>95-102</td><td>真灵根+桥洞宣言</td><td>震撼→决心</td><td>竞赛名额</td></tr>
+    <tr><td>15</td><td>103-110</td><td>竞赛前夕+排名</td><td>震惊→紧张</td><td>能否夺冠</td></tr>
+    <tr><td>16</td><td>111-118</td><td>速度与力量</td><td>热血→巅峰</td><td>12531公斤</td></tr>
+    <tr><td>17</td><td>119-126</td><td>代言人+筑基路</td><td>巅峰→绝望</td><td>筑基资格证</td></tr>
+    <tr><td>18</td><td>127-134</td><td>大日气海10级</td><td>苦修→突破</td><td>白龙兽人</td></tr>
+    <tr><td>19</td><td>135-142</td><td>繁育基地+告别</td><td>震撼→伤感</td><td>仙都爷差距</td></tr>
+    <tr><td>20</td><td>143-150</td><td>筑基测试+辱蓝岭</td><td>压迫→反击</td><td>道心unknown</td></tr>
+    <tr><td>21</td><td>151-158</td><td>真灵根进化+仪式</td><td>成长→蓄力</td><td>发动仪式</td></tr>
+    <tr><td>22</td><td>159-166</td><td>第一轮筑基考试</td><td>紧张→震惊</td><td>深不可测</td></tr>
+    <tr><td>23</td><td>167-174</td><td>春秋无尽禅+通过</td><td>突破→喜悦</td><td>夜凌霄战意</td></tr>
+    <tr><td>24</td><td>175-182</td><td>邪神狩猎</td><td>信息差爽感</td><td>羽书新一章</td></tr>
+    <tr><td>25</td><td>183-192</td><td>高中圣体</td><td>危机→突破</td><td>圣体终成</td></tr>
+    <tr><td>26</td><td>193-202</td><td>玄冥重水·季终</td><td>高潮+悬念</td><td>张羽vs夜凌霄立誓</td></tr>
+  </tbody>
+</table>
+
+<!-- Production Tips -->
+<h2 class="section-title">动画制作建议</h2>
+
+<div class="prod-tips">
+  <h3>🎨 视觉风格</h3>
+  <ul>
+    <li><strong>写实系+赛博朋克元素</strong>：修仙与金融/科技融合的独特视觉</li>
+    <li><strong>数据可视化</strong>：羽书数据面板、肉体强度排名大屏幕——UI设计感强</li>
+    <li><strong>法力特效</strong>：雷电（白真真）、无极云手（张羽）、红包符（夜凌霄）各有识别色</li>
+  </ul>
+
+  <h3 style="margin-top:24px;">🎬 核心CG段落（P0必做）</h3>
+  <ol class="cg-list">
+    <li>天台仪式（第1集）—— 开篇定调</li>
+    <li>羽书显化（第1集）—— 核心外挂视觉化</li>
+    <li>天人演武图（第3集）—— 修仙视觉奇观</li>
+    <li>三校武道竞赛决赛（第11-12集）—— 季中战斗高潮</li>
+    <li>真灵根借走（第14集）—— 全书最戏剧性转折</li>
+    <li>天空柱12531公斤（第16集）—— 力量夺冠名场面</li>
+    <li>春秋无尽禅（第23集）—— 功法视觉化</li>
+    <li>高中圣体→炼气圣体（第25-26集）—— 核心成长完成</li>
+    <li>玄冥重水（第26集）—— 环境压迫感</li>
+    <li>同归于尽（第26集）—— 情感暴击+季终悬念</li>
+  </ol>
+
+  <h3 style="margin-top:24px;">🎵 主题曲建议</h3>
+  <ul>
+    <li><strong>OP</strong>：热血电子摇滚，体现"修仙×金融"的独特定位</li>
+    <li><strong>ED</strong>：抒情钢琴+电子，白真真视角，"等你筑基回来"主题</li>
+  </ul>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <p>《没钱修什么仙？》26集动画番剧 · 完整分集大纲</p>
+  <p>原作：网络小说《没钱修什么仙？》前202章 · 26集 × 15分钟 · 第一季</p>
+  <p>文件创建时间：2026-06-17 · 最后修改：2026-06-18</p>
+  <p>内容来源：30-剧情目录下第1-202章章节摘要</p>
+</div>
+
+</body>
+</html>

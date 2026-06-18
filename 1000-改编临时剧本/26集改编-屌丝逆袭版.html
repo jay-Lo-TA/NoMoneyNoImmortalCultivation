@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>没钱修什么仙 · 26集改编方案（屌丝逆袭版）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #d4d4d4;
+    font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+    padding: 30px 40px;
+  }
+
+  /* 头部 */
+  .header {
+    text-align: center;
+    padding: 40px 0 30px;
+    border-bottom: 1px solid #222;
+    margin-bottom: 40px;
+  }
+  .header h1 {
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+  }
+  .header h1 span { color: #ff6b35; }
+  .header .subtitle {
+    font-size: 13px;
+    color: #666;
+    letter-spacing: 3px;
+  }
+  .header .badge {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 4px 16px;
+    border: 1px solid #ff6b35;
+    color: #ff6b35;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border-radius: 2px;
+  }
+
+  /* 控制栏 */
+  .controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  .controls button {
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    padding: 6px 18px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 2px;
+    transition: all .2s;
+  }
+  .controls button:hover { border-color: #ff6b35; color: #ff6b35; }
+  .controls button.on { border-color: #ff6b35; color: #ff6b35; background: rgba(255,107,53,0.08); }
+
+  /* 整体网格 */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 18px;
+  }
+
+  /* 每集卡片 */
+  .card {
+    background: #111;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+    position: relative;
+  }
+  .card:hover { border-color: #ff6b35; box-shadow: 0 0 18px rgba(255,107,53,0.06); }
+  .card.act-highlight { border-left: 3px solid #ff6b35; }
+
+  .card-header {
+    padding: 14px 16px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .card-header .ep-num {
+    font-size: 12px;
+    color: #555;
+    font-weight: 300;
+    min-width: 48px;
+  }
+  .card-header .ep-title {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 600;
+    flex: 1;
+    margin: 0 10px;
+  }
+  .card-header .ep-tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .card-header .ep-tag + .ep-tag { margin-left: 4px; }
+  .tag-reversal { background: rgba(255,107,53,0.15); color: #ff6b35; border: 1px solid rgba(255,107,53,0.2); }
+  .tag-setup { background: rgba(100,180,255,0.12); color: #64b4ff; border: 1px solid rgba(100,180,255,0.15); }
+  .tag-climax { background: rgba(255,210,50,0.15); color: #ffd232; border: 1px solid rgba(255,210,50,0.2); }
+  .tag-battle { background: rgba(255,80,80,0.12); color: #ff5050; border: 1px solid rgba(255,80,80,0.15); }
+
+  .card-body {
+    padding: 0 16px 16px;
+    display: none;
+  }
+  .card.open .card-body { display: block; }
+
+  .card-body section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #1a1a1a;
+  }
+  .card-body section:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+
+  .card-body .sec-title {
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    font-weight: 300;
+  }
+  .card-body .sec-title .hl { color: #ff6b35; }
+
+  .card-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card-body ul li {
+    font-size: 12px;
+    color: #b0b0b0;
+    line-height: 1.6;
+    padding: 1px 0;
+    position: relative;
+    padding-left: 12px;
+  }
+  .card-body ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #444;
+  }
+  .card-body ul li strong { color: #e0e0e0; font-weight: 500; }
+  .card-body ul li .hl-text { color: #ff6b35; }
+
+  .card-body .vfx-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .card-body .vfx-tags span {
+    font-size: 10px;
+    padding: 2px 8px;
+    background: #181818;
+    color: #777;
+    border-radius: 2px;
+    border: 1px solid #222;
+  }
+
+  .card-body .char-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .card-body .char-list span {
+    font-size: 10px;
+    padding: 2px 8px;
+    background: #141414;
+    color: #999;
+    border-radius: 2px;
+    border: 1px solid #222;
+  }
+  .card-body .char-list span.main { border-color: #ff6b35; color: #ff6b35; }
+  .card-body .char-list span.key { border-color: #64b4ff; color: #64b4ff; }
+
+  /* ACT 分区标题 */
+  .act-break {
+    grid-column: 1 / -1;
+    margin: 24px 0 4px;
+    padding: 14px 0 8px;
+    border-top: 1px solid #222;
+    text-align: center;
+  }
+  .act-break .act-num {
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 6px;
+    font-weight: 300;
+  }
+  .act-break .act-desc {
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 3px;
+    margin-top: 4px;
+  }
+
+  /* 数据总结 */
+  .summary-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 30px 0 10px;
+    padding: 20px 0;
+    border-top: 1px solid #222;
+  }
+  .summary-item {
+    text-align: center;
+    padding: 16px;
+    background: #0e0e0e;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+  }
+  .summary-item .num { font-size: 28px; color: #ff6b35; font-weight: 700; }
+  .summary-item .label { font-size: 11px; color: #666; margin-top: 4px; letter-spacing: 2px; }
+
+  /* toggle 箭头 */
+  .toggle-arrow {
+    font-size: 10px;
+    color: #444;
+    transition: transform .2s;
+  }
+  .card.open .toggle-arrow { transform: rotate(90deg); }
+
+  @media (max-width: 720px) {
+    body { padding: 16px; }
+    .header h1 { font-size: 22px; }
+    .grid { grid-template-columns: 1fr; }
+    .summary-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>没钱修什么仙 · <span>26集改编方案</span></h1>
+  <div class="subtitle">屌丝逆袭版 · 节奏紧张 · 反转密集 · 删繁就简</div>
+  <div class="badge">32个反转爽点 · 15min × 26集 = 390min</div>
+</div>
+
+<div class="controls">
+  <button onclick="toggleAll()">展开/全部折叠</button>
+  <button onclick="filterAct(1)" id="f1">第一幕</button>
+  <button onclick="filterAct(2)" id="f2">第二幕</button>
+  <button onclick="filterAct(3)" id="f3">第三幕</button>
+  <button onclick="filterAct(4)" id="f4">第四幕</button>
+  <button onclick="filterAct(5)" id="f5">第五幕</button>
+  <button onclick="filterAct(0)" id="f0">全部</button>
+</div>
+
+<div class="grid" id="epGrid">
+
+  <!-- ============ 第一幕：绝望与觉醒 ============ -->
+  <div class="act-break" data-act="1">
+    <div class="act-num">ACT 1 · 绝望与觉醒</div>
+    <div class="act-desc">穿越即负债 · 邪神契约 · 羽书觉醒 · 双10级挂逼启动</div>
+  </div>
+
+  <!-- EP 01 -->
+  <div class="card act-highlight" data-act="1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 01</span>
+      <span class="ep-title">我叫张羽</span>
+      <span class="ep-tag tag-reversal">反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第1-6章</li>
+          <li><strong>绝望开局</strong>：穿越即负债70万，账户余额50元，面试被拒</li>
+          <li><strong>邪神契约</strong>：布娃娃邪神降临，要求实现三愿</li>
+          <li><strong class="hl-text">反转①</strong>：张羽诡辩反杀——"你选择失去一个未来大宗门弟子？还是给我时间？"邪神让步</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li>灰暗都市+霓虹修真金融UI叠化，出租屋压迫感</li>
+          <li><strong>镜头设计</strong>：面试官俯拍→张羽仰拍（权力差）；邪神出场：影子从布娃娃撕裂而出</li>
+          <li>美术调性：<strong>冷色（绝望）→ 暖光（诡辩成功）</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <div class="vfx-tags">
+          <span>邪神出场粒子特效</span>
+          <span>契约符文UI</span>
+          <span>70万负债红色数字</span>
+          <span>面试官全息评分板</span>
+        </div>
+        <ul style="margin-top:6px">
+          <li><strong>重点表现</strong>：邪神三愿的压迫感+张羽诡辩时的眼神特写</li>
+          <li><strong>合成要点</strong>：出租屋实拍+邪神粒子+契约符文半透明叠加</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">邪神布娃娃</span>
+          <span>面试官</span>
+          <span>母亲(电话)</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 02 -->
+  <div class="card act-highlight" data-act="1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 02</span>
+      <span class="ep-title">妈，我想修仙</span>
+      <span class="ep-tag tag-reversal">反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第7-12章</li>
+          <li><strong>情感暴击</strong>：母亲拿出全部积蓄+兼职凑手术费</li>
+          <li>"妈，对不起。但我真的想修仙啊。哪怕欠上一辈子还不上欠债，我也想修仙"</li>
+          <li><strong class="hl-text">反转②</strong>：藏匿符失效 → <strong>羽书系统觉醒！</strong>技能面板全息弹出</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>冷暖对比</strong>：家的暖色（回忆/母亲）vs 世界的冷色（现实）</li>
+          <li><strong>镜头设计</strong>：母亲说"妈妈会帮你凑齐"→切到张羽眼眶特写→羽书UI从瞳孔炸开</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：羽书UI首次弹出——半透明全息面板+文字逐行浮现+「健体三十六式1级」高亮</li>
+          <li>健体三十六式第一遍练习：<strong>动作蒙太奇</strong>（从笨拙到流畅，叠加经验条浮动）</li>
+          <li>白真真首次出场：<strong>冷若冰霜</strong>——镜头从她端着餐盘走过食堂，周围学生自动让开</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真(首登场)</span>
+          <span>母亲(声)</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 03 -->
+  <div class="card" data-act="1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 03</span>
+      <span class="ep-title">躺着也在修炼</span>
+      <span class="ep-tag tag-reversal">双反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第13-18章</li>
+          <li>被同学看不起 → 埋头苦练</li>
+          <li><strong class="hl-text">反转③</strong>：<strong>周天采气法10级！</strong>被动吐纳达到主动吐纳10成，躺着也在修炼</li>
+          <li><strong class="hl-text">反转④</strong>：法力从7.7暴涨到13.3，<strong>全年级第二</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>修炼内视</strong>：法力在经脉中流动的透明光效（蓝色→金色渐变）</li>
+          <li><strong>镜头设计</strong>：深夜出租屋，张羽盘坐→体内法力循环CG→窗外天亮</li>
+          <li>10级突破：<strong>耳中呼啸幻音</strong>（观众听到风声+心跳声叠加）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0双子星CG</strong>：周天采气法10级（法力循环澎湃喷射）+ 健体三十六式3级（肉体结构微调）同步展开</li>
+          <li>法力值数字从7.7跳至13.3的UI动画</li>
+          <li>年级排名展示（全息榜单，张羽名字从底部弹到第2）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span>雷钧(武道老师)</span>
+          <span>赵天行</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 04 -->
+  <div class="card" data-act="1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 04</span>
+      <span class="ep-title">法赛·白色狼烟</span>
+      <span class="ep-tag tag-reversal">反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第19-25章</li>
+          <li>法赛开幕：嵩阳被三大名校包围、不被看好</li>
+          <li><strong class="hl-text">反转⑤</strong>：法赛第3关→张羽掌心<strong>白色气流狂涌而出，狼烟冲天</strong>——无极云手觉醒！</li>
+          <li><strong class="hl-text">反转⑥</strong>：法赛<strong>第四名</strong>——嵩阳在三大名校包围中撕开一道缝隙</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>竞技场大场面</strong>：红塔高中室内体育场+全息屏幕+三校队服色彩对比</li>
+          <li><strong>镜头设计</strong>：张羽掌心白色气流特写→拉远白色狼烟冲天→严老师猛一握拳</li>
+          <li>白真真金句：<strong>"我的羽子已经死了……"</strong>——讽刺打击</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0核心</strong>：无极云手觉醒——7次法力震荡→白色无相云罡喷涌</li>
+          <li>与熊不凡、宋海龙、乐沐岚的云团对比特效</li>
+          <li>法赛排名全息公布：张羽「第4名，273分」跳出的瞬间</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">熊不凡</span>
+          <span class="key">宋海龙</span>
+          <span>严老师</span>
+          <span>乐沐岚</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 05 -->
+  <div class="card" data-act="1">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 05</span>
+      <span class="ep-title">我是第四名</span>
+      <span class="ep-tag tag-reversal">反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第26-33章</li>
+          <li>法赛第四+奖金2万——张羽心潮澎湃</li>
+          <li><strong class="hl-text">反转⑦</strong>：刚高兴完→<strong>学生会打压</strong>：不签约就不让参赛、体育竞赛队被拒</li>
+          <li>张羽选择<strong>不签约</strong>：宁可自己找出路也不被资本绑定</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li>欢乐（奖金）→压抑（签约威胁）的<strong>色调断崖式转换</strong></li>
+          <li><strong>镜头</strong>：学生会签约合同从全息屏幕弹出→张羽手指悬停在"确认"上方→收回→拒绝</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>合同条款3D高亮滚动（"不可…不可…不可…"）</li>
+          <li><strong>打击感</strong>：体育竞赛队名单全息公布→张羽白真真名字被红色划掉</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">周澈尘(首登场阴险)</span>
+          <span class="key">蓝岭</span>
+          <span>王海</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ 第二幕：逆袭之路 ============ -->
+  <div class="act-break" data-act="2">
+    <div class="act-num">ACT 2 · 逆袭之路</div>
+    <div class="act-desc">暗学帮 · 不灭印法速成 · 武道夺冠 · 灵根入体 · 桥洞宣言</div>
+  </div>
+
+  <!-- EP 06 -->
+  <div class="card act-highlight" data-act="2">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 06</span>
+      <span class="ep-title">你们不要我，我自己来</span>
+      <span class="ep-tag tag-reversal">双反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第34-42章</li>
+          <li><strong class="hl-text">反转⑧</strong>：被学校堵死 → <strong>暗学帮补课赚钱</strong>，每周6.5万收入</li>
+          <li><strong>工地学生群像</strong>：皮球肚（肠胃改造）、夜视瞳孔、劣质亢奋剂后遗症——社会底层写实</li>
+          <li><strong class="hl-text">反转⑨</strong>：不灭印法——全平台<strong>1星差评"避雷千万别买"</strong> → 张羽<strong>1分钟1级，2小时10级！</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>地下世界</strong>：暗学帮园区灰暗+霓虹灯光+防窥符咒闪烁</li>
+          <li><strong>仙道商城UI</strong>：全息购物界面+商品评价浮空+打折标签跳动</li>
+          <li><strong>镜头设计</strong>：三条"1星避雷"评价浮空→张羽眼睛一亮→点击购买</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：不灭印法修炼蒙太奇——1分钟1级→突击2小时→经脉千锤百炼特效</li>
+          <li>10级突破：<strong>"愈战愈强"</strong> 法力转化+反弹特效（金色粒子回流）</li>
+          <li>工地学生群像：皮球肚、夜视瞳孔特写（黑色幽默+社会讽刺）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span>黑鸦</span>
+          <span>工地学生群像</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 07 -->
+  <div class="card act-highlight" data-act="2">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 07</span>
+      <span class="ep-title">武道竞赛冠军</span>
+      <span class="ep-tag tag-battle">战斗</span>
+      <span class="ep-tag tag-reversal">反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第43-51章</li>
+          <li>武道竞赛多轮战斗连战</li>
+          <li><strong class="hl-text">反转⑩</strong>：vs 炼天极——<strong>皮下罡气战术</strong>：看似鲜血淋漓，实际只伤皮肉</li>
+          <li><strong class="hl-text">反转⑪</strong>：vs 宋海龙——全集中状态+战斗中练成背龙翻岳手</li>
+          <li>🏆 <strong>武道竞赛第一名！</strong>穷鬼夺冠！</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>擂台战斗</strong>：方格擂台+全息计分板+观众席飞溅特效</li>
+          <li><strong>镜头</strong>：皮下罡气——皮肤半透明化显示皮下罡气层→对手视角以为打穿了→实际没事</li>
+          <li>血色无相云罡：<strong>白色罡气被鲜血染红</strong>的视觉冲击</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0核心</strong>：皮下罡气"护甲"半透明可视化 + 浴血奋战vs实际轻伤的反差</li>
+          <li>背龙翻岳手10级：<strong>金色重心点标记</strong>+"绊谁谁倒"</li>
+          <li>夺冠瞬间：张羽浑身是血举起手→王海冲上→白真真抱人急救</li>
+          <li>急救医生："咦？好像也没什么大伤？竟然就是点皮肉伤？"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">炼天极</span>
+          <span class="key">宋海龙</span>
+          <span>王海</span>
+          <span>雷钧</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 08 -->
+  <div class="card act-highlight" data-act="2">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 08</span>
+      <span class="ep-title">我灵根没了</span>
+      <span class="ep-tag tag-reversal">核心反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第52-60章</li>
+          <li>邪神回归：发现张羽是"牛股"→重新谈判</li>
+          <li><strong class="hl-text">反转⑫（本作核心反转）</strong>：白真真"我灵根没了！"→张羽"什么东西从后面钻进来了"——<strong>灵根主动跑进张羽体内！</strong></li>
+          <li>灵根在丹田生根发芽+金色丝线蔓延全身</li>
+          <li>白真真名场面：<strong>"我想借给他也是等他跪下来叫妈求我以后啊！"</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>奔跑+暧昧</strong>：跑车腿10级炫技、白真真跳背、"硬硬的东西顶着我"——喜剧感</li>
+          <li><strong>灵根转移</strong>：深夜远郊小路，黑暗→灵根金色光点从白真真小腹飞向张羽</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：灵根入体——金色光点从后腰钻入→丹田金色爆炸→丝线如神经蔓延全身</li>
+          <li>跑车腿10级：脚下炸开白色气浪+瞬间窜出几十米</li>
+          <li>白真真摸张羽小腹找灵根→张羽尴尬反应（喜剧节拍）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="main">邪神布娃娃(回归)</span>
+          <span class="key">张翩翩</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 09 -->
+  <div class="card" data-act="2">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 09</span>
+      <span class="ep-title">住桥洞！</span>
+      <span class="ep-tag tag-reversal">金句</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第61-69章</li>
+          <li>灵根适配赤髓浑元气 → <strong>神经滋养</strong>（自动吸收灵机+滋养脊椎）</li>
+          <li>租房蒙太奇：地下室2万/车库100万押金/公寓被嘲讽/工地房道心缓冲剂——全被收割</li>
+          <li><strong class="hl-text">反转⑬</strong>：白真真斩钉截铁——<strong>"我辈修道人，以天为被，以地为席，就应该住桥洞，钻树林，占烂尾楼！"</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>租房蒙太奇</strong>：4站快速切换（地下室暗→车库灰→公寓冷→工地脏）→ 桥洞下的阳光</li>
+          <li><strong>镜头</strong>：白真真指着高架下的桥洞→夕阳逆光剪影→宣言金句→两人搬进桥洞</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：神经滋养可视化——金色灵根丝线缠绕脊椎+自动吸纳周围灵机粒子</li>
+          <li>租房蒙太奇快速切换（每一站价格标签越来越大越离谱）</li>
+          <li>桥洞宣言：白真真逆光大喊→背景音乐升key</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span>赵天行</span>
+          <span>车女</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ 第三幕：体育竞赛 ============ -->
+  <div class="act-break" data-act="3">
+    <div class="act-num">ACT 3 · 体育竞赛</div>
+    <div class="act-desc">四关连战 · 12531公斤擎天 · 总分第一 · 夺冠即被捧杀</div>
+  </div>
+
+  <!-- EP 10 -->
+  <div class="card act-highlight" data-act="3">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 10</span>
+      <span class="ep-title">体育竞赛·开幕</span>
+      <span class="ep-tag tag-battle">新战场</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第70-77章</li>
+          <li>体育竞赛开幕：紫云高中万米体育场馆</li>
+          <li><strong class="hl-text">反转⑭</strong>：肉体强度关——张羽<strong>4.95级</strong>震撼全场（被看出没有仿妖筋肉改造痕迹）</li>
+          <li>灵敏关：钢珠+光环+房间变形——张羽筋肉控制优势外显</li>
+          <li>玉星寒首登大场面：前三关全部第一 ⚡</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>大型体育场馆</strong>：万米室内体育场+天空柱悬挂+全息转播+广告牌环绕</li>
+          <li><strong>镜头</strong>：张羽走进场馆的远景→个人特写→仰望天空柱→眼神坚定</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>肉体强度检测：全息扫描光效+数字4.95弹出</li>
+          <li>灵敏关：钢珠弹射特效+光环移动+房间变形（视觉迷宫感）</li>
+          <li><strong>P0</strong>：玉星寒前三关第一的统治力展示（得分板200vs张羽191）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">玉星寒(首登大场面)</span>
+          <span>乐沐岚</span>
+          <span>宋海龙</span>
+          <span>熊文武</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 11 -->
+  <div class="card act-highlight" data-act="3">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 11</span>
+      <span class="ep-title">5000米·心脏突破</span>
+      <span class="ep-tag tag-climax">高潮</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第78-85章</li>
+          <li>5000米速度决赛：张羽 vs 玉星寒 双雄对决</li>
+          <li>玉星寒主动倒退让张羽领先（试探）</li>
+          <li><strong class="hl-text">反转⑮</strong>：张羽心脏在极限压迫下<strong>突破蜕变</strong>——心跳如大鼓，打破自身极限</li>
+          <li>白真真12针血拼+疤痕化龙爪撕裂→保住第三</li>
+          <li>惜败第二——但总分差距缩小到9分（200 vs 191）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>速度感</strong>：第一视角奔跑+两侧风景后移粒子拖尾</li>
+          <li>心脏突破：胸口的<strong>心跳声可视化</strong>——咚→咚→咚咚→狂跳→突破！金光从胸口炸开</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：心脏突破——胸口金色光效+血管透明化+心跳声压过所有BGM</li>
+          <li>玉星寒让张羽领先：并肩奔跑→玉星寒减速微笑→特写</li>
+          <li>白真真12针：针尖入穴→疤痕赤红龙爪撕裂→她怒吼"我要和羽子一起上十大！"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">玉星寒</span>
+          <span>乐沐岚</span>
+          <span>熊文武</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 12 -->
+  <div class="card act-highlight" data-act="3">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 12</span>
+      <span class="ep-title">12531公斤</span>
+      <span class="ep-tag tag-climax">🔥</span>
+      <span class="ep-tag tag-reversal">大反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第86-95章</li>
+          <li>天空柱三轮力量比试：熊文武10800kg擎天（妖裔爆血）→李雪莲阻止玉星寒全力</li>
+          <li><strong class="hl-text">反转⑯</strong>：张羽隐藏实力→最后一轮上报<strong>12531公斤</strong>！全场震惊："他是疯了吗？"</li>
+          <li>全集中状态+10级功法融会贯通+打药辅助 → <strong>成功擎天5秒！</strong></li>
+          <li><strong class="hl-text">🏆 总分第一：341分！力压玉星寒338分夺冠！</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>力量感</strong>：天空柱从天而降的沉重感（地面震动+音效低频）</li>
+          <li><strong>5秒逐秒特写</strong>：第1秒骨骼开裂→第3秒内脏内出血→第5秒七窍溢血→微笑</li>
+          <li><strong>王海鉴定</strong>：检查伤势→倒抽凉气"伤势这么轻微？"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0核心</strong>：12531公斤数字弹出+天空柱逆推+全集中黑白世界</li>
+          <li>熊文武10800kg：龙鳞爆裂+血雾+怒吼"现在的我……可以擎天！"</li>
+          <li>李雪莲电话阻止玉星寒："你的身体不属于你自己"→玉星寒捏爆手机</li>
+          <li>10级功法融会贯通：力量如光线在体内流转交织的"积木"可视化</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">玉星寒</span>
+          <span class="key">熊文武</span>
+          <span>王海</span>
+          <span>李雪莲(声)</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 13 -->
+  <div class="card act-highlight" data-act="3">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 13</span>
+      <span class="ep-title">绝世天才？</span>
+      <span class="ep-tag tag-reversal">黑色反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第96-106章</li>
+          <li>总分排名公布：张羽341分 🥇 玉星寒338分 🥈 乐沐岚324分 🥉</li>
+          <li>直播间乐景辰+刚山狂吹"绝世天才"——张羽美滋滋听着</li>
+          <li><strong class="hl-text">反转⑰（黑色反转）</strong>：张翩翩来电揭穿——"绝世天才"是商业捧杀！吹成天赋=压低商业价值</li>
+          <li><strong>张羽暴怒</strong>："第一次发现吹捧这种事情，他竟然如此厌恶"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>虚假的辉煌→冰冷真相</strong>：直播间暖色调→张羽表情逐渐僵住→冷色调回收</li>
+          <li><strong>镜头</strong>：张羽笑着听吹捧→手机响起→表情从咧嘴到抿嘴到怒目</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：全息排名公布（张羽登顶CG高光）+ 直播间分屏（乐景辰反派笑）</li>
+          <li>张羽情绪转变：开心→困惑→愤怒的面部肌肉动画关键帧</li>
+          <li>张翩翩电话浮空UI（全息通话效果）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">玉星寒</span>
+          <span class="key">乐景辰(首登场)</span>
+          <span>刚山</span>
+          <span>张翩翩(声)</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ 第四幕：资本真相 ============ -->
+  <div class="act-break" data-act="4">
+    <div class="act-num">ACT 4 · 资本真相</div>
+    <div class="act-desc">60万代言 · 邪神哲学 · 公司暗战 · 灵根进化 · 靠山离开</div>
+  </div>
+
+  <!-- EP 14 -->
+  <div class="card act-highlight" data-act="4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 14</span>
+      <span class="ep-title">韭菜送上门</span>
+      <span class="ep-tag tag-reversal">哲学反转</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第107-115章</li>
+          <li>仙韵集团代言合同：<strong>张羽60万/年 + 白真真40万/年</strong></li>
+          <li>"白学武功"宣传采访—张羽念广告词、看韭菜送上门</li>
+          <li><strong class="hl-text">反转⑱</strong>：邪神"榨干净"哲学——<strong>"十大宗门和公司在一起耍穷鬼。但耍得好啊，让他们心甘情愿地交钱，耍得比我们邪神溜多了。"</strong></li>
+          <li>赵天行动心仿妖筋肉改造</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>商业虚伪→黑色幽默</strong>：采访灯光暖亮→张羽念广告→围观学生如韭菜的广角镜头</li>
+          <li>邪神冷笑特写（全屏+暗角）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>电子合同3D全息（条款高亮滚动+签字指纹特效）</li>
+          <li><strong>P0</strong>：仙韵展台学生围观如韭菜涌上的蒙太奇+张羽复杂表情</li>
+          <li>嵩阳"疯狂动物城"预演蒙太奇（各种改造学生群像）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="main">邪神布娃娃</span>
+          <span>仙韵集团代表</span>
+          <span>赵天行</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 15 -->
+  <div class="card" data-act="4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 15</span>
+      <span class="ep-title">大日气海</span>
+      <span class="ep-tag tag-setup">新体系</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第116-124章</li>
+          <li>邪神推荐→张羽购入<strong>大日气海</strong>（光照被动吐纳+凝聚日月精华）</li>
+          <li>暗学帮扩张+真灵根轮换修炼</li>
+          <li><strong class="hl-text">反转⑲</strong>：乐沐岚加入轮换训练→张羽肉体强度飞速暴涨</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>光照修炼</strong>：从清晨阳光到探照灯夜修→光线在体内转化为法力的特效</li>
+          <li><strong>镜头</strong>：太阳升起→张羽闭眼吸收→体内金光循环→日落→探照灯打开</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>大日气海：光照粒子→法力转化（金色光点吸入体内）</li>
+          <li>真灵根轮换：灵根从张羽体内飞出→白真真体内→金色光效切换</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="main">邪神布娃娃</span>
+          <span class="key">乐沐岚</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 16 -->
+  <div class="card" data-act="4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 16</span>
+      <span class="ep-title">他们要耍我们</span>
+      <span class="ep-tag tag-reversal">觉醒</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第125-133章</li>
+          <li><strong class="hl-text">反转⑳</strong>：真灵根轮换→开始<strong>吞吐日月精华</strong>（白真真也能从光华吸收灵机）</li>
+          <li>公司暗战升级：紫云/白龙角力→周澈尘/蓝岭谋划打压</li>
+          <li><strong>张翩翩两个月后离开</strong>→失去庇护的倒计时启动</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>阴谋感</strong>：暗色会议室+全息投影阴谋对话</li>
+          <li>日月精华吸收：<strong>灵根沐浴在月光中→光华粒子被吸收</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>真灵根吞吐日月精华：月光下金色灵根粒子回旋→白真真身周光华漩涡</li>
+          <li>多方势力阴谋蒙太奇（周澈尘/蓝岭/乐景辰各怀鬼胎）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">周澈尘</span>
+          <span class="key">蓝岭</span>
+          <span>张翩翩</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 17 -->
+  <div class="card act-highlight" data-act="4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 17</span>
+      <span class="ep-title">阿真你肚子怎么变大了</span>
+      <span class="ep-tag tag-reversal">进化</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第134-143章</li>
+          <li>白真真察觉"肚子好像变大了"→小腹出现<strong>青色纹路</strong></li>
+          <li><strong class="hl-text">反转㉑</strong>：真灵根从吐纳状态收敛为<strong>一颗青色的种子</strong>——<strong>真灵根第一次进化！</strong></li>
+          <li>福姬宣布进化：灵根品质将迎来质变</li>
+          <li>公司暗战继续升级</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>神秘+青色主题</strong>：小腹青色纹路发光→灵根收缩为种子形态</li>
+          <li><strong>镜头</strong>：白真真撩起衣服看肚子→青色光芒从腹部透出→种子形成</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：青色种子形成——灵根丝线从全身收回小腹→凝聚为一颗发光种子</li>
+          <li>腹部青色纹路：<strong>半透明皮肤+青色符文流转</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真(进化)</span>
+          <span>福姬</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 18 -->
+  <div class="card" data-act="4">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 18</span>
+      <span class="ep-title">姐走了</span>
+      <span class="ep-tag tag-reversal">转折</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第144-152章</li>
+          <li><strong class="hl-text">反转㉒</strong>：张翩翩离开→张羽白真真失去最大靠山</li>
+          <li>学生会+各公司压力开始渗透</li>
+          <li><strong>筑基考试消息传来</strong>——四个名额，四赛道</li>
+          <li>张羽决定：<strong>靠自己</strong></li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>离别</strong>：冷色+空旷的张翩翩办公室→全息通话结束→屏幕熄灭</li>
+          <li><strong>成长转折</strong>：张羽看着屏幕熄灭→沉默→握拳</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>全息通话结束→张翩翩影像消散→办公室冷色</li>
+          <li>筑基考试通知UI弹出（四条赛道选择）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">张翩翩(离开)</span>
+          <span>周澈尘</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ 第五幕：筑基之战（第二轮） ============ -->
+  <div class="act-break" data-act="5">
+    <div class="act-num">ACT 5 · 筑基之战（第二轮）</div>
+    <div class="act-desc">四赛道分场 · 用药狂潮 · 同归于尽 · 双骄誓言</div>
+  </div>
+
+  <!-- EP 19 -->
+  <div class="card" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 19</span>
+      <span class="ep-title">四选一·第一轮</span>
+      <span class="ep-tag tag-setup">选择</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第153-161章</li>
+          <li>筑基考试规则初现：道心/法力/肉体/武功四关</li>
+          <li>第一次筑基考试：肉身强度关—张羽4.95震撼全场</li>
+          <li><strong class="hl-text">反转㉓</strong>：第一轮考试通过 → 获得第二轮资格</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>考试选拔</strong>：四赛道全息展示→每个赛道名额闪烁</li>
+          <li><strong>镜头</strong>：地下考场大远景揭幕→考生特写</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>四赛道UI全景展示（道心/法力/肉体/武功+名额+规则）</li>
+          <li>第一轮考试名场面</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span>邓丙丁(主考官)</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 20 -->
+  <div class="card" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 20</span>
+      <span class="ep-title">肉体考试</span>
+      <span class="ep-tag tag-battle">考试</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第162-168章</li>
+          <li>法力考试结束→张羽稳定过关</li>
+          <li><strong>肉体考试</strong>：自选功法+难度星级+2小时参悟</li>
+          <li><strong class="hl-text">反转㉔</strong>：张羽选择最高难度→以4.96肉体挑战极限</li>
+          <li>白真真在武功赛道同样突破</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>考试压力</strong>：白色封闭考场+全息计时器+监考老师巡走</li>
+          <li>张羽肉体强度全开：筋肉线条在金刚酥油下清晰可见</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>肉体考试：浑身筋肉在金刚酥油下发光→解剖感+力量募集可视化</li>
+          <li>难度星级全息选择（1星→5星→张羽选了5星）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span>邓丙丁</span>
+          <span>黄子丑</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 21 -->
+  <div class="card act-highlight" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 21</span>
+      <span class="ep-title">再战玉星寒</span>
+      <span class="ep-tag tag-battle">宿命</span>
+      <span class="ep-tag tag-reversal">冲刺</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第169-174章</li>
+          <li>第一轮最终轮：玉星寒 vs 张羽——宿命对决！</li>
+          <li><strong class="hl-text">反转㉕</strong>：3秒倒计时齐冲——两人同时爆发</li>
+          <li>闪回：体育竞赛时张羽追逐玉星寒→这一次不一样</li>
+          <li>张羽春秋无尽禅顿悟+真灵根轮换</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>决斗场</strong>：白色擂台+全息倒计时+两人对峙剪影</li>
+          <li><strong>闪回蒙太奇</strong>：5000米奔跑+天空柱画面叠化→回到现在→张羽眼神变了</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：3秒倒计时→两人如弹簧般窜出→音爆+地面开裂</li>
+          <li>体育竞赛闪回：5000米奔跑→叠化到现在的肉体对决</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真(观战)</span>
+          <span class="key">玉星寒</span>
+          <span>邓丙丁</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 22 -->
+  <div class="card act-highlight" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 22</span>
+      <span class="ep-title">极限突破</span>
+      <span class="ep-tag tag-climax">升维</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第175-184章</li>
+          <li>第一轮考试通过 → 狩猎邪神赚钱</li>
+          <li><strong class="hl-text">反转㉖</strong>：羽书新一章觉醒 + 邪神晋级</li>
+          <li>张羽被巡察关注 + 层层束缚逼近</li>
+          <li>备战第二轮筑基考试</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>升级蜕变</strong>：羽书新章觉醒金光炸裂</li>
+          <li><strong>两轮之间</strong>：赚钱蒙太奇+狩猎大场面</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li>狩猎邪神CG（六大强者阻击）</li>
+          <li>羽书新章UI觉醒特效</li>
+          <li>被问询场景：巡察队压迫感</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="main">邪神布娃娃</span>
+          <span>玉星寒</span>
+          <span class="key">周阳(首登场)</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 23 -->
+  <div class="card act-highlight" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 23</span>
+      <span class="ep-title">第二轮·开打</span>
+      <span class="ep-tag tag-battle">考试开幕</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第185-194章</li>
+          <li><strong>战前博弈</strong>：真真潜力显现 → 学校电霸 → 周家威胁 → 潜伏爪牙</li>
+          <li><strong>圣体终成</strong>：高中圣体炼成 + 云霓秒批假条</li>
+          <li><strong>仙都考场</strong>：第二轮筑基考试开幕——<strong>四条赛道分场</strong>（道心/法力/体育/武功）</li>
+          <li><strong class="hl-text">反转㉗</strong>：张羽分到<strong>体育赛道</strong>（对手：夜凌霄、玉星寒、蒙涛）→ 白真真分到<strong>武道赛道</strong>（对手：云景、戴行之）</li>
+          <li><strong class="hl-text">反转㉘</strong>：23种药物免费自助打药 + 网红药品评测视频 → 张羽"这帮正神总算干了点正事"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>双线分镜</strong>：张羽体育赛道 vs 白真真武道赛道同步展开</li>
+          <li><strong>镜头</strong>：仙都地下考场大远景揭幕→五名考生特写→夜凌霄炙热眼神</li>
+          <li>23种药物光幕横扫 + 网红视频嵌入（开棺系列彩蛋）</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：四条赛道全息分场 + 夜凌霄约战"这一轮你会用全力了吧？"</li>
+          <li>周阳镇压邪神硬盘 + 换下半身（奇幻+惊悚+黑色幽默三重质感）</li>
+          <li>张羽双眼放光"免费？那就是自助打药了吗？"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽</span>
+          <span class="main">白真真</span>
+          <span class="key">夜凌霄(首约战)</span>
+          <span class="key">玉星寒</span>
+          <span class="key">戴行之</span>
+          <span>云景</span>
+          <span>蒙涛</span>
+          <span>邓丙丁</span>
+          <span>周阳</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 24 -->
+  <div class="card act-highlight" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 24</span>
+      <span class="ep-title">用药狂潮·三大神药</span>
+      <span class="ep-tag tag-climax">🔥考试高潮</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第195-199章</li>
+          <li><strong>三大神药公布</strong>：道解缓释胶囊（降智风险）/ 法力脉络针剂（经脉癌变风险）/ 仿凤功能素（纳米凤凰细胞）——各1500积分</li>
+          <li><strong>玉星寒吃自助</strong>：龙象制剂+补剂轮扎→520分极限</li>
+          <li><strong>蒙涛暴食压制</strong>：3.2米巨汉1200+积分——"质量不行，那就数量来凑"</li>
+          <li><strong class="hl-text">反转㉙</strong>：夜凌霄首针法力脉络针剂→<strong>完美血脉解封</strong>（3米5肉甲巨兽）</li>
+          <li><strong class="hl-text">反转㉚</strong>：张羽"一次两片"仿凤功能素→惊呆众神准备救人→高中圣体扛药成功！</li>
+          <li>悟得<strong>"炼气圣体"</strong>→黄子丑识破隐藏实力"穷人天才能崛起最重要的因素就是特么的背后有人"</li>
+          <li><strong>夜凌霄降智现场</strong>：服道解后语无伦次→黄子丑叫停签保密合同→张羽"暂停考试是因为要给公司这药物副作用保密？"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>疯狂打药蒙太奇</strong>：光幕+针剂+药瓶+积分数字交替跳动</li>
+          <li><strong>名场面</strong>：夜凌霄3米5肉甲巨兽 vs 张羽炼气圣体金光</li>
+          <li>黑色幽默：夜凌霄降智 + 正神敲诈签保密合同</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：夜凌霄完美血脉解封 CG + 张羽"一次两片"众神悬停救场</li>
+          <li>三大神药全息展柜 + 炼气圣体金光炸开</li>
+          <li>夜凌霄降智语无伦次台词叠化</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽(炼气圣体)</span>
+          <span class="main">白真真(武道考场)</span>
+          <span class="key">夜凌霄(完美血脉)</span>
+          <span class="key">玉星寒</span>
+          <span class="key">蒙涛</span>
+          <span>邓丙丁</span>
+          <span>黄子丑</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 25 -->
+  <div class="card act-highlight" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 25</span>
+      <span class="ep-title">同归于尽·定海柱</span>
+      <span class="ep-tag tag-climax">🔥🔥双线交战</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第199-201章</li>
+          <li><strong>A线·体育考场</strong>：张羽放弃道解缓释胶囊→疯狂灌道心药→分数超越夜凌霄</li>
+          <li><strong>定海柱登场</strong>：玄冥重水模拟1-10000米压力——下半场抗压考试</li>
+          <li><strong>B线·武道擂台</strong>：白真真 vs 戴行之——100万医保制度，医保归零则判负</li>
+          <li><strong class="hl-text">名场面</strong>：白真真以<strong>肩膀硬接戴行之一掌</strong>→惊涛九转+真灵根10级推演全身功法→</li>
+          <li><strong>轰！医保齐齐归零·同归于尽！</strong></li>
+          <li><strong class="hl-text">反转㉛</strong>：白真真站起来→电光步击败戴行之→"这种有钱的仙都爷果然还是没我会拼命啊"</li>
+          <li>戴行之反思"难道是我们家族代代传承的家规有瑕疵"</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>双线交刃蒙太奇</strong>：A线定海柱沉入深海 → B线擂台血战，交叉剪辑</li>
+          <li><strong>名场面</strong>：白真真肩膀硬接一掌的0.5倍速慢镜——掌锋近肩、卸力、崩血的分层镜头</li>
+          <li>医保数字同步归零特效：100万→80万→50万→0 → 数字冻结</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做</strong>：白真真肩膀硬接（慢镜+筋膜变形可视化）+ 医保归零（数字+光效爆炸）</li>
+          <li>定海柱-300→-500→-900→-1300米渐变压力光效</li>
+          <li>白真真电光步击败戴行之：雷电脚印拖尾+金色真气喷涌</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">白真真(拼命三娘·胜)</span>
+          <span class="main">张羽(定海柱炼体)</span>
+          <span class="key">戴行之(败·反思)</span>
+          <span class="key">夜凌霄(扯面罩)</span>
+          <span>玉星寒</span>
+          <span>蒙涛</span>
+          <span>邓丙丁</span>
+          <span>黄子丑</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- EP 26 -->
+  <div class="card act-highlight" data-act="5">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="ep-num">EP 26</span>
+      <span class="ep-title">最完美的高中生肉体</span>
+      <span class="ep-tag tag-climax">🔥🔥季终</span>
+      <span class="toggle-arrow">▶</span>
+    </div>
+    <div class="card-body">
+      <section>
+        <div class="sec-title">📖 <span class="hl">关键剧情</span></div>
+        <ul>
+          <li><strong>章节</strong>：第202章</li>
+          <li><strong>定海柱终极对决</strong>：深度跌破-1300米→张羽横膈膜脱力、膝盖失守→首遇失控</li>
+          <li><strong class="hl-text">致命短板暴露</strong>：羽书数据——<strong>道心7级(18.5%)</strong>！肉体突飞猛进，道心统辖严重滞后</li>
+          <li><strong class="hl-text">反转㉜</strong>：张羽引爆春秋无尽禅毒素→逼出极限→深度-1422米含血放弃</li>
+          <li><strong>完美碾压</strong>：夜凌霄运转三重10级护体功法——<strong>如意玲珑骨+大天龙神力+象魔缠筋变</strong>（一身漆黑龙鳞，抱胸淡然）</li>
+          <li>绿洲集团评价：<strong>"昆墟一层高中最完美肉体"</strong>——称号归属夜凌霄，非张羽</li>
+          <li><strong>⚔️ 双骄誓言（季终核心）</strong>：<br>        • 张羽："下一次…下一次我一定要追上你，然后超越你。"<br>        • 夜凌霄："我会永远站在第一的位置，直到抵达我所能达到的仙道巅峰。"</li>
+          <li><strong>🔮 季终钩子</strong>：夜凌霄怀疑张羽身上的"新技术"→决定让人彻查→第三轮决战（三个月后）倒计时开始</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">🎨 <span class="hl">视觉风格</span></div>
+        <ul>
+          <li><strong>深海压抑感</strong>：定海柱内部→玄冥重水压得张羽如潜艇变形→窒息感+失控感</li>
+          <li><strong>双骄对比</strong>：张羽七窍溢血放弃 vs 夜凌霄漆黑龙鳞抱胸不动——实力差的视觉语言</li>
+          <li><strong>季终构图</strong>：两人一高一低对视→各自立誓→画面渐黑→ED起</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">💥 <span class="hl">重点视效</span></div>
+        <ul>
+          <li><strong>P0必做（季终CG）</strong>：夜凌霄三重功体逐层展开（如意玲珑骨收缩→大天龙神力龙鳞→象魔缠筋变青黑）→最后定格漆黑龙鳞抱胸</li>
+          <li>张羽引爆春秋无尽禅：胸口禅字消失+生命潜能爆发+金色血雾</li>
+          <li>双骄誓言交错剪辑：张羽不甘的仰视 ↔ 夜凌霄笃信的俯瞰</li>
+          <li>片尾ED：全季26个关键画面快速闪回→落幕</li>
+          <li>彩蛋：夜凌霄电话"给我查查这个55号"→暗色中周家凝视→画面黑</li>
+        </ul>
+      </section>
+      <section>
+        <div class="sec-title">👤 <span class="hl">人物资产</span></div>
+        <div class="char-list">
+          <span class="main">张羽(败·不甘)</span>
+          <span class="main">夜凌霄(三重功体·胜)</span>
+          <span>白真真(观战)</span>
+          <span>玉星寒(观战)</span>
+          <span>蒙涛</span>
+          <span>邓丙丁</span>
+          <span>黄子丑</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Summary Row -->
+  <div class="summary-row">
+    <div class="summary-item">
+      <div class="num">32</div>
+      <div class="label">反转爽点</div>
+    </div>
+    <div class="summary-item">
+      <div class="num">6</div>
+      <div class="label">大战斗场面</div>
+    </div>
+    <div class="summary-item">
+      <div class="num">26</div>
+      <div class="label">总集数</div>
+    </div>
+    <div class="summary-item">
+      <div class="num">Ch1-202</div>
+      <div class="label">覆盖范围</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 卡片展开/收起
+function toggleCard(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+
+// 全部展开/折叠
+function toggleAll() {
+  const cards = document.querySelectorAll('.card');
+  const allOpen = Array.from(cards).every(c => c.classList.contains('open'));
+  cards.forEach(c => {
+    if (allOpen) c.classList.remove('open');
+    else c.classList.add('open');
+  });
+}
+
+// 按幕筛选
+function filterAct(num) {
+  const cards = document.querySelectorAll('.card');
+  const acts = document.querySelectorAll('.act-break');
+  const btns = document.querySelectorAll('.controls button');
+
+  btns.forEach(b => b.classList.remove('on'));
+
+  if (num === 0) {
+    cards.forEach(c => c.style.display = '');
+    acts.forEach(a => a.style.display = '');
+    document.getElementById('f0').classList.add('on');
+    return;
+  }
+
+  document.getElementById('f' + num).classList.add('on');
+
+  cards.forEach(c => {
+    if (parseInt(c.dataset.act) === num) c.style.display = '';
+    else c.style.display = 'none';
+  });
+
+  acts.forEach(a => {
+    if (parseInt(a.dataset.act) === num) a.style.display = '';
+    else a.style.display = 'none';
+  });
+}
+
+// 默认展开所有
+window.onload = function() {
+  document.querySelectorAll('.card').forEach(c => c.classList.add('open'));
+  document.getElementById('f0').classList.add('on');
+};
+</script>
+
+</body>
+</html>
