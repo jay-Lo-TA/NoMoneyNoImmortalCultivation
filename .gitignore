@@ -19,3 +19,4 @@ __pycache__/
 # 备份文件（防止重复命名污染）
 *.bak
 *.backup
+.obsidian/workspace.json
