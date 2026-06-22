@@ -1,0 +1,14 @@
+filters:
+  and:
+    - file.inFolder("20-角色/配角")
+views:
+  - type: table
+    name: 表格
+    order:
+      - title
+      - type
+      - work
+      - file.fullname
+      - file.links
+    columnSize:
+      file.fullname: 228

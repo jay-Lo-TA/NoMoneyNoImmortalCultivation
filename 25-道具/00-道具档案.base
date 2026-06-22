@@ -1,0 +1,73 @@
+filters:
+  and:
+    - file.inFolder("25-道具")
+formulas:
+  holder_short: if(holder, holder, "—")
+  priority_short: if(priority, priority, "—")
+  cg_priority_short: if(cg_priority, cg_priority, "—")
+properties:
+  title:
+    displayName: 道具名
+  file.name:
+    displayName: 文件名
+  type:
+    displayName: 类型
+  priority:
+    displayName: 优先级
+  cg_priority:
+    displayName: CG 等级
+  holder:
+    displayName: 持有人
+  origin_chapter:
+    displayName: 出处章节
+  unlock_chapter:
+    displayName: 觉醒章节
+  status:
+    displayName: 状态
+  formula.holder_short:
+    displayName: 持有
+  formula.priority_short:
+    displayName: P?
+  formula.cg_priority_short:
+    displayName: CG?
+views:
+  - type: table
+    name: 道具总表
+    order:
+      - title
+      - type
+      - holder
+      - priority
+      - cg_priority
+      - origin_chapter
+      - unlock_chapter
+      - status
+    limit: 100
+    summaries:
+      priority: Count
+      cg_priority: Count
+    columnSize:
+      note.title: 210
+  - type: table
+    name: P0 必做
+    filters:
+      and:
+        - priority == "P0"
+    order:
+      - title
+      - holder
+      - cg_priority
+      - origin_chapter
+      - status
+    limit: 50
+  - type: table
+    name: 按持有人分组
+    groupBy:
+      property: holder
+      direction: ASC
+    order:
+      - title
+      - priority
+      - cg_priority
+      - origin_chapter
+    limit: 100
