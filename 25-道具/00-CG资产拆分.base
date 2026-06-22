@@ -1,0 +1,107 @@
+filters:
+  and:
+    - file.inFolder("25-道具")
+    - file.name != "README.md"
+    - file.name != "00-道具档案.base"
+    - file.name != "00-CG资产拆分.base"
+formulas:
+  cg_class_short: if(cg_class, cg_class, "—")
+  priority_short: if(priority, priority, "—")
+  asset_type_short: if(asset_type, asset_type, "—")
+properties:
+  title:
+    displayName: CG 资产名
+  file.name:
+    displayName: 文件名
+  type:
+    displayName: 类型
+  cg_class:
+    displayName: CG 大类
+  asset_type:
+    displayName: 资产类型
+  priority:
+    displayName: P 等级
+  first_chapter:
+    displayName: 首次出现章
+  frequency:
+    displayName: 出现频次
+  status:
+    displayName: 状态
+  formula.cg_class_short:
+    displayName: CG 大类
+  formula.priority_short:
+    displayName: P?
+  formula.asset_type_short:
+    displayName: 资产类型
+views:
+  - type: table
+    name: CG 资产总表
+    order:
+      - title
+      - cg_class
+      - priority
+      - asset_type
+      - first_chapter
+      - frequency
+      - status
+    limit: 200
+    summaries:
+      priority: Count
+      cg_class: Count
+    columnSize:
+      note.title: 220
+  - type: table
+    name: P0 必做清单
+    filters:
+      and:
+        - priority == "P0"
+    order:
+      - title
+      - cg_class
+      - asset_type
+      - first_chapter
+      - frequency
+      - status
+    limit: 100
+  - type: table
+    name: 按 CG 大类分组
+    groupBy:
+      property: cg_class
+      direction: ASC
+    order:
+      - title
+      - priority
+      - asset_type
+      - first_chapter
+      - frequency
+    limit: 200
+  - type: table
+    name: 按 P 等级分组
+    groupBy:
+      property: priority
+      direction: ASC
+    order:
+      - title
+      - cg_class
+      - asset_type
+      - first_chapter
+    limit: 200
+  - type: table
+    name: 高频资产
+    filters:
+      and:
+        - frequency == "高"
+    order:
+      - title
+      - cg_class
+      - priority
+      - first_chapter
+    limit: 100
+  - type: table
+    name: 按首次出现章排序
+    order:
+      - first_chapter
+      - title
+      - cg_class
+      - priority
+    limit: 200

@@ -1,6 +1,8 @@
 filters:
   and:
     - file.inFolder("25-道具")
+    - file.name != "README.md"
+    - file.name != "00-道具档案.base"
 formulas:
   holder_short: if(holder, holder, "—")
   priority_short: if(priority, priority, "—")
