@@ -11,10 +11,14 @@
             "id": "4d1326d5dc65cc0d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "20-角色/配角图鉴.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "配角图鉴"
             }
           }
         ]
@@ -177,6 +181,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4d1326d5dc65cc0d",
-  "lastOpenFiles": []
+  "active": "e803c1dcde71360c",
+  "lastOpenFiles": [
+    "20-角色/README.md",
+    "20-角色/00-群众角色.base",
+    "20-角色/00-群众角色拆解总表.md",
+    "20-角色/师承/高崇光-青木神君.md",
+    "20-角色/师承/萧玉容-磁极神君.md",
+    "25-道具/00-CG资产拆分.md"
+  ]
 }

@@ -1,0 +1,108 @@
+filters:
+  and:
+    - file.inFolder("20-角色")
+    - file.name != "README.md"
+    - file.name != "配角图鉴.md"
+    - file.name != "00-群众角色.base"
+formulas:
+  priority_short: if(priority, priority, "—")
+  type_short: if(type, type, "—")
+  category_short: if(category, category, "—")
+properties:
+  title:
+    displayName: 场景名
+  file.name:
+    displayName: 文件名
+  type:
+    displayName: 类型
+  category:
+    displayName: 分类
+  priority:
+    displayName: P 等级
+  est_count:
+    displayName: 估计人数
+  first_chapter:
+    displayName: 首次出现章
+  last_chapter:
+    displayName: 最后出现章
+  status:
+    displayName: 状态
+  formula.priority_short:
+    displayName: P?
+  formula.type_short:
+    displayName: 类型
+  formula.category_short:
+    displayName: 分类
+views:
+  - type: table
+    name: 群众角色总表
+    order:
+      - title
+      - category
+      - priority
+      - est_count
+      - first_chapter
+      - last_chapter
+      - status
+    limit: 200
+    summaries:
+      priority: Count
+      category: Count
+    columnSize:
+      note.title: 240
+  - type: table
+    name: P0 必做
+    filters:
+      and:
+        - priority == "P0"
+    order:
+      - title
+      - category
+      - est_count
+      - first_chapter
+      - last_chapter
+    limit: 100
+  - type: table
+    name: 按分类分组
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - title
+      - priority
+      - est_count
+      - first_chapter
+    limit: 200
+  - type: table
+    name: 按 P 等级分组
+    groupBy:
+      property: priority
+      direction: ASC
+    order:
+      - title
+      - category
+      - est_count
+      - first_chapter
+    limit: 200
+  - type: table
+    name: 按首次出现章排序
+    order:
+      - first_chapter
+      - title
+      - category
+      - priority
+      - est_count
+    limit: 200
+  - type: table
+    name: 高频场景
+    filters:
+      and:
+        - first_chapter != null
+        - last_chapter != null
+    order:
+      - title
+      - category
+      - priority
+      - first_chapter
+      - last_chapter
+    limit: 100
